@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Green Garden</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7fafc;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide.active {
+            display: block;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #d1d5db;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: #16a34a;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <div class="max-w-sm mx-auto p-4">
+        <header class="flex items-start justify-between mb-6">
+            <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center shadow-md">
+                <!-- <img alt="Green Garden logo" class="w-12 h-12" src="C:\Users\Pranay\Downloads\logo13.jpg"/> -->
+                <img src="C:\Users\Pranay\Downloads\logo13.jpg" alt="Logo"
+                    class="h-12 w-12 rounded-full object-cover" />
+
+            </div>
+            <div class="text-right">
+                <h1 class="text-xl font-bold text-gray-800">Green Garden</h1>
+                <p class="text-gray-600">Go Green</p>
+                <p class="text-gray-600">Sidoarjo</p>
+            </div>
+        </header>
+        <main>
+            <div class="carousel-container mb-6 shadow-lg">
+                <div class="carousel-slide active">
+                    <img alt="Gardening tools and plants on a table" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDTBCgx7O5EU8f1750TyfYJT876ZyL6HpgQRiTO4YQSwhjtaF5iM4x0NH_8q2T3t1vbYzmTPOcuThxe5PbOm6f5XLBEvqhZ_AwnfZC3NqOVXLlD6EemROQpqR6Rm9t_L85QBpa_0XRZV5IHaQP5zTm-EaRbVWytErX6HzsTyz1hPDsbkQ7bNT-SMGux9oZ3TZ7ygU2gcsSgQ0523AIAZIpVhfdvQHt7zhVnUjjrX5HzotZ43mrj6_pl_TzHWHoEt--v6W_8QsRJ-fN" />
+                </div>
+                <div class="carousel-slide">
+                    <img alt="Person holding a small potted plant" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdICJH7F8q8quadeAAfZ2_ywcgyKe9x_0Txh7_AY8qX8GcpepWgPxKYzSjR5ejz6H4RRK37k8_CTzamBv5pCCa2H3pHtS3LMfAH6wz-zAe6E06KmP29TH-1hjTwnkYZBzxmIo9yRmxKmEcuisocDI7Uuo-GERAb2pJvggRU7-YUTpYn2i-dEkwhLimnIo9yNow13_XptXgneg9Z_e1_OoFxa4KbSxjJqJxCpVvQQ-QqBZY5Hz52RXqLci3ionTuXhA3OJP5h18hjEp" />
+                </div>
+                <div class="carousel-slide">
+                    <img alt="Various succulent plants in pots" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaOFE1p8kfNI1I3wxrypyuB0sDLRXNQusIy0YMtnijnvpSHeuMBCVdtS5d8sARIl4DUejCvWD5vB76lU2zxyZCKOEk5D8o91vyacA8btVx7Rv15_8DgzdGdid5TpDso1R1YIPTPFlitFqMPE--23QnLSzwN92fnN4GclcSmYELlJTTSE1hBeAFdFcY5cArShugwZSfq4-VtGN-Jpa9I7t64MmFPxO5OW6N1iwXcpU2XJcq9v7yKbCnTJTU5YjzgZYFiBNqUK9loEnu" />
+                </div>
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+            </div>
+            <div class="description-section">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Description</h2>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                </p>
+            </div>
+            <div class="mt-8 space-y-4">
+                <button
+                    class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-full shadow-md hover:bg-green-700 transition duration-300">
+                    Masuk
+                </button>
+                <button
+                    class="w-full bg-white text-green-600 font-bold py-3 px-4 rounded-full border-2 border-green-600 shadow-md hover:bg-gray-100 transition duration-300">
+                    Daftar
+                </button>
+            </div>
+        </main>
+    </div>
+    <script>
+        let slideIndex = 0;
+        showSlides(slideIndex);
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("carousel-slide");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            if (slideIndex >= slides.length) { slideIndex = 0 }
+            if (slideIndex < 0) { slideIndex = slides.length - 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            if (slides[slideIndex]) {
+                slides[slideIndex].style.display = "block";
+            }
+            if (dots[slideIndex]) {
+                dots[slideIndex].className += " active";
+            }
+        }
+        // Auto-play carousel
+        // setInterval(() => {
+        //     slideIndex++;
+        //     showSlides();
+        // }, 5000); // Change image every 5 seconds
+    </script>
+</body>
+
+</html>

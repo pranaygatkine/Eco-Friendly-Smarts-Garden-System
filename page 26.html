@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>GreenGenie Seed Package</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style type="text/tailwindcss">
+    body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .icon {
+            font-family: 'Material Icons';
+        }
+        #notification {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        #cart-overlay, #cart-modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+        #cart-modal {
+             transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+  <div class="max-w-sm mx-auto" id="root">
+    <header class="flex justify-between items-center p-4 bg-white">
+      <button class="text-gray-600">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <div class="flex items-center">
+        <img alt="GreenGenie logo" class="h-8"
+          src="assets\logo (2).png" />
+        <span class="text-2xl font-bold text-green-600 ml-2">GreenGenie</span>
+      </div>
+      <button class="text-gray-600 relative" id="cart-button">
+        <span class="material-icons">shopping_bag</span>
+        <span
+          class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden"
+          id="cart-count">0</span>
+      </button>
+    </header>
+    <main>
+      <div class="bg-amber-100 rounded-b-3xl pb-16 relative">
+        <h1 class="text-xl font-bold text-gray-800 text-center py-4">Suggested Seed Package</h1>
+        <div class="relative flex justify-center items-center h-48">
+          <img alt="Cardboard box" class="h-32" id="main-package-image"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6bLetVtT74LkbwVVcq5kTRLtESdJg8fe84mOMWeDMoSnwh0lcd3LywdoyRM8sg5LT1bGORg02oUDAXuX6-E80Niou6I4B0y0I4aFCDpXbezKCsroobGBEc4AtJ2ye6K651CYPMBs6MmIqlGZWGBjx6Z4Zs7oV6MDhKU8YHdq-QtHLptMOG1lGQ92L-R_stXFkZbazmg3EKUOT_KTP_rr1gCqCD4JrVu_7Q6l89u2ltH1QNvCGRje5ursuQ8D8XWQrfXxeATCLGdoo" />
+        </div>
+        <div class="absolute top-16 right-4 bg-green-500 text-white px-3 py-1 rounded-full flex items-center text-sm">
+          <span class="material-icons text-sm mr-1">star</span> 4.8
+        </div>
+        <div class="absolute -bottom-12 left-0 right-0 px-4">
+          <div class="bg-white rounded-2xl shadow-lg p-4 flex justify-around items-center">
+            <div class="text-center option cursor-pointer"
+              data-desc="Bundle of fruits containing different types of berries such as blueberry, strawberry, caneberry, etc."
+              data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuBwTmWNlLTOXcz3g_or5_OdY9uAXObt5qP19PzIYdXA4OSxakorBy5maNKGkx9XSMhZadHEnZW4YK3r1-znOsC0dta5CE6_XDBnNmdo9tHEOXKfaT0MR5ytoIvCp3vSSfVDBrSup6W-x8tikP1_ZGAElShwAYdSsx0g1YMQAZQ22l0Kvmmxc9L50AK0OWXdmKoJYK20kguIQAa1xHBfc0v1ZPvuLgclsHXKE8qlNFyMQeDqPH8WdcwTyRUlFfOSRgUUtRnVkq3v56zq"
+              data-price="12" data-title="Fruit Bundle #1">
+              <div class="bg-amber-100 rounded-lg p-3">
+                <img alt="Package option 1" class="h-8 w-8 mx-auto"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwTmWNlLTOXcz3g_or5_OdY9uAXObt5qP19PzIYdXA4OSxakorBy5maNKGkx9XSMhZadHEnZW4YK3r1-znOsC0dta5CE6_XDBnNmdo9tHEOXKfaT0MR5ytoIvCp3vSSfVDBrSup6W-x8tikP1_ZGAElShwAYdSsx0g1YMQAZQ22l0Kvmmxc9L50AK0OWXdmKoJYK20kguIQAa1xHBfc0v1ZPvuLgclsHXKE8qlNFyMQeDqPH8WdcwTyRUlFfOSRgUUtRnVkq3v56zq" />
+              </div>
+              <span class="text-xs text-gray-500 mt-1">Option #1</span>
+            </div>
+            <div class="text-center option cursor-pointer"
+              data-desc="A mix of tropical fruits including mango, pineapple, and papaya seeds."
+              data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuDMwxOM1pdgDXu3A1Gq-MlJTUNP0uYEVnZ6zdUY_M0LVtFJBED-bTuyMoDaoET7wQFdFnqz7ewmV1IC0VB1MFuQiZp4sAAIsvxee7nW87_31A6jk-G0k330Bctq7kjbu3AAXr2_7C3O9BAq0SHCUkLVqDrgcWCKeHDDNIKMO5rQ9690_YQNM-QV0fC_zq3eDnAMr6jHymFhFj3meN6C-SCQ-S7w_ExbLzPZkVFj48s82BTpuJGxPKzxEV9GiRxfp6vAk5Bs7F5WU4V-"
+              data-price="18" data-title="Fruit Bundle #2">
+              <div class="bg-amber-100 rounded-lg p-3">
+                <img alt="Package option 2" class="h-8 w-8 mx-auto"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMwxOM1pdgDXu3A1Gq-MlJTUNP0uYEVnZ6zdUY_M0LVtFJBED-bTuyMoDaoET7wQFdFnqz7ewmV1IC0VB1MFuQiZp4sAAIsvxee7nW87_31A6jk-G0k330Bctq7kjbu3AAXr2_7C3O9BAq0SHCUkLVqDrgcWCKeHDDNIKMO5rQ9690_YQNM-QV0fC_zq3eDnAMr6jHymFhFj3meN6C-SCQ-S7w_ExbLzPZkVFj48s82BTpuJGxPKzxEV9GiRxfp6vAk5Bs7F5WU4V-" />
+              </div>
+              <span class="text-xs text-gray-500 mt-1">Option #2</span>
+            </div>
+            <div class="text-center option active-option cursor-pointer"
+              data-desc="Bundle of fruits containing different types of berries such as blueberry, strawberry, caneberry, etc."
+              data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuBQGVdfoQjcrLpYk0LQxPNJlP58jKXxpr8xKap05oT36cIkrQsjlojCNOC0nNUbc91F8p3hu6JuhjzOv1tq5mDljVnzfPLuwNHE_H-lNOvyXgXpxZ25fHNE5ov97WS2p-Sh6QiSbv8Co7sD0uJ7-qyVgr0Afq4iQcE_6F_HkJfrO7Y5GqMsvz7xjCVCPwfLGX043jMmbarUJefNXzVH0Jck4q0L7_2RU0oiQwErtKHCEWwD4OSUrsawIfu-WV5dhBI3gvW1ekP95tX2"
+              data-price="15" data-title="Fruit Bundle #3">
+              <div class="bg-white rounded-lg p-3 shadow-md border-2 border-amber-300">
+                <img alt="Package option 3" class="h-10 w-10 mx-auto"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQGVdfoQjcrLpYk0LQxPNJlP58jKXxpr8xKap05oT36cIkrQsjlojCNOC0nNUbc91F8p3hu6JuhjzOv1tq5mDljVnzfPLuwNHE_H-lNOvyXgXpxZ25fHNE5ov97WS2p-Sh6QiSbv8Co7sD0uJ7-qyVgr0Afq4iQcE_6F_HkJfrO7Y5GqMsvz7xjCVCPwfLGX043jMmbarUJefNXzVH0Jck4q0L7_2RU0oiQwErtKHCEWwD4OSUrsawIfu-WV5dhBI3gvW1ekP95tX2" />
+              </div>
+              <span class="text-xs text-gray-500 mt-1">Option #3</span>
+            </div>
+            <div class="text-center option cursor-pointer"
+              data-desc="A collection of citrus fruit seeds: orange, lemon, and lime."
+              data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuDH34NEVQ9hSGwa1w_k85mgbW5jMVoMFVmhy-2bIw92uEAVz_ET3Q23r5b8Medzcp1v-M-S8Uzj5lDYyCFMIiaknPqNG3os5GWMmzO4ik4LJ6kUXaU7UwRdp6_PGqsywKsy2fO3frO3AR0rw-mlnVplZ6Z1oMTvDpIRTWCVljCxx8Xxjgm-lgjJDBFjNyDVOvDYFsuAKCD4QuBIttlqeoGiUB6NJZSNrf7aMgDOJWjb0YgFFIn2o8j3R-gKjyZpKk5i4UDpgZ37a-jR"
+              data-price="14" data-title="Fruit Bundle #4">
+              <div class="bg-amber-100 rounded-lg p-3">
+                <img alt="Package option 4" class="h-8 w-8 mx-auto"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH34NEVQ9hSGwa1w_k85mgbW5jMVoMFVmhy-2bIw92uEAVz_ET3Q23r5b8Medzcp1v-M-S8Uzj5lDYyCFMIiaknPqNG3os5GWMmzO4ik4LJ6kUXaU7UwRdp6_PGqsywKsy2fO3frO3AR0rw-mlnVplZ6Z1oMTvDpIRTWCVljCxx8Xxjgm-lgjJDBFjNyDVOvDYFsuAKCD4QuBIttlqeoGiUB6NJZSNrf7aMgDOJWjb0YgFFIn2o8j3R-gKjyZpKk5i4UDpgZ37a-jR" />
+              </div>
+              <span class="text-xs text-gray-500 mt-1">Option #4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-t-3xl pt-20 -mt-16 px-6 pb-24">
+        <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-6"></div>
+        <h2 class="text-2xl font-bold text-gray-800" id="bundle-title">Fruit Bundle #3</h2>
+        <p class="text-gray-500 mt-2 mb-6" id="bundle-desc">Bundle of fruits containing different types of berries such
+          as blueberry, strawberry, caneberry, etc.</p>
+        <button
+          class="w-full bg-green-500 text-white rounded-full py-4 flex justify-between items-center text-lg shadow-lg"
+          id="add-to-cart-btn">
+          <div class="flex items-center ml-6">
+            <span class="material-icons mr-2">shopping_bag</span>
+            <span>Add to Cart</span>
+          </div>
+          <span class="mr-6 font-bold" id="bundle-price">$ 15</span>
+        </button>
+      </div>
+    </main>
+   <footer class="fixed bottom-0 left-0 right-0 bg-white shadow-lg rounded-t-3xl max-w-md mx-auto">
+            <div class="flex justify-around items-center p-4">
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">home</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">eco</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">emoji_events</span>
+                </button>
+                <button class="text-green-600">
+                    <span class="material-icons icon-size">storefront</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">spa</span>
+                </button>
+            </div>
+        </footer>
+    <div
+      class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-gray-800 text-white py-3 px-6 rounded-full flex items-center shadow-lg opacity-0 transform translate-y-4 pointer-events-none"
+      id="notification">
+      <span class="material-icons mr-3 text-green-400">check_circle</span>
+      <span id="notification-text">Item added to cart!</span>
+    </div>
+  </div>
+  <div class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" id="cart-overlay"></div>
+  <div
+    class="fixed bottom-0 left-0 right-0 max-w-sm mx-auto bg-white rounded-t-3xl shadow-2xl p-4 z-50 transform translate-y-full"
+    id="cart-modal">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold text-gray-800">My Cart</h2>
+      <button class="text-gray-500" id="close-cart-btn">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-6"></div>
+    <div class="space-y-4" id="cart-items-container">
+    </div>
+    <div class="text-center py-10" id="empty-cart-message">
+      <p class="text-gray-500">Your cart is empty.</p>
+    </div>
+    <div class="mt-6 pt-4 border-t" id="cart-summary">
+      <div class="flex justify-between items-center text-lg font-medium text-gray-800">
+        <span>Subtotal</span>
+        <span id="subtotal-price">$0.00</span>
+      </div>
+      <div class="flex justify-between items-center text-sm text-gray-500 mt-1">
+        <span>Shipping</span>
+        <span>$5.00</span>
+      </div>
+      <div class="flex justify-between items-center text-xl font-bold text-gray-900 mt-4">
+        <span>Total</span>
+        <span id="total-price">$5.00</span>
+      </div>
+      <button class="w-full bg-green-500 text-white rounded-full py-4 mt-6 text-lg shadow-lg">
+        Checkout
+      </button>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const options = document.querySelectorAll('.option');
+      const mainImage = document.getElementById('main-package-image');
+      const bundleTitle = document.getElementById('bundle-title');
+      const bundleDesc = document.getElementById('bundle-desc');
+      const bundlePrice = document.getElementById('bundle-price');
+      const addToCartBtn = document.getElementById('add-to-cart-btn');
+      const cartButton = document.getElementById('cart-button');
+      const cartCount = document.getElementById('cart-count');
+      const notification = document.getElementById('notification');
+      const notificationText = document.getElementById('notification-text');
+      const cartOverlay = document.getElementById('cart-overlay');
+      const cartModal = document.getElementById('cart-modal');
+      const closeCartBtn = document.getElementById('close-cart-btn');
+      const cartItemsContainer = document.getElementById('cart-items-container');
+      const emptyCartMessage = document.getElementById('empty-cart-message');
+      const cartSummary = document.getElementById('cart-summary');
+      const subtotalPriceEl = document.getElementById('subtotal-price');
+      const totalPriceEl = document.getElementById('total-price');
+      let cart = {};
+      options.forEach(option => {
+        option.addEventListener('click', () => {
+          options.forEach(opt => {
+            const container = opt.querySelector('div');
+            const img = opt.querySelector('img');
+            container.classList.remove('bg-white', 'shadow-md', 'border-2', 'border-amber-300');
+            container.classList.add('bg-amber-100');
+            img.classList.remove('h-10', 'w-10');
+            img.classList.add('h-8', 'w-8');
+            opt.classList.remove('active-option');
+          });
+          const container = option.querySelector('div');
+          const img = option.querySelector('img');
+          container.classList.add('bg-white', 'shadow-md', 'border-2', 'border-amber-300');
+          container.classList.remove('bg-amber-100');
+          img.classList.add('h-10', 'w-10');
+          img.classList.remove('h-8', 'w-8');
+          option.classList.add('active-option');
+          const newImgSrc = option.dataset.img;
+          const newTitle = option.dataset.title;
+          const newDesc = option.dataset.desc;
+          const newPrice = option.dataset.price;
+          mainImage.src = newImgSrc;
+          bundleTitle.textContent = newTitle;
+          bundleDesc.textContent = newDesc;
+          bundlePrice.textContent = `$ ${newPrice}`;
+        });
+      });
+      const showNotification = (message) => {
+        notificationText.textContent = message;
+        notification.classList.remove('opacity-0', 'translate-y-4');
+        notification.classList.add('opacity-100', 'translate-y-0');
+        setTimeout(() => {
+          notification.classList.remove('opacity-100', 'translate-y-0');
+          notification.classList.add('opacity-0', 'translate-y-4');
+        }, 2000);
+      };
+      const updateCart = () => {
+        cartItemsContainer.innerHTML = '';
+        let totalItems = 0;
+        let subtotal = 0;
+        const itemIds = Object.keys(cart);
+        if (itemIds.length === 0) {
+          emptyCartMessage.classList.remove('hidden');
+          cartSummary.classList.add('hidden');
+        } else {
+          emptyCartMessage.classList.add('hidden');
+          cartSummary.classList.remove('hidden');
+          itemIds.forEach(id => {
+            const item = cart[id];
+            totalItems += item.quantity;
+            subtotal += item.price * item.quantity;
+            const cartItemEl = document.createElement('div');
+            cartItemEl.classList.add('flex', 'items-center', 'justify-between', 'py-2');
+            cartItemEl.innerHTML = `
+                            <div class="flex items-center">
+                                <img src="${item.img}" alt="${item.title}" class="h-16 w-16 rounded-lg object-cover mr-4">
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">${item.title}</h3>
+                                    <p class="text-gray-500 text-sm">$${item.price.toFixed(2)}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="flex items-center border rounded-full px-2 py-1">
+                                    <button class="text-gray-500 change-quantity" data-id="${id}" data-change="-1"><span class="material-icons text-lg">remove</span></button>
+                                    <span class="px-3 font-medium">${item.quantity}</span>
+                                    <button class="text-gray-500 change-quantity" data-id="${id}" data-change="1"><span class="material-icons text-lg">add</span></button>
+                                </div>
+                                <button class="text-red-500 ml-4 remove-item" data-id="${id}"><span class="material-icons">delete_outline</span></button>
+                            </div>
+                        `;
+            cartItemsContainer.appendChild(cartItemEl);
+          });
+        }
+        cartCount.textContent = totalItems;
+        if (totalItems > 0) {
+          cartCount.classList.remove('hidden');
+        } else {
+          cartCount.classList.add('hidden');
+        }
+        subtotalPriceEl.textContent = `$${subtotal.toFixed(2)}`;
+        totalPriceEl.textContent = `$${(subtotal + 5).toFixed(2)}`; // Assuming $5 shipping
+      };
+      addToCartBtn.addEventListener('click', () => {
+        const selectedOption = document.querySelector('.option.active-option');
+        const id = selectedOption.dataset.title;
+        const title = selectedOption.dataset.title;
+        const price = parseFloat(selectedOption.dataset.price);
+        const img = selectedOption.querySelector('img').src;
+        if (cart[id]) {
+          cart[id].quantity++;
+        } else {
+          cart[id] = { title, price, img, quantity: 1 };
+        }
+        showNotification(`${title} added to cart!`);
+        updateCart();
+      });
+      const toggleCart = (show) => {
+        if (show) {
+          cartOverlay.classList.remove('hidden');
+          cartModal.classList.remove('translate-y-full');
+        } else {
+          cartOverlay.classList.add('hidden');
+          cartModal.classList.add('translate-y-full');
+        }
+      };
+      cartButton.addEventListener('click', () => toggleCart(true));
+      closeCartBtn.addEventListener('click', () => toggleCart(false));
+      cartOverlay.addEventListener('click', () => toggleCart(false));
+      cartItemsContainer.addEventListener('click', (e) => {
+        const target = e.target.closest('button');
+        if (!target) return;
+        const id = target.dataset.id;
+        if (target.classList.contains('change-quantity')) {
+          const change = parseInt(target.dataset.change);
+          cart[id].quantity += change;
+          if (cart[id].quantity <= 0) {
+            delete cart[id];
+          }
+          updateCart();
+        }
+        if (target.classList.contains('remove-item')) {
+          delete cart[id];
+          updateCart();
+        }
+      });
+      // Initial cart state
+      updateCart();
+    });
+  </script>
+
+</body>
+
+</html>

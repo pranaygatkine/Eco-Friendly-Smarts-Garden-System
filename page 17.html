@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Total Bookings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        :root {
+            --custom-green: #69a572;
+            --light-green: #e6f3e8;
+            --light-green-darker: #5a8a61;
+            --border-custom-green: #92d19d;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .text-custom-green {
+            color: var(--custom-green);
+        }
+        .bg-custom-green {
+            background-color: var(--custom-green);
+        }
+        .border-custom-green {
+            border-color: var(--border-custom-green);
+        }
+        .bg-light-green {
+            background-color: var(--light-green);
+        }
+        .text-light-green-darker {
+            color: var(--light-green-darker);
+        }
+        .dropdown-menu {
+            transform-origin: top right;
+            transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+        }
+        .booking-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .booking-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <div class="container mx-auto p-4 max-w-md">
+        <header class="flex justify-between items-center mb-6">
+            <button
+                class="bg-custom-green text-white p-2 rounded-full w-10 h-10 flex items-center justify-center transition-transform duration-200 hover:scale-110">
+                <span class="material-icons">arrow_back_ios_new</span>
+            </button>
+            <div class="relative">
+                <button
+                    class="border border-gray-300 text-gray-700 px-4 py-2 rounded-full flex items-center transition-colors duration-200 hover:bg-gray-100"
+                    id="dropdown-button">
+                    Active Bookings
+                    <span class="material-icons ml-2 transition-transform duration-300"
+                        id="dropdown-arrow">expand_more</span>
+                </button>
+                <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 transform scale-95 dropdown-menu hidden"
+                    id="dropdown-menu">
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                        href="#">Past Bookings</a>
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                        href="#">Cancelled Bookings</a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <h1 class="text-4xl font-bold text-custom-green mb-2">Total Bookings</h1>
+            <h2 class="text-2xl font-semibold text-custom-green mb-6">Active Bookings</h2>
+            <div class="space-y-4">
+                <div class="bg-white border-2 border-custom-green rounded-2xl p-4 booking-card">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold text-gray-800">Toby Ramos</h3>
+                        <span
+                            class="bg-light-green text-light-green-darker text-xs font-semibold px-3 py-1 rounded-full">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mt-2">
+                        <div class="inline-block bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-lg">
+                            Mon, Oct 15 - 08:00 PM
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-3 text-gray-500">
+                        <span class="material-icons text-lg text-custom-green">location_on</span>
+                        <p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+                    </div>
+                </div>
+                <div class="bg-white border-2 border-custom-green rounded-2xl p-4 booking-card">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold text-gray-800">Debbie Meyer</h3>
+                        <span
+                            class="bg-light-green text-light-green-darker text-xs font-semibold px-3 py-1 rounded-full">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mt-2">
+                        <div class="inline-block bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-lg">
+                            Mon, Oct 15 - 08:00 PM
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-3 text-gray-500">
+                        <span class="material-icons text-lg text-custom-green">location_on</span>
+                        <p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+                    </div>
+                </div>
+                <div class="bg-white border-2 border-custom-green rounded-2xl p-4 booking-card">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold text-gray-800">Elijah Jefferson</h3>
+                        <span
+                            class="bg-light-green text-light-green-darker text-xs font-semibold px-3 py-1 rounded-full">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mt-2">
+                        <div class="inline-block bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-lg">
+                            Mon, Oct 15 - 08:00 PM
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-3 text-gray-500">
+                        <span class="material-icons text-lg text-custom-green">location_on</span>
+                        <p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+                    </div>
+                </div>
+                <div class="bg-white border-2 border-custom-green rounded-2xl p-4 booking-card">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold text-gray-800">Sara Conner</h3>
+                        <span
+                            class="bg-light-green text-light-green-darker text-xs font-semibold px-3 py-1 rounded-full">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mt-2">
+                        <div class="inline-block bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-lg">
+                            Tue, Oct 16 - 10:00 AM
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-3 text-gray-500">
+                        <span class="material-icons text-lg text-custom-green">location_on</span>
+                        <p class="ml-2 text-sm">Consectetur adipiscing elit...</p>
+                    </div>
+                </div>
+                <div class="bg-white border-2 border-custom-green rounded-2xl p-4 booking-card">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold text-gray-800">John Appleseed</h3>
+                        <span
+                            class="bg-light-green text-light-green-darker text-xs font-semibold px-3 py-1 rounded-full">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mt-2">
+                        <div class="inline-block bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-lg">
+                            Wed, Oct 17 - 02:30 PM
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-3 text-gray-500">
+                        <span class="material-icons text-lg text-custom-green">location_on</span>
+                        <p class="ml-2 text-sm">Sed do eiusmod tempor...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropdownButton = document.getElementById('dropdown-button');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            const dropdownArrow = document.getElementById('dropdown-arrow');
+            function toggleDropdown(show) {
+                if (show) {
+                    dropdownMenu.classList.remove('hidden');
+                    requestAnimationFrame(() => {
+                        dropdownMenu.classList.remove('opacity-0', 'scale-95');
+                        dropdownMenu.classList.add('opacity-100', 'scale-100');
+                        dropdownArrow.style.transform = 'rotate(180deg)';
+                    });
+                } else {
+                    dropdownMenu.classList.remove('opacity-100', 'scale-100');
+                    dropdownMenu.classList.add('opacity-0', 'scale-95');
+                    dropdownArrow.style.transform = 'rotate(0deg)';
+                    setTimeout(() => {
+                        dropdownMenu.classList.add('hidden');
+                    }, 200); // Corresponds to the transition duration
+                }
+            }
+            dropdownButton.addEventListener('click', function (event) {
+                event.stopPropagation();
+                const isHidden = dropdownMenu.classList.contains('hidden');
+                toggleDropdown(isHidden);
+            });
+            // Close the dropdown if clicked outside
+            window.addEventListener('click', function (e) {
+                if (!dropdownMenu.classList.contains('hidden')) {
+                    toggleDropdown(false);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

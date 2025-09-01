@@ -1,0 +1,163 @@
+<!DOCTYPE toctype>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Plant Details</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: max(884px, 100dvh);
+        }
+        .icon-size {
+            font-size: 24px;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+
+        .follow-btn.followed {
+            background-color: #E8F5E9;
+            color: #4CAF50;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 flex justify-center">
+    <div class="relative min-h-screen  w-full max-w-sm">
+        <header class="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4">
+            <button class="w-10 h-10 bg-white bg-opacity-50 rounded-full flex items-center justify-center">
+                <span class="material-icons text-white">arrow_back_ios_new</span>
+            </button>
+            <div class="relative" x-data="{ open: false }">
+                <button @click="open = !open"
+                    class="w-10 h-10 bg-white bg-opacity-50 rounded-full flex items-center justify-center">
+                    <span class="material-icons text-white">more_vert</span>
+                </button>
+                <div @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20"
+                    style="display: none;" x-show="open" x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-end="transform opacity-100 scale-100"
+                    x-transition:enter-start="transform opacity-0 scale-95"
+                    x-transition:leave="transition ease-in duration-75"
+                    x-transition:leave-end="transform opacity-0 scale-95"
+                    x-transition:leave-start="transform opacity-100 scale-100">
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Report</a>
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Share</a>
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Block</a>
+                </div>
+            </div>
+        </header>
+        <div class="h-80">
+            <img alt="Lush green plants in terracotta pots on shelves" class="w-full h-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7O8uchHgwUSGVR4I9GddEkzsIRxkVn2rI_fepNPbUyyqpQRhnpw1EvQQTkGX72QOL6WG6txaYz7aiVAWXUjWE--0Rm_nM9Rabm0BqB-JsWjgBloeHbr0bZVjHptcAe4TN9zI3HbKy43Q4CRI_TXAtQMqltcb5gz9TCooGuvaAFzDhF5_9x-BQhteSRbnol2fKCLyvajxSqShlvlGyQVuOzbK7PEZDM92P781ZWlfQmp-ttFMaG8WpYOsI_VVZw7Pyz1nnEdLWoGE" />
+        </div>
+        <main class="bg-white rounded-t-3xl -mt-8 p-6 relative pb-28">
+            <h1 class="text-xl font-bold text-gray-800">Even on Urban Excursions, Finding Mother Nature's Charms</h1>
+            <div class="flex items-center justify-between mt-4">
+                <div class="flex items-center">
+                    <img alt="Author's avatar" class="w-10 h-10 rounded-full"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLFoQVDHZUatI7qEN4juY6RG9EH3pjFYG2ZflGmT1yahLo1x-b-euOeXFmPcApf_bvxAmxxvLbjeshlR_iHDOQUjOonL2nSu4QmGAXUeYm0zTDs_Grb2z3Ct5BaDfxOBHRp1xibRH7SKhq9_wG_46gh7hmHCxGu1h59qw17ZfhvDqe7dV8juaFfWeHyTWAI1Mtxbrx532hMG5_jamSA5zmCE2NxAMSs6ieZl_Iry02aGG_DrZr3C0hXZSFF7Z90lgrCa9NwVMkC8c" />
+                    <div class="ml-3">
+                        <p class="font-semibold text-gray-800">Shylla Monic</p>
+                        <p class="text-sm text-gray-500">2019 . 01 . 01</p>
+                    </div>
+                </div>
+
+
+                <button
+                    class="follow-btn bg-green-700 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-1"
+                    id="follow-btn">
+                    <span class="material-icons text-sm" id="follow-icon">add</span>
+                    <span id="follow-text">Follow</span>
+                </button>
+
+
+            </div>
+            <div class="mt-6">
+                <h2 class="text-lg font-bold text-gray-800">Description</h2>
+                <p class="text-gray-600 mt-2 text-sm leading-relaxed">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor sed tellus fusce laoreet facilisi
+                    urna imperdiet. Quis potenti ut odio auctor mollis enim scelerisque. Et, congue odio vulputate
+                    purus. Nibh sit egestas ac urna at erat est et. Consectetur aliquam nulla curabitur.
+                </p>
+            </div>
+
+        </main>
+        <div class="fixed bottom-24 right-1/2 translate-x-1/2 ">
+            <button class="w-16 h-16 bg-green-700 rounded-full flex items-center justify-center shadow-lg">
+                <span class="material-icons text-white" style="font-size: 36px;">document_scanner</span>
+            </button>
+        </div>
+        <footer
+            class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-sm bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+
+            <nav class="flex justify-around items-center h-20">
+                <a class="text-green-700 flex flex-col items-center gap-1" href="#">
+                    <span class="material-icons icon-size">home</span>
+                    <span class="text-xs font-semibold"></span>
+                </a>
+                <a class="text-gray-400 flex flex-col items-center gap-1" href="#">
+                    <span class="material-icons-outlined icon-size">eco</span>
+                    <span class="text-xs"></span>
+                </a>
+                <a class="text-gray-400 flex flex-col items-center gap-1" href="#">
+                    <span class="material-icons-outlined icon-size">emoji_events</span>
+                    <span class="text-xs"></span>
+                </a>
+                <a class="text-gray-400 flex flex-col items-center gap-1" href="#">
+                    <span class="material-icons-outlined icon-size">storefront</span>
+                    <span class="text-xs"></span>
+                </a>
+                <a class="text-gray-400 flex flex-col items-center gap-1" href="#">
+                    <span class="material-icons-outlined icon-size">local_florist</span>
+                    <span class="text-xs"></span>
+                </a>
+            </nav>
+        </footer>
+    </div>
+    <script defer="" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+
+
+    <script>
+        const followBtn = document.getElementById('follow-btn');
+        const followText = document.getElementById('follow-text');
+        const followIcon = document.getElementById('follow-icon');
+
+        let isFollowing = false;
+
+        followBtn.addEventListener('click', () => {
+            isFollowing = !isFollowing;
+
+            if (isFollowing) {
+                followText.textContent = 'Following';
+                followIcon.style.display = 'none';
+                followBtn.classList.add('bg-green-100', 'text-green-700');
+                followBtn.classList.remove('bg-green-700', 'text-white');
+            } else {
+                followText.textContent = 'Follow';
+                followIcon.style.display = 'inline-block';
+                followBtn.classList.add('bg-green-700', 'text-white');
+                followBtn.classList.remove('bg-green-100', 'text-green-700');
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>

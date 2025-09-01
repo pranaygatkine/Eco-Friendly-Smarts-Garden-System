@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Upcoming Bookings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7fafc;
+        }
+        .main-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .back-button {
+            background-color: #A5D6A7;
+            color: #388E3C;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            cursor: pointer;
+        }
+        .header-title {
+            color: #4CAF50;
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+        .booking-card {
+            background-color: #f9f9f9;
+            border: 1px solid #f0f0f0;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 24px;box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            position: relative;}
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .card-title h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        .card-title p {
+            font-size: 0.875rem;
+            color: #718096;
+        }
+        .card-title p::before {
+            content: '●';
+            color: #f56565;
+            margin-right: 4px;
+            font-size: 0.75rem;
+        }
+        .card-menu {
+            color: #a0aec0;
+            cursor: pointer;
+            position: relative;}
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 12px;
+        }
+        .date-time {
+            background-color: #e2e8f0;
+            color: #4a5568;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+        .duration {
+            background-color: #81C784;
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            height: 150px;}
+        .map-container iframe {
+            border: 0;
+        }
+        .menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 24px;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+            width: 160px;
+            overflow: hidden;
+        }
+        .menu-dropdown.show {
+            display: block;
+        }
+        .menu-dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+        .menu-dropdown-item:hover {
+            background-color: #f7fafc;
+        }
+        .menu-dropdown-item .material-icons {
+            font-size: 1rem;
+            margin-right: 8px;
+        }
+        .menu-dropdown-divider {
+            height: 1px;
+            background-color: #e2e8f0;
+            margin: 4px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="header">
+            <div class="back-button">
+                <span class="material-icons">arrow_back</span>
+            </div>
+            <h1 class="header-title">Upcoming Bookings</h1>
+        </div>
+        <div class="relative mb-6">
+            <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+            <input
+                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:ring-green-500 focus:border-green-500"
+                id="search-bar" placeholder="Search bookings..." type="text" />
+        </div>
+        <div class="flex justify-between items-center mb-6">
+            <span class="text-gray-600 font-medium">Sort by:</span>
+            <div class="flex space-x-2">
+                <button
+                    class="filter-btn active bg-green-500 text-white px-4 py-2 rounded-full text-sm font-medium">Date</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium">Service
+                    Type</button>
+            </div>
+        </div>
+        <div id="bookings-container">
+        </div>
+    </div>
+    <script>
+        const bookingsData = [
+            {
+                id: 1,
+                name: "Dattatraya Tarakase",
+                service: "Fruitful Service",
+                dateTime: "Mon, Oct 15 - 08:00 PM",
+                duration: "02:00:00",
+                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.571357460894!2d73.77132427496362!3d18.54826258255073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bec057616c6f%3A0xd9cfb318d0c64953!2sTrident%20Business%20Centre!5e0!3m2!1sen!2sin!4v1755677759165!5m2!1sen!2sin"
+            },
+            {
+                id: 2,
+                name: "Hanmant Rotte",
+                service: "Gardening Pro",
+                dateTime: "Tue, Oct 16 - 10:00 AM",
+                duration: "03:00:00",
+                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.571357460894!2d73.77132427496362!3d18.54826258255073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bec057616c6f%3A0xd9cfb318d0c64953!2sTrident%20Business%20Centre!5e0!3m2!1sen!2sin!4v1755677759165!5m2!1sen!2sin"
+            },
+            {
+                id: 3,
+                name: "Rohan Takalse",
+                service: "Cleaning Experts",
+                dateTime: "Wed, Oct 17 - 02:00 PM",
+                duration: "01:30:00",
+                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.571357460894!2d73.77132427496362!3d18.54826258255073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bec057616c6f%3A0xd9cfb318d0c64953!2sTrident%20Business%20Centre!5e0!3m2!1sen!2sin!4v1755677759165!5m2!1sen!2sin"
+            }
+        ];
+        const bookingsContainer = document.getElementById('bookings-container');
+        const searchBar = document.getElementById('search-bar');
+        let currentSort = 'date'; // Default sort
+        const renderBookings = (bookings) => {
+            bookingsContainer.innerHTML = '';
+            if (bookings.length === 0) {
+                bookingsContainer.innerHTML = `<p class="text-center text-gray-500">No bookings found.</p>`;
+                return;
+            }
+            bookings.forEach(booking => {
+                const card = document.createElement('div');
+                card.className = 'booking-card';
+                card.innerHTML = `
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>${booking.name}</h3>
+                        <p>${booking.service}</p>
+                    </div>
+                    <div class="card-menu" data-menu-id="${booking.id}">
+                        <span class="material-icons">more_vert</span>
+                        <div id="menu-dropdown-${booking.id}" class="menu-dropdown">
+                            <a href="#" class="menu-dropdown-item">
+                                <span class="material-icons">edit</span>
+                                Reschedule
+                            </a>
+                            <a href="#" class="menu-dropdown-item">
+                                <span class="material-icons">chat_bubble_outline</span>
+                                Message
+                            </a>
+                            <div class="menu-dropdown-divider"></div>
+                            <a href="#" class="menu-dropdown-item text-red-500">
+                                <span class="material-icons">cancel</span>
+                                Cancel Booking
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe src="${booking.mapUrl}" width="100%" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="card-footer">
+                    <span class="date-time">${booking.dateTime}</span>
+                    <span class="duration">${booking.duration}</span>
+                </div>
+            `;
+                bookingsContainer.appendChild(card);
+            });
+            // Add event listeners for new menus
+            document.querySelectorAll('.card-menu').forEach(menu => {
+                menu.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const menuId = menu.dataset.menuId;
+                    const dropdown = document.getElementById(`menu-dropdown-${menuId}`);
+                    // Hide all other menus
+                    document.querySelectorAll('.menu-dropdown').forEach(d => {
+                        if (d !== dropdown) {
+                            d.classList.remove('show');
+                        }
+                    });
+                    dropdown.classList.toggle('show');
+                });
+            });
+        }
+        const filterAndSortBookings = () => {
+            const searchTerm = searchBar.value.toLowerCase();
+            let filteredBookings = bookingsData.filter(booking =>
+                booking.name.toLowerCase().includes(searchTerm) ||
+                booking.service.toLowerCase().includes(searchTerm)
+            );
+            if (currentSort === 'date') {
+                filteredBookings.sort((a, b) => new Date(a.dateTime.split(' - ')[0]) - new Date(b.dateTime.split(' - ')[0]));
+            } else if (currentSort === 'service type') {
+                filteredBookings.sort((a, b) => a.service.localeCompare(b.service));
+            }
+            renderBookings(filteredBookings);
+        };
+        renderBookings(bookingsData);
+        document.querySelector('.back-button').addEventListener('click', () => {
+            console.log('Back button clicked');
+        });
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active', 'bg-green-500', 'text-white');
+                    btn.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                button.classList.add('active', 'bg-green-500', 'text-white');
+                button.classList.remove('bg-gray-200', 'text-gray-700');
+                currentSort = button.innerText.toLowerCase();
+                filterAndSortBookings();
+            });
+        });
+        searchBar.addEventListener('input', filterAndSortBookings);
+        // Close menus when clicking outside
+        window.addEventListener('click', () => {
+            document.querySelectorAll('.menu-dropdown').forEach(dropdown => {
+                dropdown.classList.remove('show');
+            });
+        });
+        // Initial sort
+        filterAndSortBookings();
+    </script>
+</body>
+
+</html>

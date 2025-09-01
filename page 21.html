@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Requests</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7fafc;
+        }
+        .button-container {
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .button-container.removing {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        .attention-message {
+            display: none;
+        }
+        .approved-message {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+    </style>
+</head>
+
+<body class="max-w-sm mx-auto bg-white">
+    <div class="p-4">
+        <header class="flex items-center mb-6">
+            <button class="w-10 h-10 bg-green-400 rounded-full flex items-center justify-center text-white">
+                <span class="material-icons">arrow_back</span>
+            </button>
+        </header>
+        <h1 class="text-3xl font-bold text-green-700 mb-4">Requests</h1>
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Bookings Requests</h2>
+            <div class="space-y-3" id="booking-requests">
+                <div class="flex items-center bg-white border border-gray-200 rounded-lg overflow-hidden"
+                    id="booking-1">
+                    <div class="bg-green-400 p-4">
+                        <span class="material-icons text-white text-3xl">event_available</span>
+                    </div>
+                    <div class="flex-grow p-3 text-gray-700">Total Bookings</div>
+                    <div class="flex items-center pr-3" id="buttons-booking-1">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm mr-2 button-container"
+                            onclick="approveRequest('booking-1')">Approve</button>
+                        <button class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm button-container"
+                            onclick="declineRequest('booking-1')">Decline</button>
+                    </div>
+                    <div class="pr-3 text-green-600 font-semibold approved-message" id="approved-msg-booking-1">Approved
+                    </div>
+                </div>
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md attention-message"
+                    id="attention-booking-1" role="alert">
+                    <p class="font-bold">Attention</p>
+                    <p>Request has been declined.</p>
+                    <button class="text-sm font-semibold underline mt-2"
+                        onclick="undoDecline('booking-1')">Undo</button>
+                </div>
+                <div class="flex items-center bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="bg-green-400 p-4">
+                        <span class="material-icons text-white text-3xl">groups</span>
+                    </div>
+                    <div class="flex-grow p-3 text-gray-700">Total Customers</div>
+                </div>
+                <div class="flex items-center bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="bg-green-400 p-4">
+                        <span class="material-icons text-white text-3xl">spa</span>
+                    </div>
+                    <div class="flex-grow p-3 text-gray-700">Total Gardners</div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-800">Gardners Requests</h2>
+                <a class="text-sm text-gray-500" href="#">See all</a>
+            </div>
+            <div class="space-y-4">
+                <div class="flex bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="bg-green-600 p-4 flex items-center justify-center">
+                        <span class="material-icons text-white text-4xl">title</span>
+                    </div>
+                    <div class="flex-grow p-3">
+                        <h3 class="font-bold text-gray-800">Saif Ahmed</h3>
+                        <p class="text-sm text-gray-600">Edit Request</p>
+                        <div class="flex items-center text-xs text-gray-500 mt-1">
+                            <span>Decorative Service</span>
+                            <span class="material-icons text-red-500 ml-1 text-xs">settings</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">Mon, Oct 15 - 06:00 PM</p>
+                    </div>
+                    <div class="border-l border-gray-200 p-3 text-center w-28">
+                        <p class="text-xs text-gray-500">Edits Type</p>
+                        <p class="font-semibold text-sm text-gray-800 mt-1">Speciality Name</p>
+                    </div>
+                </div>
+                <div class="flex bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="bg-green-600 p-4 flex items-center justify-center">
+                        <span class="material-icons text-white text-4xl">cloud_upload</span>
+                    </div>
+                    <div class="flex-grow p-3">
+                        <h3 class="font-bold text-gray-800">Saif Ahmed</h3>
+                        <p class="text-sm text-gray-600">Upload Request</p>
+                        <div class="flex items-center text-xs text-gray-500 mt-1">
+                            <span>Decorative Service</span>
+                            <span class="material-icons text-red-500 ml-1 text-xs">settings</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">Mon, Oct 15 - 06:00 PM</p>
+                    </div>
+                    <div class="w-24 h-full">
+                        <img alt="A green plant in a white pot" class="object-cover w-full h-full rounded-r-lg"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsw-4UKTQLQFQH6kG4OBae9TbYfAxKW-v-bWFfOnaF3ow3DnR9cdoSUq7vozD1vFyn9S3CUPDDzU3XsFsFlHoX25aSn8MIrZudTUMi6M7cxFyT_ssOwEGUKx4Hr_Hw2PuGcXhZB4Q4yq7Ekk1Y1kRzvEH5AgZvWlRxd9JkM0NUM70Cx75dvVeDZlezVIFnYZLcmwPAe_yj-gliRXQfi3Gf1tOfysSawUCMefpTdBprV3eP7eNxFS-FjjekbEoKweGU26FU9XQYsxIr" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        function approveRequest(id) {
+            const buttonContainer = document.getElementById('buttons-' + id);
+            const approvedMessage = document.getElementById('approved-msg-' + id);
+            if (buttonContainer && approvedMessage) {
+                buttonContainer.classList.add('removing');
+                setTimeout(() => {
+                    buttonContainer.style.display = 'none';
+                    approvedMessage.style.display = 'block';
+                    setTimeout(() => {
+                        approvedMessage.style.opacity = 1;
+                    }, 10);
+                }, 500);
+            }
+        }
+        function declineRequest(id) {
+            const item = document.getElementById(id);
+            const attentionMessage = document.getElementById('attention-' + id);
+            if (item && attentionMessage) {
+                item.style.display = 'none';
+                attentionMessage.style.display = 'block';
+            }
+        }
+        function undoDecline(id) {
+            const item = document.getElementById(id);
+            const attentionMessage = document.getElementById('attention-' + id);
+            if (item && attentionMessage) {
+                item.style.display = 'flex';
+                attentionMessage.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

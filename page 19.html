@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Notifications</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .notification-item {
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        .notification-item:nth-child(1) { animation-delay: 0.1s; }
+        .notification-item:nth-child(2) { animation-delay: 0.2s; }
+        .notification-item:nth-child(3) { animation-delay: 0.3s; }
+        .notification-item:nth-child(4) { animation-delay: 0.4s; }
+        .notification-item:nth-child(5) { animation-delay: 0.5s; }
+        .notification-item:nth-child(6) { animation-delay: 0.6s; }
+        .notification-item:nth-child(7) { animation-delay: 0.7s; }
+    </style>
+</head>
+
+<body class="bg-white font-sans">
+    <div class="container mx-auto max-w-sm p-4">
+        <div class="flex items-center mb-6">
+            <button
+                class="bg-green-500 hover:bg-green-600 text-white rounded-full p-2 transition-transform duration-300 ease-in-out transform hover:scale-110">
+                <span class="material-icons">arrow_back</span>
+            </button>
+        </div>
+        <h1 class="text-3xl font-bold text-green-500 mb-6 animate-[fadeIn_1s_ease-out]">Notifications</h1>
+        <div class="space-y-4">
+            <div
+                class="notification-item flex items-center space-x-4 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                <img alt="David Silbia" class="w-12 h-12 rounded-full"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtJy4cfw094EM6npYoSnLuEkTc2G8mZIenQo_bYDeHNxXJuaaRgG_MoinCH9norV-Exoxkoy7sUIwbJNEbPaHvOPK8coQP9rpKDSwJK-pUxO8H8EfBMIFSAjNmIWlv8T1Ta7GmC_4pvfJldybijhZekFVsUHo_IFKWfBvroitdJznwf28x4cLJS0RyOkYLUAEfEe-FgC5ARCgmzDcfVKF_i4SjDp5JxSEWFJacVu9yLMi32Da0IzjOipyQtdWD8wpdfz48Pli5yShg" />
+                <div>
+                    <p class="font-semibold">David Silbia</p>
+                    <p class="text-gray-600 text-sm">has rescheduled Booking Id# 13234523.</p>
+                </div>
+            </div>
+            <div
+                class="notification-item flex items-center space-x-4 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                <img alt="Adnan Safi" class="w-12 h-12 rounded-full"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqclOSpj68bS2viZ_3rLbqI3-Pj6e0IhhHRx0HXlaEh0HDo9cVgK0trKLIHvZPDy_Gy7W8Eu5jNwfmyjad84A58F3fr5b_RUKyo601SB0rOcUbxn0OB56ckeok3ANE0_XJyl77lfoGDm_bRpueTWqRb2M0kea_AgyCnOoJ19Tk7KPByazs9xAdahQfR7xdSplQur5_Umu2k2xundluN-vjYgaGt1VTMkET-f_YOCEiERGgWtsYUevHfID8uL0xApyenJW-il4T6Sr_" />
+                <div class="flex-grow">
+                    <p class="font-semibold">Adnan Safi</p>
+                    <p class="text-gray-600 text-sm">Lorem ipsum dolor sit amet.</p>
+                </div>
+                <span class="text-gray-400 text-xs">5 min ago</span>
+            </div>
+            <div
+                class="notification-item flex items-center space-x-4 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                <img alt="Joan Baker" class="w-12 h-12 rounded-full"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUxwApdJi0ET4FjbXKzUXSfmaynl7g4V8afUGiz1zak7_GZceNekfQeKM1f-jEsW4mSHdX22XCAjrWRDrZgKYbLgwq2vXX3ATUMnQjsQ6LqW-Oq2EYMW51nAnqHk3XBeE3HAWJeCSR-7z1-74at7Tzntak27pa_luCLQqVYVgQzyzTWbr6OxKAhEU4lg30Edq4CnROAug4Zr8qV9_Li9QritdKbWdnr3IXUPtG8w_Y03EYwGsyRSZIUdehVpTfwdz2Yvz40lHnklI8" />
+                <div class="flex-grow">
+                    <p class="font-semibold">Joan Baker</p>
+                    <p class="text-gray-600 text-sm">Lorem ipsum dolor sit amet.</p>
+                </div>
+                <span class="text-gray-400 text-xs">20 min ago</span>
+            </div>
+            <div
+                class="notification-item flex items-center space-x-4 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                <img alt="Ronald C. Kinch" class="w-12 h-12 rounded-full"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQOvBTKuHoaP76NGiw-ayqrh1kJdomizOdVYwSB5fcjDrwkpl_iHJ9ThAsm8HjLLewJFkiLEH3Bhc9osHbk9R2l9zvbjz9f_AQp2bkmHpNz5FuKnwpoH8fL7H-UyDy2FSGzsZ-hBny6pVPmarIV06Bv6dLZcvuhy1T4PGQyBtibGwt3Con_r45n9HhEY9B7sn05HAdoloRMZmRvB12LCsijYBs3WIjTMz38wQixiavazMhDOYRYiODnrH7eR6Jw_UOEkFlw0GOOjnI" />
+                <div class="flex-grow">
+                    <p class="font-semibold">Ronald C. Kinch</p>
+                    <p class="text-gray-600 text-sm">Lorem ipsum dolor sit amet.</p>
+                </div>
+                <span class="text-gray-400 text-xs">1 hr ago</span>
+            </div>
+            <div
+                class="notification-item flex items-center space-x-4 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                <img alt="Clara Tolson" class="w-12 h-12 rounded-full"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBZrbJgnU3kZP-tTgqmy4r0OUfNtUxR7W-jbArft2z6kCf5zP0b_O-A993nFfzdU1__haKutFwHcDP1y0BfV6mL62swSL9unAQJCDZcRD_o_398bPW-KEo1QGcvaJCJEhBBSPvJDgk2Ov1CWIRKv6VIbk0Wrdg2S4QAv-7a2nNJhhWMAAY0_VfgkMSYgVGYts4mf5LSZ-5BGWuiiIBfQP2hCrkPX2JZ5b5uoMo67fuTdqPfqs6SjLXpiIOhnTFMwrA4WGzse4YcqOr" />
+                <div class="flex-grow">
+                    <p class="font-semibold">Clara Tolson</p>
+                    <p class="text-gray-600 text-sm">Lorem ipsum dolor sit amet.</p>
+                </div>
+                <span class="text-gray-400 text-xs">9 hr ago</span>
+            </div>
+            <div
+                class="notification-item flex items-center space-x-4 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                <img alt="Jennifer Fritz" class="w-12 h-12 rounded-full"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOisey9cMSsf5PSjgEmUcR_QGdPyuGhMEFppIC2cFTl05sUwEdTLy2hM6MQr6fz1Tq-g0qKWc3G_dowKfM6y_e03VGAzwpPR1DvSWAcb_wNvCr72yqrnMcJzG85aBFBbdDNmuWQL0alKgwJjOQunLU_REpkoLDGAW8xMALvnNRG8xJL7mueVionhgUXmR6w48LsEOs1DO2vTUWIuswsrSpk6Gx0lEq9CmPN-AGiUrjapE-JadIK4OAgoGokquyTvp-6jBI2NZj97D-" />
+                <div class="flex-grow">
+                    <p class="font-semibold">Jennifer Fritz</p>
+                    <p class="text-gray-600 text-sm">Lorem ipsum dolor sit amet.</p>
+                </div>
+                <span class="text-gray-400 text-xs">Tue, 5:10 pm</span>
+            </div>
+            <div
+                class="notification-item flex items-center space-x-4 p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                <img alt="Eric G. Prickett" class="w-12 h-12 rounded-full"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3wwxCtSp7eahm4j2x15oQ3K3fj6cgd74y7X9q7TJBZ-AxN84Z3apd8GLkwL4LiHIL3_cEcafQuyrIvkZVM5UUElvH8tYyGSkd0lBSJTpdrKc2ADnh97Z5NlC1szNqBpSCRKued6eMFTLW_yvmHQOsC4OQMelr3xIzvRuS7tOK8atnjrJIgovNiC6L1wvLS9v701h1ekgkIuLEtAKaHDZUti3xKyzbrGGpDJFBge-YVmIAju8v_Xuye747jy5eYtNGoXeTHc7O5Jyf" />
+                <div class="flex-grow">
+                    <p class="font-semibold">Eric G. Prickett</p>
+                    <p class="text-gray-600 text-sm">Lorem ipsum dolor sit amet.</p>
+                </div>
+                <span class="text-gray-400 text-xs">Wed, 3:30 pm</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

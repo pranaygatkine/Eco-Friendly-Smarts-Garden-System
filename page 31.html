@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GreenGenie</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .icon-size {
+            font-size: 28px;
+        }
+        body {
+          min-height: max(884px, 100dvh);
+        }.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }.no-scrollbar {
+            -ms-overflow-style: none;scrollbar-width: none;}
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const overlay = document.getElementById('overlay');
+            menu.classList.toggle('hidden');
+            overlay.classList.toggle('hidden');
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 no-scrollbar">
+    <div class="container mx-auto max-w-sm relative">
+        <div class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" id="overlay" onclick="toggleMenu()"></div>
+        <div class="fixed inset-0 flex items-center justify-center z-50 hidden" id="menu">
+            <div class="bg-white rounded-2xl shadow-lg p-6 w-80 space-y-6 relative">
+                <div class="flex items-center space-x-2">
+                    <img alt="GreenGenie logo" class="h-8"
+                        src="assets\logo (2).png" />
+                    <span class="text-2xl font-bold text-green-800">GreenGenie</span>
+                </div>
+                <nav class="space-y-4">
+                    <a class="flex items-center space-x-3 text-gray-700 hover:text-green-600" href="#">
+                        <span class="material-icons">home</span>
+                        <span>Home</span>
+                    </a>
+                    <a class="flex items-center space-x-3 text-green-600 font-semibold" href="#">
+                        <span class="material-icons">yard</span>
+                        <span>My Plants</span>
+                    </a>
+                    <a class="flex items-center space-x-3 text-gray-700 hover:text-green-600" href="#">
+                        <span class="material-icons">star_border</span>
+                        <span>Favourites</span>
+                    </a>
+                    <a class="flex items-center space-x-3 text-gray-700 hover:text-green-600" href="#">
+                        <span class="material-icons">storefront</span>
+                        <span>Store</span>
+                    </a>
+                  
+                    <a class="flex items-center space-x-3 text-gray-700 hover:text-green-600" href="#">
+                        <span class="material-icons">settings</span>
+                        <span>Settings</span>
+                    </a>
+                    <a class="flex items-center space-x-3 text-gray-700 hover:text-green-600" href="#">
+                        <span class="material-icons">help_outline</span>
+                        <span>Help</span>
+                    </a>
+                </nav>
+                <button class="absolute top-4 right-4 text-gray-600" onclick="toggleMenu()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+        </div>
+        <header class="flex justify-between items-center p-4">
+            <button class="text-gray-600" onclick="toggleMenu()">
+                <span class="material-icons">menu</span>
+            </button>
+            <div class="flex items-center space-x-2">
+                <img alt="GreenGenie logo" class="h-8"
+                    src="assets\logo (2).png" />
+                <span class="text-2xl font-bold text-green-800">GreenGenie</span>
+            </div>
+            <button class="text-gray-600 relative">
+                <span class="material-icons">notifications</span>
+            </button>
+        </header>
+        <main class="p-4 space-y-6 pb-24">
+            <div class="bg-green-100 rounded-3xl p-6 shadow-md relative">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">Monstera</h1>
+                        <p class="text-gray-600">Indoor</p>
+                    </div>
+                    <div class="bg-gray-800 text-white rounded-lg px-2 py-1 flex items-center">
+                        <span class="material-icons text-green-400 text-sm">favorite</span>
+                        <span class="material-icons text-white text-base">battery_full</span>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h2 class="font-semibold text-gray-700">Overview</h2>
+                    <div class="grid grid-cols-2 gap-4 mt-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-yellow-500 icon-size">wb_sunny</span>
+                            <div>
+                                <p class="text-xs text-gray-500">LIGHT</p>
+                                <p class="font-semibold text-gray-800">35-40%</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-red-500 icon-size">device_thermostat</span>
+                            <div>
+                                <p class="text-xs text-gray-500">TEMPERATURE</p>
+                                <p class="font-semibold text-gray-800">70-75 °F</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-blue-500 icon-size">opacity</span>
+                            <div>
+                                <p class="text-xs text-gray-500">HUMIDITY</p>
+                                <p class="font-semibold text-gray-800">80%</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-blue-400 icon-size">water_drop</span>
+                            <div>
+                                <p class="text-xs text-gray-500">WATER</p>
+                                <p class="font-semibold text-gray-800">250ml</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute right-0 bottom-0 w-48">
+                    <img alt="Monstera plant in a white pot" class="h-auto w-full"
+                        src="assets\monnn.png" />
+                </div>
+                <div class="mt-8 bg-white rounded-full p-2 flex items-center space-x-2 w-max shadow">
+                    <span class="material-icons text-green-500">spa</span>
+                    <p class="text-sm text-gray-700">Your plant is healthy</p>
+                </div>
+            </div>
+            <div class="bg-yellow-50 rounded-3xl p-6 shadow-md relative">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">Janda Bolong</h1>
+                        <p class="text-gray-600">Outdoor</p>
+                    </div>
+                    <div class="bg-gray-800 text-white rounded-lg px-2 py-1 flex items-center">
+                        <span class="material-icons text-yellow-400 text-sm">favorite</span>
+                        <span class="material-icons text-white text-base">battery_full</span>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h2 class="font-semibold text-gray-700">Overview</h2>
+                    <div class="grid grid-cols-2 gap-4 mt-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-yellow-500 icon-size">wb_sunny</span>
+                            <div>
+                                <p class="text-xs text-gray-500">LIGHT</p>
+                                <p class="font-semibold text-gray-800">35-40%</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-red-500 icon-size">device_thermostat</span>
+                            <div>
+                                <p class="text-xs text-gray-500">TEMPERATURE</p>
+                                <p class="font-semibold text-gray-800">70-75 °F</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-blue-500 icon-size">opacity</span>
+                            <div>
+                                <p class="text-xs text-gray-500">HUMIDITY</p>
+                                <p class="font-semibold text-gray-800">50%</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-blue-400 icon-size">water_drop</span>
+                            <div>
+                                <p class="text-xs text-gray-500">WATER</p>
+                                <p class="font-semibold text-gray-800">50ml</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute right-0 bottom-0 w-56">
+                    <img alt="Janda Bolong plant in a white pot" class="h-auto w-full"
+                        src="assets\jan.png" />
+                </div>
+                <div class="mt-20 bg-blue-100 rounded-full p-2 flex items-center space-x-2 w-max shadow">
+                    <span class="material-icons text-blue-500">opacity</span>
+                    <p class="text-sm text-gray-700">Your plant is thirsty</p>
+                </div>
+            </div>
+        </main>
+       <footer class="fixed bottom-0 left-0 right-0 bg-white shadow-lg rounded-t-3xl max-w-md mx-auto">
+            <div class="flex justify-around items-center p-4">
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">home</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">eco</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">emoji_events</span>
+                </button>
+                <button class="text-green-600">
+                    <span class="material-icons icon-size">storefront</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">spa</span>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>

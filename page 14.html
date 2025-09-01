@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GreenGenie Plant </title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .icon-size {
+            font-size: 28px;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden relative">
+        <header class="flex justify-between items-center p-4">
+            <button class="text-gray-600">
+                <span class="material-icons">arrow_back</span>
+            </button>
+            <div class="flex items-center space-x-2">
+                <img src="assets\logo (2).png"
+                    class="h-8" alt="GreenGenie Logo">
+                <span class="text-xl font-semibold text-green-600">GreenGenie</span>
+            </div>
+            <button class="text-gray-600 relative" id="cart-button">
+                <span class="material-icons">shopping_bag</span>
+                <span
+                    class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                    id="cart-count">0</span>
+            </button>
+        </header>
+        <main class="pb-24">
+            <div class="bg-green-100 rounded-b-3xl px-4 pt-4 pb-8">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-600">Indoor</p>
+                        <h1 class="text-4xl font-bold text-gray-800 leading-tight">Monstera<br />Adansonii</h1>
+                    </div>
+                    <div class="bg-green-500 text-white px-3 py-1 rounded-full flex items-center space-x-1">
+                        <span class="material-icons text-sm">star</span>
+                        <span>4.8</span>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-between items-end">
+                    <div>
+                        <div>
+                            <p class="text-sm text-gray-500">PRICE</p>
+                            <p class="text-2xl font-bold text-gray-800">$ 15</p>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-500">SIZE</p>
+                            <p class="text-2xl font-bold text-gray-800">5" h</p>
+                        </div>
+                        <div class="mt-6">
+                            <button class="bg-white rounded-full p-3 shadow-md" id="favorite-btn">
+                                <span class="material-icons text-green-500">favorite</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <img alt="Monstera Adansonii plant" class="w-full"
+                            src="https://static.vecteezy.com/system/resources/previews/051/027/753/non_2x/monstera-adansonii-houseplant-with-large-leaves-free-png.png" />
+                    </div>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="mt-8">
+                    <h2 class="text-xl font-bold text-gray-800">Overview</h2>
+                    <div class="flex justify-around mt-4 text-center">
+                        <div>
+                            <span class="material-icons text-yellow-500 icon-size">wb_sunny</span>
+                            <p class="text-sm text-gray-500 mt-1">LIGHT</p>
+                            <p class="font-semibold text-gray-800">35-40%</p>
+                        </div>
+                        <div>
+                            <span class="material-icons text-blue-500 icon-size">thermostat</span>
+                            <p class="text-sm text-gray-500 mt-1">TEMPERATURE</p>
+                            <p class="font-semibold text-gray-800">70-75 <span class="text-blue-500">°F</span></p>
+                        </div>
+                        <div>
+                            <span class="material-icons text-blue-400 icon-size">water_drop</span>
+                            <p class="text-sm text-gray-500 mt-1">WATER</p>
+                            <p class="font-semibold text-gray-800">250ml</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <h2 class="text-xl font-bold text-gray-800">About</h2>
+                    <p class="text-gray-600 mt-2 text-sm leading-relaxed">
+                        The Monstera Adansonii grows best in a well-draining Aroid mix using bark, perlite, peat moss,
+                        and charcoal. Keep your plant in bright indirect light and humidity .
+                    </p>
+                </div>
+                <div class="mt-8">
+                    <button
+                        class="w-full bg-green-600 text-white py-4 rounded-full flex items-center justify-center text-lg shadow-lg"
+                        id="add-to-cart-btn">
+                        <span class="material-icons mr-2">add_shopping_cart</span>
+                        Add to cart
+                        <span class="ml-auto pr-6 font-semibold">$ 15</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Cart Drawer -->
+
+        <div id="cart-drawer" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50 hidden">
+            <div class="bg-white w-11/12 max-w-sm p-4 rounded-lg shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold">Your Cart</h2>
+                    <button id="close-cart" class="text-gray-500">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <ul id="cart-items" class="space-y-2 max-h-48 overflow-y-auto"></ul>
+                <button class="mt-4 bg-green-600 text-white px-4 py-2 rounded w-full">Checkout</button>
+            </div>
+        </div>
+
+
+        <footer class="flex justify-around items-center py-4 border-t bg-white w-full max-w-sm fixed bottom-0">
+            <button class="text-gray-400">
+                <span class="material-icons icon-size">home</span>
+            </button>
+            <button class="text-gray-400">
+                <span class="material-icons icon-size">eco</span>
+            </button>
+            <button class="text-gray-400">
+                <span class="material-icons icon-size">emoji_events</span>
+            </button>
+            <button class="text-green-600">
+                <span class="material-icons icon-size">storefront</span>
+            </button>
+            <button class="text-gray-400">
+                <span class="material-icons icon-size">spa</span>
+            </button>
+        </footer>
+    </div>
+    <script>
+
+        const cartButton = document.getElementById('cart-button');
+        const closeCart = document.getElementById('close-cart');
+        const cartDrawer = document.getElementById('cart-drawer');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+        const cartItemsEl = document.getElementById('cart-items');
+        const cartCountEl = document.getElementById('cart-count');
+        const favoriteBtn = document.getElementById('favorite-btn');
+        const favoriteIcon = favoriteBtn.querySelector('span');
+
+        let cart = [];
+        let isFavorited = true;
+
+        function renderCart() {
+            cartItemsEl.innerHTML = '';
+            cart.forEach((item, index) => {
+                cartItemsEl.innerHTML += `
+                <li class="flex justify-between items-center border-b pb-1">
+                    <span>${item.name}</span>
+                    <button onclick="removeFromCart(${index})" class="text-red-500 text-sm">Remove</button>
+                </li>
+            `;
+            });
+            cartCountEl.textContent = cart.length;
+            cartCountEl.classList.toggle('hidden', cart.length === 0);
+        }
+
+        window.removeFromCart = function (index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        addToCartBtn.addEventListener('click', () => {
+            cart.push({ name: "Monstera Adansonii" });
+            renderCart();
+        });
+
+        cartButton.addEventListener('click', () => {
+            cartDrawer.classList.remove('hidden');
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartDrawer.classList.add('hidden');
+        });
+
+
+        favoriteBtn.addEventListener('click', () => {
+            isFavorited = !isFavorited;
+            if (isFavorited) {
+                favoriteIcon.textContent = 'favorite';
+                favoriteIcon.classList.remove('text-gray-400');
+                favoriteIcon.classList.add('text-green-500');
+            } else {
+                favoriteIcon.textContent = 'favorite_border';
+                favoriteIcon.classList.remove('text-green-500');
+                favoriteIcon.classList.add('text-gray-400');
+            }
+        });
+
+        renderCart();
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Total Complaints</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7fafc;
+        }
+        .main-container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <div class="main-container bg-white pb-8">
+        <header class="p-4 flex items-center">
+            <button
+                class="bg-green-500 text-white rounded-full p-2 w-10 h-10 flex items-center justify-center shadow-md">
+                <span class="material-icons">arrow_back</span>
+            </button>
+        </header>
+        <main class="px-4">
+            <h1 class="text-3xl font-bold text-green-600 mb-6">Total Complaints</h1>
+            <div class="relative mb-6">
+                <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                <input
+                    class="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-full focus:outline-none focus:border-green-500"
+                    placeholder="Search by keyword or name..." type="text" />
+            </div>
+            <div class="space-y-4">
+                <div class="bg-white border-2 border-green-200 rounded-2xl p-4 shadow-sm">
+                    <div class="flex justify-between items-start mb-2">
+                        <h2 class="text-xl font-semibold text-gray-800">Hamza Shaikh</h2>
+                        <span
+                            class="text-xs text-green-700 bg-green-100 border border-green-300 rounded-full px-3 py-1">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-md">Mon, Oct 15 -
+                            08:00 PM</span>
+                    </div>
+                    <div class="flex items-center text-gray-500 mb-3">
+                        <span class="material-icons text-lg mr-2">location_on</span>
+                        <p class="text-sm">Lorem ipsum dolor sit...</p>
+                    </div>
+                    <div class="bg-white border border-gray-300 rounded-lg p-3">
+                        <p class="text-sm text-gray-600">Gardener was not on time!!</p>
+                    </div>
+                </div>
+                <div class="bg-white border-2 border-green-200 rounded-2xl p-4 shadow-sm">
+                    <div class="flex justify-between items-start mb-2">
+                        <h2 class="text-xl font-semibold text-gray-800">John Doe</h2>
+                        <span
+                            class="text-xs text-red-700 bg-red-100 border border-red-300 rounded-full px-3 py-1">Pending</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-md">Tue, Oct 16 -
+                            10:30 AM</span>
+                    </div>
+                    <div class="flex items-center text-gray-500 mb-3">
+                        <span class="material-icons text-lg mr-2">location_on</span>
+                        <p class="text-sm">Consectetur adipiscing elit...</p>
+                    </div>
+                    <div class="bg-white border border-gray-300 rounded-lg p-3">
+                        <p class="text-sm text-gray-600">The service was not satisfactory.</p>
+                    </div>
+                </div>
+                <div class="bg-white border-2 border-green-200 rounded-2xl p-4 shadow-sm">
+                    <div class="flex justify-between items-start mb-2">
+                        <h2 class="text-xl font-semibold text-gray-800">Jane Smith</h2>
+                        <span
+                            class="text-xs text-green-700 bg-green-100 border border-green-300 rounded-full px-3 py-1">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-md">Wed, Oct 17 -
+                            02:00 PM</span>
+                    </div>
+                    <div class="flex items-center text-gray-500 mb-3">
+                        <span class="material-icons text-lg mr-2">location_on</span>
+                        <p class="text-sm">Sed do eiusmod tempor...</p>
+                    </div>
+                    <div class="bg-white border border-gray-300 rounded-lg p-3">
+                        <p class="text-sm text-gray-600">The plants provided were of poor quality.</p>
+                    </div>
+                </div>
+                <div class="bg-white border-2 border-green-200 rounded-2xl p-4 shadow-sm">
+                    <div class="flex justify-between items-start mb-2">
+                        <h2 class="text-xl font-semibold text-gray-800">Michael Johnson</h2>
+                        <span
+                            class="text-xs text-red-700 bg-red-100 border border-red-300 rounded-full px-3 py-1">Pending</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-md">Thu, Oct 18 -
+                            04:45 PM</span>
+                    </div>
+                    <div class="flex items-center text-gray-500 mb-3">
+                        <span class="material-icons text-lg mr-2">location_on</span>
+                        <p class="text-sm">Ut enim ad minim veniam...</p>
+                    </div>
+                    <div class="bg-white border border-gray-300 rounded-lg p-3">
+                        <p class="text-sm text-gray-600">Gardener did not follow instructions.</p>
+                    </div>
+                </div>
+                <div class="bg-white border-2 border-green-200 rounded-2xl p-4 shadow-sm">
+                    <div class="flex justify-between items-start mb-2">
+                        <h2 class="text-xl font-semibold text-gray-800">Emily Davis</h2>
+                        <span
+                            class="text-xs text-green-700 bg-green-100 border border-green-300 rounded-full px-3 py-1">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded-md">Fri, Oct 19 -
+                            09:15 AM</span>
+                    </div>
+                    <div class="flex items-center text-gray-500 mb-3">
+                        <span class="material-icons text-lg mr-2">location_on</span>
+                        <p class="text-sm">Quis nostrud exercitation...</p>
+                    </div>
+                    <div class="bg-white border border-gray-300 rounded-lg p-3">
+                        <p class="text-sm text-gray-600">Equipment was left behind at my property.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 flex justify-center items-center space-x-2">
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100">
+                    <span class="material-icons text-lg">chevron_left</span>
+                </button>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white font-semibold">1</button>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100">2</button>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100">3</button>
+                <span class="text-gray-500">...</span>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100">5</button>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100">
+                    <span class="material-icons text-lg">chevron_right</span>
+                </button>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

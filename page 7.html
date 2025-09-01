@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Water Plants</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .icon-water-drop {
+            width: 1em;
+            height: 1em;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a1c499'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v5h-2zm0 6h2v2h-2z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .icon-water-drop-filled {
+            width: 1em;
+            height: 1em;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 3C7.5 3 4 6.5 4 11c0 3.14 1.5 5.5 4 7.2V21h8v-2.8c2.5-1.7 4-4.06 4-7.2 0-4.5-3.5-8-8-8z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .icon-water-drop-outline {
+            width: 1em;
+            height: 1em;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23A0B4A0'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v5h-2zm0 6h2v2h-2z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.5;
+        }
+        .check-circle-filled {
+            background-color: white;
+            color: #EBC2B4;
+        }
+        .check-circle-outline {
+            background-color: white;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <div class="container mx-auto max-w-sm p-4 bg-white min-h-screen">
+        <header class="flex justify-between items-center py-4 relative">
+            <h1 class="text-2xl font-bold">Water <span class="text-green-500">Plants</span></h1>
+            <div class="relative" x-data="{ open: false }">
+                <button @click="open = !open" class="text-gray-400">
+                    <span class="material-icons">settings</span>
+                </button>
+                <div @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20"
+                    style="display: none;" x-show="open">
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Account</a>
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Notifications</a>
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Appearance</a>
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Privacy &amp;
+                        Security</a>
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Help &amp; Support</a>
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Logout</a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="space-y-4">
+                <div class="bg-[#F8DED5] p-4 rounded-2xl flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <img alt="A green leafy plant in a white pot" class="w-16 h-16 object-cover rounded-xl"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMxX7czJjr7OA_W-P6EHWtvwf0GKiZBHvpglClA84nkQ7i5erQYSo4q7FVQwrkR-xeO2NXVF7q1Z81kAm0Ph_vkokwCikkbV0TVckyK8WQxb3kAtzjL64W6d4hqd4IUq8twuZt8RBGOhJb6lQxYgvj8UmoHxBE9lly_tMu4CLzLkK7ISUDrN-lqP5QZFTqInz7aLSL5hzCnSzCTXawEsXRoJlc0Wzj8ouqMPQzzVmsJ4g-6DpAB6bC0yG9dMxviJvGIlnjpsf98S8" />
+                        <div>
+                            <p class="font-semibold text-gray-700">Create with</p>
+                            <p class="font-semibold text-gray-700">Gardening App</p>
+                            <div class="flex items-center text-gray-600 mt-1">
+                                <span class="material-icons text-sm">local_drink</span>
+                                <span class="text-sm ml-1">150 ml</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <span class="material-icons text-3xl text-[#F8DED5]">check_circle</span>
+                    </div>
+                </div>
+                <div class="bg-[#F5E5D8] p-4 rounded-2xl flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <img alt="A lush green bush in a black pot" class="w-16 h-16 object-cover rounded-xl"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHHunrpELxhlLLFoc7bX7diJpZzzF2ldsEJAMecXLKOxFjSfyAPcOYERciklHL7caaXyIi9bJ4qrtcmbgHp8TMmbSc3rNXWP_gL5okMTtABKpX8WzpweK_GLfPQ0Ul01ayRdwpjhjYc4kEP8x9sRzSPjL5zDDMYvFa_u3inWna0X-IPwZJZi5jOvFTgnnDIvYX8lUefWOw50A4thU4msc-mvy_DPIB_i6uHU6EJJ6rJN5C8__Z_GQM-eNPCBdnFj9KOpjh8bxGzLM" />
+                        <div>
+                            <p class="font-semibold text-gray-700">Create with</p>
+                            <p class="font-semibold text-gray-700">Gardening App</p>
+                            <div class="flex items-center text-gray-600 mt-1">
+                                <span class="material-icons text-sm">local_drink</span>
+                                <span class="text-sm ml-1">150 ml</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <span class="material-icons text-3xl text-[#F5E5D8]">check_circle</span>
+                    </div>
+                </div>
+                <div class="bg-gray-200 p-4 rounded-2xl flex items-center justify-between border-2 border-red-300">
+                    <div class="flex items-center space-x-4">
+                        <img alt="A topiary tree in a brown pot" class="w-16 h-16 object-cover rounded-xl"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvdZqxPMRW5z_CsL0lilISdwgtcKH5-hTn0XIRhTNlhB3OnkV1A21uzol8JGyU1nBymOSzSMi3Yy_AVA211Dj0ELwJm5HUPae8w1cZYWOoUNAGrSEu81Zs_UzUCeWlMulOKPmBfHDefsXEoqnylY9sOfGy-QDwpS1jzxfBGpeuXJauCdP_2qAUOHkqpnK_xIWDD80e1Pnx78r1BV3nLVPxmJBpY7YYQw6tMYMbk3HJyu0oJl6Lj_jzXNpaCQdO-oB7XpAuISR-oGk" />
+                        <div>
+                            <p class="font-semibold text-gray-400">Create with</p>
+                            <p class="font-semibold text-gray-400">Gardening App</p>
+                            <div class="flex items-center text-gray-400 mt-1">
+                                <span class="material-icons text-sm">local_drink</span>
+                                <span class="text-sm ml-1">150 ml</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-12 h-12 bg-white/50 rounded-full flex items-center justify-center">
+                        <span class="material-icons text-green-700 text-3xl opacity-50">water_drop</span>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-xl font-bold mt-8 mb-4">Saturday, May 21</h2>
+            <div class="relative bg-gray-200 p-4 rounded-2xl flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <img alt="A small green grass plant in a black pot" class="w-16 h-16 object-cover rounded-xl"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB84FzfFI7yIOf3lHPyh8AY2PkVgouSa0GhPN8-EvYqNYVg53GXbO9xsBXaZZEpA3qRAqnnAycmCCwnCu8qFke11G-4TKDIMOya-8L6y5ok665XS9soXw9PVrMY2pTcQruWqH4B3aBdAIMPOmgxFWLtGDYvyKV9RZ-aqhIL4RTSxN-gPP2pSh9LCQ22-LHaHsy1Gqj_oeVCH8bwSUMKnp3ediKyys6C9SdHo1piCsh1nsb5N-aYeA5kjWFooaJsI3dIsV3Y_GykqEE" />
+                    <div>
+                        <p class="font-semibold text-gray-400">Create with</p>
+                        <p class="font-semibold text-gray-400">Gardening App</p>
+                        <div class="flex items-center text-gray-400 mt-1">
+                            <span class="material-icons text-sm">local_drink</span>
+                            <span class="text-sm ml-1">150 ml</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-12 h-12 bg-white/50 rounded-full flex items-center justify-center">
+                    <span class="material-icons text-green-700 text-3xl opacity-50">water_drop</span>
+                </div>
+                <button
+                    class="absolute -bottom-5 -right-5 w-16 h-16 bg-green-600 rounded-full flex items-center justify-center shadow-lg">
+                    <span class="material-icons text-white text-4xl">add</span>
+                </button>
+                <button
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-green-600/80 rounded-full flex items-center justify-center">
+                    <span class="material-icons text-white text-4xl">fullscreen</span>
+                </button>
+            </div>
+        </main>
+    </div>
+    <footer class="fixed bottom-0 left-0 right-0 bg-white shadow-lg rounded-t-3xl max-w-md mx-auto">
+            <div class="flex justify-around items-center p-4">
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">home</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">eco</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">emoji_events</span>
+                </button>
+                <button class="text-green-600">
+                    <span class="material-icons icon-size">storefront</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">spa</span>
+                </button>
+            </div>
+        </footer>
+    <script defer="" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+
+</body>
+
+</html>

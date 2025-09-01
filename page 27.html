@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>GreenGenie Shopping Bag</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style type="text/tailwindcss">
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .icon-bg {
+      background-color: #e6f3f0;
+    }
+    #coupon-input-container.hidden {
+        display: none;
+    }.no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }.no-scrollbar {
+        -ms-overflow-style: none;scrollbar-width: none;}
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <div class="max-w-sm mx-auto bg-white shadow-md flex flex-col h-screen" id="app">
+    <header class="p-4 flex justify-between items-center flex-shrink-0">
+      <span class="material-icons">arrow_back</span>
+      <div class="text-center">
+        <img alt="GreenGenie logo" class="h-8 mx-auto"
+          src="assets\logo (2).png" />
+                              <h2 class="text-xl font-bold text-green-700 mt-2">Green<span class="text-green-500">Genie</span>
+
+      </div>
+      <div class="relative">
+        <span class="material-icons">notifications_none</span>
+        <span
+          class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">3</span>
+      </div>
+    </header>
+    <main class="p-4 overflow-y-auto pb-32 no-scrollbar">
+      <h1 class="text-2xl font-bold mb-4">Shopping Bag</h1>
+      <div id="cart-items"></div>
+      <div class="my-6">
+        <div class="flex items-center" id="apply-coupon-toggle">
+          <div class="icon-bg p-3 rounded-full">
+            <span class="material-icons text-green-600">local_offer</span>
+          </div>
+          <p class="ml-4 font-semibold">Apply Coupon</p>
+          <div class="flex-grow border-b-2 border-dashed border-gray-300 ml-4"></div>
+          <span class="material-icons text-gray-400">chevron_right</span>
+        </div>
+        <div class="hidden mt-4" id="coupon-input-container">
+          <div class="flex items-center">
+            <input class="flex-grow border border-gray-300 rounded-l-md p-2 focus:ring-green-500 focus:border-green-500"
+              id="coupon-code" placeholder="Enter coupon code" type="text" />
+            <button class="bg-green-500 text-white font-semibold px-4 py-2 rounded-r-md"
+              id="apply-coupon-btn">Apply</button>
+          </div>
+          <p class="text-sm mt-2" id="coupon-message"></p>
+          <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 mt-3 rounded-md hidden"
+            id="error-message-container">
+            <div class="flex items-center">
+              <span class="material-icons mr-2">error_outline</span>
+              <p id="error-message">Invalid coupon code. Please try again.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center my-6">
+        <div class="icon-bg p-3 rounded-full">
+          <span class="material-icons text-green-600">local_shipping</span>
+        </div>
+        <div class="ml-4 flex-grow">
+          <div class="flex justify-between items-center">
+            <p class="font-semibold">Delivery</p>
+            <p class="font-semibold" id="delivery-cost">$15</p>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-1.5 mt-1">
+            <div class="bg-green-500 h-1.5 rounded-full" id="delivery-progress" style="width: 75%"></div>
+          </div>
+          <div class="flex justify-between items-center text-sm mt-1">
+            <p class="text-gray-500">Order above $50 to get Free Delivery</p>
+            <p class="text-green-600 font-semibold" id="shop-more-amount">Shop for more $20</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-orange-100 rounded-lg p-4 mb-4">
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="font-bold text-orange-600">Saved for later</h3>
+          <p class="text-sm font-semibold text-orange-600">3 items</p>
+        </div>
+        <div class="flex items-center">
+          <div class="relative">
+            <img alt="Large Snake Zylanica plant" class="w-16 h-16 rounded-lg object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUzEZ4cbswVirt8MRD9I1qUpSZeSWgrfKJv5mOHOwHAKpc9B55JnLmx_nNqi57UoBfJVDvWN8_TEjgpF439mQmPQUlLtaveTDzEQmP6aAqpV6TAHSLuc7vIbsZLN1kKv-pTkkFznMDx4AXopkdQfeSOBL1QlBwUK5Nk8FnYMk5d6DmyecFs53_sJ6YpI7agOhfFXw44jITTylkvN8sZNZDCyD0_DlPeKI3Litr1uhsAKbmkH-MwaCz-z7_vErIQ1qUVY8mSuh00Qs" />
+            <button class="absolute top-1 left-1 bg-white p-1 rounded-full shadow">
+              <span class="material-icons text-base text-gray-400">favorite_border</span>
+            </button>
+          </div>
+          <div class="ml-4 flex-grow">
+            <h4 class="font-semibold">Large Snake Zylanica</h4>
+            <div class="flex items-center mt-1">
+              <p class="text-gray-500 text-sm">Large</p>
+            </div>
+          </div>
+          <div class="text-right flex flex-col items-end">
+            <p class="font-bold text-lg">$60</p>
+            <div class="flex items-center mt-2 space-x-2">
+              <button class="text-sm font-semibold text-orange-600">move to cart</button>
+              <button class="text-gray-500">
+                <span class="material-icons">delete_outline</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="fixed bottom-0 left-0 right-0 max-w-sm mx-auto p-4 bg-white border-t mt-auto">
+      <button
+        class="w-full bg-green-600 text-white py-4 px-6 rounded-full flex justify-between items-center font-bold text-lg">
+        <div class="flex items-center">
+          <span class="material-icons mr-2">shopping_bag</span>
+          <span>Checkout</span>
+        </div>
+        <span id="total-price">$ 60</span>
+      </button>
+    </div>
+
+
+
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const state = {
+        cart: [{
+          id: 1,
+          name: 'Monstera Adansonii',
+          family: 'Monstera family',
+          price: 15,
+          quantity: 2,
+          imgSrc: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR7cJyzbt7IPGTluI-rk2hybUSSEc3NUDBm5ZdeEARgBPWIV-9fsV23yr061kYyPxF8FXQ2NPh1Q95OpPeUNujSglnNBj0yPmwnBa9suqaqan3KZ5LgOTJOlnabjLb8bHgAptpR6L-6r7sJuKimGi0RHceHwYj3wBEbVfpQ1XbJtTXgTIMNbvl-xdyJwJS8VHIst8K28aJyqeTYTrz9rsj2JpNaEP7BP-jc8Rl8haSWKHgFveoqI3PFB3zYL3VLCCuHRa3pG4l4S8',
+          isFavorite: true
+        }, {
+          id: 2,
+          name: 'Fruit Bundle #3',
+          family: 'Customized seeds',
+          price: 15,
+          quantity: 2,
+          imgSrc: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA--FEZUPw-qI7sWJ9_u5VXkZVEe6NazrRd4ccqVuVa8FwhU5kStEm1AIP2-bU38uUH-2FaVVqbSt7ZfRf11R27GMMtS0MJwx4pjtRkCbnmh4arNFTI7yoDNIVOna7Ei56n4kOg6jDDHe61UoC3kBVXUHQYl5X-BzuOuh-C_Fb6zWYEDXGwWQ5ThTj1PNQosh6h2TvAAvAej3ZRilCsZsyayrnrgeU7-DJAm4-5ywroLUpMZpDyrG3EtxoSOrdWTMgbAUC-qHeFgk0',
+          isFavorite: false
+        }, {
+          id: 3,
+          name: 'Another Plant',
+          family: 'Some family',
+          price: 25,
+          quantity: 1,
+          imgSrc: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBUzEZ4cbswVirt8MRD9I1qUpSZeSWgrfKJv5mOHOwHAKpc9B55JnLmx_nNqi57UoBfJVDvWN8_TEjgpF439mQmPQUlLtaveTDzEQmP6aAqpV6TAHSLuc7vIbsZLN1kKv-pTkkFznMDx4AXopkdQfeSOBL1QlBwUK5Nk8FnYMk5d6DmyecFs53_sJ6YpI7agOhfFXw44jITTylkvN8sZNZDCyD0_DlPeKI3Litr1uhsAKbmkH-MwaCz-z7_vErIQ1qUVY8mSuh00Qs',
+          isFavorite: false
+        }],
+        coupon: null
+      };
+      const validCoupons = {
+        'SAVE10': 0.10,
+        'GREEN20': 0.20
+      };
+      const cartItemsContainer = document.getElementById('cart-items');
+      const totalPriceEl = document.getElementById('total-price');
+      const deliveryCostEl = document.getElementById('delivery-cost');
+      const deliveryProgressEl = document.getElementById('delivery-progress');
+      const shopMoreAmountEl = document.getElementById('shop-more-amount');
+      const applyCouponToggle = document.getElementById('apply-coupon-toggle');
+      const couponInputContainer = document.getElementById('coupon-input-container');
+      const couponCodeInput = document.getElementById('coupon-code');
+      const applyCouponBtn = document.getElementById('apply-coupon-btn');
+      const couponMessageEl = document.getElementById('coupon-message');
+      const errorMessageContainer = document.getElementById('error-message-container');
+      function renderCart() {
+        cartItemsContainer.innerHTML = '';
+        if (state.cart.length === 0) {
+          cartItemsContainer.innerHTML = '<p class="text-center text-gray-500">Your shopping bag is empty.</p>';
+          updateTotals();
+          return;
+        }
+        state.cart.forEach(item => {
+          const itemEl = document.createElement('div');
+          itemEl.className = 'bg-lime-100 rounded-lg p-4 mb-4';
+          itemEl.innerHTML = `
+            <div class="flex items-start">
+                <div class="relative">
+                    <img alt="${item.name}" class="w-24 h-24 rounded-lg object-cover" src="${item.imgSrc}">
+                    <button data-id="${item.id}" class="favorite-toggle absolute top-1 left-1 bg-white p-1 rounded-full shadow">
+                        <span class="material-icons text-base ${item.isFavorite ? 'text-green-500' : 'text-gray-400'}">${item.isFavorite ? 'favorite' : 'favorite_border'}</span>
+                    </button>
+                </div>
+                <div class="ml-4 flex-grow">
+                    <h2 class="font-semibold">${item.name}</h2>
+                    <p class="text-sm text-gray-600">${item.family}</p>
+                    <div class="flex items-center mt-2">
+                        <button data-id="${item.id}" class="increase-quantity bg-white rounded-full p-1"><span class="material-icons text-sm">add</span></button>
+                        <span class="mx-3 font-semibold">${item.quantity}</span>
+                        <button data-id="${item.id}" class="decrease-quantity bg-white rounded-full p-1"><span class="material-icons text-sm">remove</span></button>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-lg text-gray-800">$${item.price * item.quantity}</p>
+                    <button data-id="${item.id}" class="delete-item mt-8">
+                        <span class="material-icons text-gray-500">delete_outline</span>
+                    </button>
+                </div>
+            </div>
+          `;
+          cartItemsContainer.appendChild(itemEl);
+        });
+        updateTotals();
+        addEventListeners();
+      }
+      function updateTotals() {
+        let subtotal = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        let discount = 0;
+        if (state.coupon) {
+          discount = subtotal * validCoupons[state.coupon];
+          subtotal -= discount;
+        }
+        const deliveryCost = subtotal >= 50 ? 0 : 15;
+        const total = subtotal + deliveryCost;
+        totalPriceEl.textContent = `$ ${total.toFixed(2)}`;
+        deliveryCostEl.textContent = deliveryCost > 0 ? `$${deliveryCost}` : 'Free';
+        const progress = Math.min((subtotal / 50) * 100, 100);
+        deliveryProgressEl.style.width = `${progress}%`;
+        if (subtotal < 50) {
+          shopMoreAmountEl.textContent = `Shop for more $${(50 - subtotal).toFixed(2)}`;
+          shopMoreAmountEl.parentElement.previousElementSibling.previousElementSibling.textContent = 'Order above $50 to get Free Delivery';
+        } else {
+          shopMoreAmountEl.textContent = '';
+          shopMoreAmountEl.parentElement.previousElementSibling.previousElementSibling.textContent = 'You have free delivery!';
+        }
+        if (state.coupon) {
+          couponMessageEl.textContent = `Coupon "${state.coupon}" applied! You saved $${discount.toFixed(2)}.`;
+          couponMessageEl.className = 'text-sm mt-2 text-green-600';
+          errorMessageContainer.classList.add('hidden');
+        } else {
+          couponMessageEl.textContent = '';
+        }
+      }
+      function addEventListeners() {
+        document.querySelectorAll('.increase-quantity').forEach(button => {
+          button.onclick = (e) => {
+            const id = parseInt(e.currentTarget.dataset.id);
+            const item = state.cart.find(i => i.id === id);
+            item.quantity++;
+            renderCart();
+          };
+        });
+        document.querySelectorAll('.decrease-quantity').forEach(button => {
+          button.onclick = (e) => {
+            const id = parseInt(e.currentTarget.dataset.id);
+            const item = state.cart.find(i => i.id === id);
+            if (item.quantity > 1) {
+              item.quantity--;
+            } else {
+              state.cart = state.cart.filter(i => i.id !== id);
+            }
+            renderCart();
+          };
+        });
+        document.querySelectorAll('.delete-item').forEach(button => {
+          button.onclick = (e) => {
+            const id = parseInt(e.currentTarget.dataset.id);
+            state.cart = state.cart.filter(i => i.id !== id);
+            renderCart();
+          };
+        });
+        document.querySelectorAll('.favorite-toggle').forEach(button => {
+          button.onclick = (e) => {
+            const id = parseInt(e.currentTarget.dataset.id);
+            const item = state.cart.find(i => i.id === id);
+            item.isFavorite = !item.isFavorite;
+            renderCart();
+          };
+        });
+      }
+      applyCouponToggle.onclick = () => {
+        couponInputContainer.classList.toggle('hidden');
+      }
+      applyCouponBtn.onclick = () => {
+        const code = couponCodeInput.value.toUpperCase();
+        if (validCoupons[code]) {
+          state.coupon = code;
+          couponMessageEl.textContent = `Coupon "${code}" applied!`;
+          couponMessageEl.className = 'text-sm mt-2 text-green-600';
+          errorMessageContainer.classList.add('hidden');
+          updateTotals();
+        } else {
+          state.coupon = null;
+          couponCodeInput.classList.add('border-red-500');
+          couponMessageEl.textContent = '';
+          errorMessageContainer.classList.remove('hidden');
+          updateTotals();
+        }
+      }
+      couponCodeInput.addEventListener('input', () => {
+        couponCodeInput.classList.remove('border-red-500');
+        errorMessageContainer.classList.add('hidden');
+      });
+      renderCart();
+    });
+  </script>
+</body>
+
+</html>

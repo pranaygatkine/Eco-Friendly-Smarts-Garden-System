@@ -1,0 +1,596 @@
+<!-- <!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Completed Bookings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary-green: #166534;
+            --light-green-bg: #dcfce7;
+            --light-green-text: #15803d;
+            --border-green: #4ade80;
+            --pending-yellow-bg: #fef9c3;
+            --pending-yellow-text: #ca8a04;
+            --pending-yellow-border: #facc15;
+            --cancelled-red-bg: #fee2e2;
+            --cancelled-red-text: #dc2626;
+            --cancelled-red-border: #f87171;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f7f7;
+        }
+        .main-container {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .scrollable-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 1rem;}
+        .sort-menu {
+            display: none;
+        }
+        .sort-menu.show {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+<div class="main-container max-w-sm mx-auto">
+<header class="flex items-center p-4">
+<button class="bg-[var(--primary-green)] text-white p-2 rounded-full shadow-md">
+<span class="material-icons">arrow_back</span>
+</button>
+</header>
+<div class="px-4">
+<h1 class="text-3xl font-bold text-[var(--primary-green)] mb-4">Bookings</h1>
+<div class="flex items-center space-x-4 mb-6">
+<div class="relative flex-grow">
+<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--primary-green)]" placeholder="Search bookings" type="text"/>
+</div>
+<div class="relative" id="sort-by-container">
+<button class="flex items-center space-x-2 border border-gray-300 px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--primary-green)]" id="sort-by-button">
+<span class="material-icons text-gray-600">sort</span>
+<span class="text-gray-700">Sort by</span>
+</button>
+<div class="sort-menu absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10" id="sort-by-menu">
+<a class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-sort="date" href="#">
+<span>Date</span>
+<span class="material-icons text-sm opacity-0 sort-icon"></span>
+</a>
+<a class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-sort="status" href="#">
+<span>Status</span>
+<span class="material-icons text-sm opacity-0 sort-icon"></span>
+</a>
+<a class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-sort="name" href="#">
+<span>Name (A-Z)</span>
+<span class="material-icons text-sm opacity-0 sort-icon"></span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="scrollable-content px-4">
+<div class="space-y-4" id="booking-list">
+<div class="booking-card bg-white p-4 rounded-2xl border border-[var(--border-green)] shadow-sm" data-date="2023-10-15T20:00" data-name="Toby Ramos" data-status="Confirmed">
+<div class="flex justify-between items-start">
+<h2 class="text-xl font-semibold text-gray-800">Toby Ramos</h2>
+<span class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful Service</span>
+</div>
+<div class="mt-2 mb-4">
+<span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Mon, Oct 15 - 08:00 PM</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-gray-500">
+<span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+<p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-icons text-green-600">check_circle</span>
+<span class="text-sm font-medium text-green-600">Confirmed</span>
+</div>
+</div>
+</div>
+<div class="booking-card bg-white p-4 rounded-2xl border border-[var(--pending-yellow-border)] shadow-sm" data-date="2023-10-15T20:00" data-name="Debbie Meyer" data-status="Pending">
+<div class="flex justify-between items-start">
+<h2 class="text-xl font-semibold text-gray-800">Debbie Meyer</h2>
+<span class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful Service</span>
+</div>
+<div class="mt-2 mb-4">
+<span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Mon, Oct 15 - 08:00 PM</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-gray-500">
+<span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+<p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-icons text-yellow-500">hourglass_empty</span>
+<span class="text-sm font-medium text-yellow-600">Pending</span>
+</div>
+</div>
+</div>
+<div class="booking-card bg-white p-4 rounded-2xl border border-[var(--cancelled-red-border)] shadow-sm" data-date="2023-10-15T20:00" data-name="Elijah Jefferson" data-status="Cancelled">
+<div class="flex justify-between items-start">
+<h2 class="text-xl font-semibold text-gray-800">Elijah Jefferson</h2>
+<span class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful Service</span>
+</div>
+<div class="mt-2 mb-4">
+<span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Mon, Oct 15 - 08:00 PM</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-gray-500">
+<span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+<p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-icons text-red-500">cancel</span>
+<span class="text-sm font-medium text-red-600">Cancelled</span>
+</div>
+</div>
+</div>
+<div class="booking-card bg-white p-4 rounded-2xl border border-[var(--border-green)] shadow-sm" data-date="2023-10-16T09:00" data-name="Martha Simmons" data-status="Confirmed">
+<div class="flex justify-between items-start">
+<h2 class="text-xl font-semibold text-gray-800">Martha Simmons</h2>
+<span class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful Service</span>
+</div>
+<div class="mt-2 mb-4">
+<span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Tue, Oct 16 - 09:00 AM</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-gray-500">
+<span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+<p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-icons text-green-600">check_circle</span>
+<span class="text-sm font-medium text-green-600">Confirmed</span>
+</div>
+</div>
+</div>
+<div class="booking-card bg-white p-4 rounded-2xl border border-[var(--border-green)] shadow-sm" data-date="2023-10-16T11:00" data-name="Carl Jacobs" data-status="Confirmed">
+<div class="flex justify-between items-start">
+<h2 class="text-xl font-semibold text-gray-800">Carl Jacobs</h2>
+<span class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful Service</span>
+</div>
+<div class="mt-2 mb-4">
+<span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Tue, Oct 16 - 11:00 AM</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-gray-500">
+<span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+<p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-icons text-green-600">check_circle</span>
+<span class="text-sm font-medium text-green-600">Confirmed</span>
+</div>
+</div>
+</div>
+<div class="booking-card bg-white p-4 rounded-2xl border border-[var(--cancelled-red-border)] shadow-sm" data-date="2023-10-17T14:00" data-name="Sandra Day" data-status="Cancelled">
+<div class="flex justify-between items-start">
+<h2 class="text-xl font-semibold text-gray-800">Sandra Day</h2>
+<span class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful Service</span>
+</div>
+<div class="mt-2 mb-4">
+<span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Wed, Oct 17 - 02:00 PM</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-gray-500">
+<span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+<p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-icons text-red-500">cancel</span>
+<span class="text-sm font-medium text-red-600">Cancelled</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const backButton = document.querySelector('header button');
+        backButton.addEventListener('click', () => {
+            console.log('Back button clicked');
+        });
+        const sortByButton = document.getElementById('sort-by-button');
+        const sortByMenu = document.getElementById('sort-by-menu');
+        const sortByContainer = document.getElementById('sort-by-container');
+        sortByButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            sortByMenu.classList.toggle('show');
+        });
+        document.addEventListener('click', (event) => {
+            if (!sortByContainer.contains(event.target)) {
+                sortByMenu.classList.remove('show');
+            }
+        });
+        const bookingList = document.getElementById('booking-list');
+        const bookingCards = Array.from(bookingList.querySelectorAll('.booking-card'));
+        const sortLinks = sortByMenu.querySelectorAll('a');
+        let currentSort = {
+            key: null,
+            direction: 'asc'
+        };
+        sortLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const sortKey = link.dataset.sort;
+                if (currentSort.key === sortKey) {
+                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    currentSort.key = sortKey;
+                    currentSort.direction = 'asc';
+                }
+                updateSortIcons();
+                sortBookings();
+                sortByMenu.classList.remove('show');
+            });
+        });
+        function updateSortIcons() {
+            sortLinks.forEach(link => {
+                const icon = link.querySelector('.sort-icon');
+                if (link.dataset.sort === currentSort.key) {
+                    icon.classList.remove('opacity-0');
+                    icon.textContent = currentSort.direction === 'asc' ? 'arrow_upward' : 'arrow_downward';
+                } else {
+                    icon.classList.add('opacity-0');
+                    icon.textContent = '';
+                }
+            });
+        }
+        function sortBookings() {
+            const { key, direction } = currentSort;
+            if (!key) return;
+            bookingCards.sort((a, b) => {
+                const valA = a.dataset[key];
+                const valB = b.dataset[key];
+                let comparison = 0;
+                if (key === 'date') {
+                    comparison = new Date(valA) - new Date(valB);
+                } else {
+                    comparison = valA.localeCompare(valB, undefined, { numeric: true, sensitivity: 'base' });
+                }
+                return direction === 'asc' ? comparison : -comparison;
+            });
+            bookingCards.forEach(card => bookingList.appendChild(card));
+        }
+    });
+</script>
+
+</body></html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Completed Bookings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        :root {
+            --primary-green: #166534;
+            --light-green-bg: #dcfce7;
+            --light-green-text: #15803d;
+            --border-green: #4ade80;
+            --pending-yellow-bg: #fef9c3;
+            --pending-yellow-text: #ca8a04;
+            --pending-yellow-border: #facc15;
+            --cancelled-red-bg: #fee2e2;
+            --cancelled-red-text: #dc2626;
+            --cancelled-red-border: #f87171;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f7f7;
+        }
+        .main-container {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .scrollable-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 1rem;
+            -ms-overflow-style: none;scrollbar-width: none;}
+        .scrollable-content::-webkit-scrollbar {
+            display: none;}
+        .sort-menu {
+            display: none;
+        }
+        .sort-menu.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="main-container max-w-sm mx-auto">
+        <header class="flex items-center p-4">
+            <button class="bg-[var(--primary-green)] text-white p-2 rounded-full shadow-md">
+                <span class="material-icons">arrow_back</span>
+            </button>
+        </header>
+        <div class="px-4">
+            <h1 class="text-3xl font-bold text-[var(--primary-green)] mb-4">Bookings</h1>
+            <div class="flex items-center space-x-4 mb-6">
+                <div class="relative flex-grow">
+                    <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                    <input
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--primary-green)]"
+                        id="search-input" placeholder="Search bookings" type="text" />
+                </div>
+                <div class="relative" id="sort-by-container">
+                    <button
+                        class="flex items-center space-x-2 border border-gray-300 px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--primary-green)]"
+                        id="sort-by-button">
+                        <span class="material-icons text-gray-600">sort</span>
+                        <span class="text-gray-700">Sort by</span>
+                    </button>
+                    <div class="sort-menu absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10"
+                        id="sort-by-menu">
+                        <a class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            data-sort="date" href="#">
+                            <span>Date</span>
+                            <span class="material-icons text-sm opacity-0 sort-icon"></span>
+                        </a>
+                        <a class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            data-sort="status" href="#">
+                            <span>Status</span>
+                            <span class="material-icons text-sm opacity-0 sort-icon"></span>
+                        </a>
+                        <a class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            data-sort="name" href="#">
+                            <span>Name (A-Z)</span>
+                            <span class="material-icons text-sm opacity-0 sort-icon"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scrollable-content px-4">
+            <div class="space-y-4" id="booking-list">
+                <div class="booking-card bg-white p-4 rounded-2xl border border-[var(--border-green)] shadow-sm"
+                    data-date="2023-10-15T20:00" data-name="Toby Ramos" data-status="Confirmed">
+                    <div class="flex justify-between items-start">
+                        <h2 class="text-xl font-semibold text-gray-800">Toby Ramos</h2>
+                        <span
+                            class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mt-2 mb-4">
+                        <span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Mon, Oct 15 - 08:00
+                            PM</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-gray-500">
+                            <span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+                            <p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-green-600">check_circle</span>
+                            <span class="text-sm font-medium text-green-600">Confirmed</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-card bg-white p-4 rounded-2xl border border-[var(--pending-yellow-border)] shadow-sm"
+                    data-date="2023-10-15T20:00" data-name="Debbie Meyer" data-status="Pending">
+                    <div class="flex justify-between items-start">
+                        <h2 class="text-xl font-semibold text-gray-800">Debbie Meyer</h2>
+                        <span
+                            class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mt-2 mb-4">
+                        <span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Mon, Oct 15 - 08:00
+                            PM</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-gray-500">
+                            <span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+                            <p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-yellow-500">hourglass_empty</span>
+                            <span class="text-sm font-medium text-yellow-600">Pending</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-card bg-white p-4 rounded-2xl border border-[var(--cancelled-red-border)] shadow-sm"
+                    data-date="2023-10-15T20:00" data-name="Elijah Jefferson" data-status="Cancelled">
+                    <div class="flex justify-between items-start">
+                        <h2 class="text-xl font-semibold text-gray-800">Elijah Jefferson</h2>
+                        <span
+                            class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mt-2 mb-4">
+                        <span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Mon, Oct 15 - 08:00
+                            PM</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-gray-500">
+                            <span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+                            <p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-red-500">cancel</span>
+                            <span class="text-sm font-medium text-red-600">Cancelled</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-card bg-white p-4 rounded-2xl border border-[var(--border-green)] shadow-sm"
+                    data-date="2023-10-16T09:00" data-name="Martha Simmons" data-status="Confirmed">
+                    <div class="flex justify-between items-start">
+                        <h2 class="text-xl font-semibold text-gray-800">Martha Simmons</h2>
+                        <span
+                            class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mt-2 mb-4">
+                        <span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Tue, Oct 16 - 09:00
+                            AM</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-gray-500">
+                            <span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+                            <p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-green-600">check_circle</span>
+                            <span class="text-sm font-medium text-green-600">Confirmed</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-card bg-white p-4 rounded-2xl border border-[var(--border-green)] shadow-sm"
+                    data-date="2023-10-16T11:00" data-name="Carl Jacobs" data-status="Confirmed">
+                    <div class="flex justify-between items-start">
+                        <h2 class="text-xl font-semibold text-gray-800">Carl Jacobs</h2>
+                        <span
+                            class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mt-2 mb-4">
+                        <span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Tue, Oct 16 - 11:00
+                            AM</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-gray-500">
+                            <span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+                            <p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-green-600">check_circle</span>
+                            <span class="text-sm font-medium text-green-600">Confirmed</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-card bg-white p-4 rounded-2xl border border-[var(--cancelled-red-border)] shadow-sm"
+                    data-date="2023-10-17T14:00" data-name="Sandra Day" data-status="Cancelled">
+                    <div class="flex justify-between items-start">
+                        <h2 class="text-xl font-semibold text-gray-800">Sandra Day</h2>
+                        <span
+                            class="text-xs bg-[var(--light-green-bg)] text-[var(--light-green-text)] px-2 py-1 rounded-full whitespace-nowrap">Fruitful
+                            Service</span>
+                    </div>
+                    <div class="mt-2 mb-4">
+                        <span class="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-full">Wed, Oct 17 - 02:00
+                            PM</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-gray-500">
+                            <span class="material-icons text-lg text-[var(--primary-green)]">location_on</span>
+                            <p class="ml-2 text-sm">Lorem ipsum dolor sit...</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons text-red-500">cancel</span>
+                            <span class="text-sm font-medium text-red-600">Cancelled</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const backButton = document.querySelector('header button');
+            backButton.addEventListener('click', () => {
+                console.log('Back button clicked');
+            });
+            const searchInput = document.getElementById('search-input');
+            const bookingList = document.getElementById('booking-list');
+            const bookingCards = Array.from(bookingList.querySelectorAll('.booking-card'));
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                bookingCards.forEach(card => {
+                    const name = card.dataset.name.toLowerCase();
+                    const status = card.dataset.status.toLowerCase();
+                    if (name.includes(searchTerm) || status.includes(searchTerm)) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            const sortByButton = document.getElementById('sort-by-button');
+            const sortByMenu = document.getElementById('sort-by-menu');
+            const sortByContainer = document.getElementById('sort-by-container');
+            sortByButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                sortByMenu.classList.toggle('show');
+            });
+            document.addEventListener('click', (event) => {
+                if (!sortByContainer.contains(event.target)) {
+                    sortByMenu.classList.remove('show');
+                }
+            });
+            const sortLinks = sortByMenu.querySelectorAll('a');
+            let currentSort = {
+                key: null,
+                direction: 'asc'
+            };
+            sortLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const sortKey = link.dataset.sort;
+                    if (currentSort.key === sortKey) {
+                        currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        currentSort.key = sortKey;
+                        currentSort.direction = 'asc';
+                    }
+                    updateSortIcons();
+                    sortBookings();
+                    sortByMenu.classList.remove('show');
+                });
+            });
+            function updateSortIcons() {
+                sortLinks.forEach(link => {
+                    const icon = link.querySelector('.sort-icon');
+                    if (link.dataset.sort === currentSort.key) {
+                        icon.classList.remove('opacity-0');
+                        icon.textContent = currentSort.direction === 'asc' ? 'arrow_upward' : 'arrow_downward';
+                    } else {
+                        icon.classList.add('opacity-0');
+                        icon.textContent = '';
+                    }
+                });
+            }
+            function sortBookings() {
+                const { key, direction } = currentSort;
+                if (!key) return;
+                const visibleBookingCards = bookingCards.filter(card => card.style.display !== 'none');
+                visibleBookingCards.sort((a, b) => {
+                    const valA = a.dataset[key];
+                    const valB = b.dataset[key];
+                    let comparison = 0;
+                    if (key === 'date') {
+                        comparison = new Date(valA) - new Date(valB);
+                    } else {
+                        comparison = valA.localeCompare(valB, undefined, { numeric: true, sensitivity: 'base' });
+                    }
+                    return direction === 'asc' ? comparison : -comparison;
+                });
+                visibleBookingCards.forEach(card => bookingList.appendChild(card));
+            }
+        });
+    </script>
+
+</body>
+
+</html>

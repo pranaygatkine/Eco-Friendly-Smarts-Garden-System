@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Planta - Forgot Password</title>
+  <link href="https://fonts.googleapis.com/css2?display=swap&family=Epilogue:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style type="text/tailwindcss">
+    :root {
+      --primary-color: #34d399;
+      --primary-color-hover: #10b981;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --background-color: #f9fafb;
+      --input-bg: #f3f4f6;
+      --input-placeholder: #9ca3af;
+    }
+
+    body {
+      font-family: "Epilogue", "Noto Sans", sans-serif;
+    }
+  </style>
+  <style>
+    body {
+      min-height: 100vh;
+    }
+  </style>
+</head>
+
+<body class="bg-[var(--background-color)] flex flex-col justify-center items-center min-h-screen">
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-lg overflow-hidden">
+    <!-- Background Image -->
+    <div class="relative h-48 md:h-64">
+      <div class="absolute inset-0 bg-center bg-cover"
+        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDtmzz7VQJVP9h6bO3iuAyqDyxHF3jBF3T8G3bogDFlTfP58wfDRzW0oDLKZHjtx6Aye6ld2bjfwnfnBv4HOdUSHEvnTkroFxMYUbfGtSi__2vgn-t5mCM5kMbR_Czoq4Hxv8JVcvxSUAaRFPXLuApjBOTDCOeqO9bLOsDc3Y209FWDZ7f_9jeUf6PlPyfvlu1sG56Ef7ZNn8WCe8OX-1w6t-Gumxf2JugaQzPFZta-ADqj7K8fAgdZK8cbKTcAsLLT4TeuNZemQw_v");'>
+      </div>
+      <div class="absolute inset-0 bg-black/30"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6 bg-[var(--background-color)]">
+      <h1 class="text-center text-2xl font-bold text-[var(--text-primary)]">Forgot Password</h1>
+      <p class="text-center text-[var(--text-secondary)] mt-2">No worries, we'll send you reset instructions.</p>
+
+      <form class="mt-6 space-y-4">
+        <input type="email" id="email" name="email" required
+          placeholder="Enter your email"
+          class="w-full rounded-xl border-0 bg-[var(--input-bg)] py-4 px-4 text-[var(--text-primary)] placeholder:text-[var(--input-placeholder)] focus:ring-2 focus:ring-inset focus:ring-[var(--primary-color)] sm:text-sm" />
+
+        <button type="submit"
+          class="w-full rounded-xl bg-[var(--primary-color)] px-5 py-4 text-base font-bold text-white shadow-sm transition-colors hover:bg-[var(--primary-color-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-color)]">
+          Send Reset Link
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

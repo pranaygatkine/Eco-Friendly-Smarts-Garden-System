@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GreenGenie Shopping Bag</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .icon-size-20 {
+            font-size: 20px;
+        }
+        .icon-size-28 {
+            font-size: 28px;
+        }
+        .coupon-success-animation {
+            animation: coupon-success 0.5s ease-in-out;
+        }
+        @keyframes coupon-success {
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .popup-animation {
+            animation: popup-enter 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+        @keyframes popup-enter {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <div class="container mx-auto max-w-sm">
+        <header class="flex justify-between items-center py-4 px-4">
+            <span class="material-icons">arrow_back</span>
+            <div class="flex flex-col items-center">
+                <img alt="GreenGenie logo" class="h-6" src="assets\logo (2).png" />
+                <span class="text-green-600 font-bold text-lg">GreenGenie</span>
+            </div>
+            <span class="material-icons">notifications_none</span>
+        </header>
+        <main class="px-4 pb-48 h-screen overflow-y-auto no-scrollbar" id="main-content">
+            <h1 class="text-xl font-bold mb-4">Shopping Bag</h1>
+            <div class="space-y-6" id="cart-items-container">
+                <div class="bg-green-100 rounded-2xl p-4 flex items-center" data-family="Monstera family" data-id="1"
+                    data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuBlL78V9gMsuh0K1NlxadWFaCCCrzBmMDMpgnHAGOVFekO7O6ueRA2DnVCyMvaSIfEMIQlNfvz8SO8DvZn85iOAnJSsMMmc7JWnPbu9ZrKOePXm1DsO8GJpuUoOP0EL3xq5sIdqHNi2eTR2gpgSiIAGbfbvMWbxMOfSgPaqvHdI7qHdFrr7mJWx6CSxEtnerdfWqjy_8lZGdkek4V8TdD26iE0mUGMW6FzJzTA0IaPXRfLBcpujY6HXDXeOUkfz9NqSQaFX_1SqB4s"
+                    data-name="Monstera Adansonii" data-price="15" data-quantity="2" id="cart-item-1">
+                    <div class="relative">
+                        <img alt="Monstera Adansonii plant" class="w-24 h-24 rounded-lg object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlL78V9gMsuh0K1NlxadWFaCCCrzBmMDMpgnHAGOVFekO7O6ueRA2DnVCyMvaSIfEMIQlNfvz8SO8DvZn85iOAnJSsMMmc7JWnPbu9ZrKOePXm1DsO8GJpuUoOP0EL3xq5sIdqHNi2eTR2gpgSiIAGbfbvMWbxMOfSgPaqvHdI7qHdFrr7mJWx6CSxEtnerdfWqjy_8lZGdkek4V8TdD26iE0mUGMW6FzJzTA0IaPXRfLBcpujY6HXDXeOUkfz9NqSQaFX_1SqB4s" />
+                        <div class="absolute bottom-1 left-1 bg-white rounded-full p-1 shadow-md">
+                            <span class="material-icons text-green-500 icon-size-20">favorite</span>
+                        </div>
+                    </div>
+                    <div class="flex-grow ml-4">
+                        <h2 class="font-semibold">Monstera Adansonii</h2>
+                        <p class="text-sm text-gray-600">Monstera family</p>
+                        <div class="flex items-center mt-2">
+                            <button
+                                class="bg-white rounded-full w-6 h-6 flex items-center justify-center text-gray-700 add-btn">
+                                <span class="material-icons icon-size-20">add</span>
+                            </button>
+                            <span class="mx-3 font-semibold quantity">2</span>
+                            <button
+                                class="bg-white rounded-full w-6 h-6 flex items-center justify-center text-gray-700 remove-btn">
+                                <span class="material-icons icon-size-20">remove</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-xl text-green-800 price">$ 30</p>
+                        <button class="mt-8 delete-btn">
+                            <span class="material-icons text-gray-500">delete_outline</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl p-4 shadow-sm mb-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="bg-green-100 rounded-full w-10 h-10 flex items-center justify-center">
+                            <span class="material-icons text-green-600">local_offer</span>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="font-semibold" id="coupon-text">Apply Coupon</h3>
+                            <p class="text-xs text-gray-500" id="coupon-description">Enter your coupon code</p>
+                        </div>
+                    </div>
+                    <button class="text-green-600 font-bold" id="toggle-coupon-btn">
+                        <span class="material-icons">chevron_right</span>
+                    </button>
+                </div>
+                <div class="hidden mt-4" id="coupon-input-section">
+                    <div class="relative">
+                        <input
+                            class="w-full border border-gray-300 rounded-lg py-2 pl-4 pr-24 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-gray-400"
+                            id="coupon-input" placeholder="PLANTLOVER" type="text" />
+                        <button
+                            class="absolute right-2 top-1/2 -translate-y-1/2 bg-green-600 text-white font-semibold text-sm px-4 py-1 rounded-md"
+                            id="apply-coupon-btn">APPLY</button>
+                    </div>
+                </div>
+                <div class="hidden text-green-600 text-sm mt-2 flex items-center coupon-success-animation"
+                    id="coupon-success">
+                    <span class="material-icons mr-1">check_circle</span>
+                    <p>Coupon "PLANTLOVER" applied! You got a 10% discount.</p>
+                </div>
+                <div class="hidden text-red-500 text-sm mt-2 flex items-center" id="coupon-error">
+                    <span class="material-icons mr-1">error_outline</span>
+                    <p>Invalid coupon code.</p>
+                </div>
+            </div>
+            <div class="mb-6">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center">
+                        <div class="bg-green-100 rounded-full w-12 h-12 flex items-center justify-center">
+                            <span class="material-icons text-green-600">local_shipping</span>
+                        </div>
+                        <span class="ml-4 font-semibold">Delivery</span>
+                    </div>
+                    <span class="font-semibold" id="delivery-cost">$15</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                    <div class="bg-green-400 h-1.5 rounded-full" id="delivery-progress" style="width: 60%"></div>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-500">Order above $50 to get</span>
+                    <span class="text-green-600 font-semibold" id="free-delivery-gap">Shop for more $20</span>
+                </div>
+                <p class="text-xs text-gray-500 mt-1" id="free-delivery-text">Free Delivery</p>
+            </div>
+            <div class="bg-yellow-100 rounded-2xl p-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-lg text-yellow-800">Saved for later</h3>
+                    <span class="font-semibold text-yellow-800" id="saved-items-count">1 item</span>
+                </div>
+                <div class="space-y-4" id="saved-items-container">
+                    <div class="flex items-center" data-family="Snake Plant family" data-id="2"
+                        data-img="https://lh3.googleusercontent.com/aida-public/AB6AXuAYzlcME5MCJvAOvhQQmEJ6qUtns7mxnONjzcsy6syTeZpfmgsk4Q1HqD4uoEyVUNF7waP9pJ3Ri-BAJ4t077BlMEzT3rZVkquqI-sFPFlYjbiPu0JMhkRmrzpT1QNqPhdE7HFlWX2OgiqwAJomm_AkE0EJYB4lT1XOylzeO3x35axvd7tQn0QA2DAjEQOJzMDcQJTG-m1pX5yrBx3Q0g-UiugU023paa0HCj-0NYspc0cqt3iWmZsz1E9rvVsgX2dWwKrJ8q398x0"
+                        data-name="Large Snake Zylanica" data-price="60" data-quantity="1" id="saved-item-2">
+                        <div class="relative">
+                            <img alt="Large Snake Zylanica plant" class="w-16 h-16 rounded-lg object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYzlcME5MCJvAOvhQQmEJ6qUtns7mxnONjzcsy6syTeZpfmgsk4Q1HqD4uoEyVUNF7waP9pJ3Ri-BAJ4t077BlMEzT3rZVkquqI-sFPFlYjbiPu0JMhkRmrzpT1QNqPhdE7HFlWX2OgiqwAJomm_AkE0EJYB4lT1XOylzeO3x35axvd7tQn0QA2DAjEQOJzMDcQJTG-m1pX5yrBx3Q0g-UiugU023paa0HCj-0NYspc0cqt3iWmZsz1E9rvVsgX2dWwKrJ8q398x0" />
+                        </div>
+                        <div class="flex-grow ml-4">
+                            <h4 class="font-semibold">Large Snake Zylanica</h4>
+                            <p class="text-sm text-gray-500">Snake Plant family</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-xl text-yellow-900">$60</p>
+                            <button class="text-sm text-yellow-700 mt-2 move-to-cart-btn">move to cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div class="fixed bottom-16 left-0 right-0 max-w-sm mx-auto px-4 bg-gray-50 pt-4" id="checkout-section">
+            <button class="w-full bg-green-600 text-white rounded-2xl py-4 flex justify-between items-center px-6">
+                <div class="flex items-center">
+                    <span class="material-icons mr-2">shopping_bag</span>
+                    <span class="font-semibold text-lg">Checkout</span>
+                </div>
+                <span class="font-bold text-xl" id="checkout-price">$ 30</span>
+            </button>
+        </div>
+        <footer class="fixed bottom-0 left-0 right-0 bg-white shadow-lg max-w-sm mx-auto rounded-t-2xl">
+            <nav class="flex justify-around py-3">
+                <a class="flex flex-col items-center text-gray-400" href="#">
+                    <span class="material-icons icon-size-28">home</span>
+                </a>
+                <a class="flex flex-col items-center text-gray-400" href="#">
+                    <span class="material-icons icon-size-28" style="transform: scaleX(-1);">eco</span>
+                </a>
+                <a class="flex flex-col items-center text-gray-400" href="#">
+                    <span class="material-icons icon-size-28">emoji_events</span>
+                </a>
+                <a class="flex flex-col items-center text-green-600" href="#">
+                    <span class="material-icons icon-size-28">storefront</span>
+                </a>
+                <a class="flex flex-col items-center text-gray-400" href="#">
+                    <span class="material-icons icon-size-28">yard</span>
+                </a>
+            </nav>
+        </footer>
+    </div>
+    <div class="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-end pb-24 z-50 hidden"
+        id="popup-container">
+        <div class="bg-white rounded-2xl p-5 w-11/12 max-w-sm mx-auto shadow-lg popup-animation" id="popup">
+            <div class="flex items-center">
+                <div class="bg-green-100 rounded-full w-10 h-10 flex items-center justify-center">
+                    <span class="material-icons text-green-600">check_circle_outline</span>
+                </div>
+                <div class="ml-4">
+                    <p class="font-semibold">Moved to cart</p>
+                    <p class="text-sm text-gray-600" id="popup-item-name">Large Snake Zylanica</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const couponInput = document.getElementById('coupon-input');
+        const applyCouponBtn = document.getElementById('apply-coupon-btn');
+        const couponSuccess = document.getElementById('coupon-success');
+        const couponError = document.getElementById('coupon-error');
+        const couponText = document.getElementById('coupon-text');
+        const checkoutPriceEl = document.getElementById('checkout-price');
+        const toggleCouponBtn = document.getElementById('toggle-coupon-btn');
+        const couponInputSection = document.getElementById('coupon-input-section');
+        const couponDescription = document.getElementById('coupon-description');
+        const mainContent = document.getElementById('main-content');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const savedItemsContainer = document.getElementById('saved-items-container');
+        const checkoutSection = document.getElementById('checkout-section');
+        const popupContainer = document.getElementById('popup-container');
+        const popupItemName = document.getElementById('popup-item-name');
+        let couponApplied = false;
+        const createCartItemElement = (item) => {
+            const div = document.createElement('div');
+            div.className = "bg-green-100 rounded-2xl p-4 flex items-center";
+            div.id = `cart-item-${item.id}`;
+            div.dataset.id = item.id;
+            div.dataset.name = item.name;
+            div.dataset.family = item.family;
+            div.dataset.price = item.price;
+            div.dataset.quantity = item.quantity;
+            div.dataset.img = item.img;
+            div.innerHTML = `
+                <div class="relative">
+                    <img alt="${item.name} plant" class="w-24 h-24 rounded-lg object-cover" src="${item.img}">
+                    <div class="absolute bottom-1 left-1 bg-white rounded-full p-1 shadow-md">
+                        <span class="material-icons text-green-500 icon-size-20">favorite</span>
+                    </div>
+                </div>
+                <div class="flex-grow ml-4">
+                    <h2 class="font-semibold">${item.name}</h2>
+                    <p class="text-sm text-gray-600">${item.family}</p>
+                    <div class="flex items-center mt-2">
+                        <button class="bg-white rounded-full w-6 h-6 flex items-center justify-center text-gray-700 add-btn">
+                            <span class="material-icons icon-size-20">add</span>
+                        </button>
+                        <span class="mx-3 font-semibold quantity">${item.quantity}</span>
+                        <button class="bg-white rounded-full w-6 h-6 flex items-center justify-center text-gray-700 remove-btn">
+                            <span class="material-icons icon-size-20">remove</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-xl text-green-800 price">$ ${item.price * item.quantity}</p>
+                    <button class="mt-8 delete-btn">
+                        <span class="material-icons text-gray-500">delete_outline</span>
+                    </button>
+                </div>
+            `;
+            return div;
+        };
+        const showPopup = (itemName) => {
+            popupItemName.textContent = itemName;
+            popupContainer.classList.remove('hidden');
+            setTimeout(() => {
+                popupContainer.classList.add('hidden');
+            }, 3000);
+        };
+        const updateCart = () => {
+            let subtotal = 0;
+            const cartItems = cartItemsContainer.querySelectorAll('[id^="cart-item-"]');
+            cartItems.forEach(item => {
+                const price = parseFloat(item.dataset.price);
+                const quantity = parseInt(item.dataset.quantity);
+                subtotal += price * quantity;
+                item.querySelector('.price').textContent = `$ ${price * quantity}`;
+                item.querySelector('.quantity').textContent = quantity;
+            });
+            let finalPrice = subtotal;
+            if (couponApplied) {
+                finalPrice *= 0.9;
+            }
+            const deliveryCostEl = document.getElementById('delivery-cost');
+            const deliveryProgressEl = document.getElementById('delivery-progress');
+            const freeDeliveryGapEl = document.getElementById('free-delivery-gap');
+            const freeDeliveryText = document.getElementById('free-delivery-text');
+            if (subtotal >= 50) {
+                deliveryCostEl.textContent = 'Free';
+                deliveryProgressEl.style.width = '100%';
+                freeDeliveryGapEl.textContent = 'You got free delivery!';
+                freeDeliveryText.classList.add('hidden');
+            } else {
+                const gap = 50 - subtotal;
+                deliveryCostEl.textContent = '$15';
+                finalPrice += 15;
+                deliveryProgressEl.style.width = `${(subtotal / 50) * 100}%`;
+                freeDeliveryGapEl.textContent = `Shop for more $${gap.toFixed(0)}`;
+                freeDeliveryText.classList.remove('hidden');
+            }
+            checkoutPriceEl.textContent = `$ ${finalPrice.toFixed(0)}`;
+            if (cartItems.length === 0) {
+                mainContent.querySelector('h1').insertAdjacentHTML('afterend', '<p class="text-center text-gray-500 mt-8">Your shopping bag is empty.</p>');
+                cartItemsContainer.innerHTML = '';
+                checkoutSection.style.display = 'none';
+                document.querySelector('.mb-6').style.display = 'none';
+            } else {
+                checkoutSection.style.display = 'block';
+                document.querySelector('.mb-6').style.display = 'block';
+            }
+            const savedItemsCount = savedItemsContainer.children.length;
+            document.getElementById('saved-items-count').textContent = `${savedItemsCount} item${savedItemsCount !== 1 ? 's' : ''}`;
+        }
+        mainContent.addEventListener('click', (e) => {
+            const target = e.target;
+            const cartItem = target.closest('[id^="cart-item-"]');
+            if (cartItem) {
+                let quantity = parseInt(cartItem.dataset.quantity);
+                if (target.closest('.add-btn')) {
+                    quantity++;
+                    cartItem.dataset.quantity = quantity;
+                    updateCart();
+                }
+                if (target.closest('.remove-btn')) {
+                    if (quantity > 1) {
+                        quantity--;
+                        cartItem.dataset.quantity = quantity;
+                        updateCart();
+                    }
+                }
+                if (target.closest('.delete-btn')) {
+                    cartItem.remove();
+                    updateCart();
+                }
+            }
+            const savedItem = target.closest('[id^="saved-item-"]');
+            if (target.classList.contains('move-to-cart-btn') && savedItem) {
+                const itemData = {
+                    id: savedItem.dataset.id,
+                    name: savedItem.dataset.name,
+                    family: savedItem.dataset.family,
+                    price: parseFloat(savedItem.dataset.price),
+                    quantity: 1,
+                    img: savedItem.dataset.img
+                };
+                const existingCartItem = cartItemsContainer.querySelector(`#cart-item-${itemData.id}`);
+                if (existingCartItem) {
+                    let quantity = parseInt(existingCartItem.dataset.quantity);
+                    quantity++;
+                    existingCartItem.dataset.quantity = quantity;
+                } else {
+                    const newCartItem = createCartItemElement(itemData);
+                    cartItemsContainer.appendChild(newCartItem);
+                }
+                savedItem.remove();
+                showPopup(itemData.name);
+                updateCart();
+            }
+        });
+        toggleCouponBtn.addEventListener('click', () => {
+            const isHidden = couponInputSection.classList.toggle('hidden');
+            toggleCouponBtn.querySelector('.material-icons').textContent = isHidden ? 'chevron_right' : 'expand_more';
+        });
+        applyCouponBtn.addEventListener('click', () => {
+            couponSuccess.classList.add('hidden');
+            couponError.classList.add('hidden');
+            if (couponInput.value.toUpperCase() === 'PLANTLOVER') {
+                if (!couponApplied) {
+                    couponApplied = true;
+                    couponSuccess.classList.remove('hidden');
+                    couponText.textContent = 'Coupon Applied';
+                    couponDescription.classList.add('hidden');
+                    couponInputSection.classList.add('hidden');
+                    toggleCouponBtn.classList.add('hidden');
+                    updateCart();
+                } else {
+                    couponError.querySelector('p').textContent = "Coupon already applied.";
+                    couponError.classList.remove('hidden');
+                }
+            } else {
+                couponError.querySelector('p').textContent = "Invalid coupon code.";
+                couponError.classList.remove('hidden');
+                couponInput.classList.add('border-red-500');
+                setTimeout(() => {
+                    couponInput.classList.remove('border-red-500');
+                    couponError.classList.add('hidden');
+                }, 2000);
+            }
+        });
+        // Initial setup
+        updateCart();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Alexandra Aepod</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-sm mx-auto bg-white rounded-3xl shadow-lg overflow-hidden relative">
+        <div class="relative">
+            <img alt="A bouquet of pink and white tulips" class="w-full h-64 object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvOYosS974XWZAOJaPdri2ViuHia62G81IxaT-cQNtdO5Pm6bHhxqGYiuOORRIqwz9UqYYMdFe44Cji4epsDzUlpQYF2wOpzyl2zzowMm2om68j-MGUrHbVv0pKGub8kWh7uM4poaNSFrh7DMbIlza1ft6AHqBjYJuYKphEegJKwYQA1byKfKuaWNkOWE1e521CIkcle3kqNYLF0AEfLx4toM9xJNpcmxzUnu32dE7M3kC0k278E5VRdjs25VeJu91zROCnZ_bcK3I" />
+            <div class="absolute top-4 left-4">
+                <button class="bg-white bg-opacity-50 rounded-full p-2 text-gray-800">
+                    <i class="material-icons">arrow_back_ios_new</i>
+                </button>
+            </div>
+            <div class="absolute top-4 right-4">
+                <button class="bg-white bg-opacity-50 rounded-full p-2 text-gray-800" id="menu-button">
+                    <i class="material-icons">more_vert</i>
+                </button>
+                <div class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-xl z-20" id="menu">
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Share</a>
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Save</a>
+                    <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Report</a>
+                </div>
+            </div>
+        </div>
+        <div class="p-6 bg-white rounded-t-3xl -mt-8 relative z-10">
+            <h1 class="text-3xl font-bold text-emerald-800">Alexandra</h1>
+            <p class="text-gray-500 text-lg">Create an Aepod</p>
+            <div class="mt-6">
+                <h2 class="text-xl font-semibold text-gray-800">Description</h2>
+                <p class="mt-2 text-gray-600 text-sm leading-relaxed">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor sed tellus fusce laoreet facilisi
+                    urna imperdiet. Quis potenti ut odio auctor mollis enim scelerisque. Et, congue odio vulputate
+                    purus.
+                </p>
+            </div>
+            <div class="mt-8 flex justify-between items-center">
+                <p class="text-2xl font-bold text-gray-800">$ 65.00</p>
+                <button
+                    class="bg-emerald-600 text-white font-semibold py-3 px-8 rounded-full shadow-md hover:bg-emerald-700 transition duration-300"
+                    id="checkout-button">Checkout</button>
+            </div>
+        </div>
+    </div>
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30" id="checkout-modal">
+        <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+            <h2 class="text-2xl font-bold mb-4">Checkout Complete!</h2>
+            <p class="text-gray-600 mb-6">Thank you for your purchase.</p>
+            <button
+                class="bg-emerald-600 text-white font-semibold py-2 px-6 rounded-full hover:bg-emerald-700 transition duration-300"
+                id="close-modal-button">Close</button>
+        </div>
+    </div>
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const menu = document.getElementById('menu');
+        const checkoutButton = document.getElementById('checkout-button');
+        const checkoutModal = document.getElementById('checkout-modal');
+        const closeModalButton = document.getElementById('close-modal-button');
+        menuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu.classList.toggle('hidden');
+        });
+        checkoutButton.addEventListener('click', () => {
+            checkoutModal.classList.remove('hidden');
+        });
+        closeModalButton.addEventListener('click', () => {
+            checkoutModal.classList.add('hidden');
+        });
+        window.addEventListener('click', (e) => {
+            if (!menu.contains(e.target) && !menuButton.contains(e.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

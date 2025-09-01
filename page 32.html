@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GreenGenie</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f7f8fa;
+    }
+    .icon-size {
+        font-size: 28px;
+    }
+    .filter-chip {
+        @apply px-5 py-2 text-sm font-medium rounded-full whitespace-nowrap cursor-pointer transition-colors;
+    }
+    .filter-chip.active {
+        @apply bg-green-500 text-white shadow-md;
+    }
+    .filter-chip:not(.active) {
+        @apply bg-gray-200 text-gray-500;
+    }
+    .plant-card {
+        display: none;
+    }
+    .menu-overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: opacity 0.3s ease-in-out;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .menu-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .menu-modal {
+      transform: scale(0.95);
+      opacity: 0;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      pointer-events: none;
+    }
+    .menu-modal.open {
+      transform: scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+</style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <div class="container mx-auto p-4 max-w-sm relative">
+        <div class="menu-overlay fixed inset-0 z-40" id="menu-overlay"></div>
+        <div class="menu-modal fixed inset-0 z-50 flex items-center justify-center p-4" id="menu-modal">
+            <div class="bg-white rounded-2xl shadow-xl w-full max-w-xs p-6 relative">
+                <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-800" id="close-menu">
+                    <span class="material-icons">close</span>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <img alt="GreenGenie logo" class="h-8"
+                        src="assets\logo (2).png" />
+                    <span class="text-2xl font-bold text-green-800">GreenGenie</span>
+                </div>
+                <nav class="flex flex-col space-y-6 text-lg">
+                    <a class="flex items-center text-gray-700 hover:text-green-500" href="#">
+                        <span class="material-icons mr-4">home</span>
+                        <span>Home</span>
+                    </a>
+                    <a class="flex items-center text-gray-700 hover:text-green-500" href="#">
+                        <span class="material-icons mr-4">receipt_long</span>
+                        <span>My Orders</span>
+                    </a>
+                    <a class="flex items-center text-gray-700 hover:text-green-500" href="#">
+                        <span class="material-icons mr-4">favorite</span>
+                        <span>Favorites</span>
+                    </a>
+                    <a class="flex items-center text-gray-700 hover:text-green-500" href="#">
+                        <span class="material-icons mr-4">settings</span>
+                        <span>Settings</span>
+                    </a>
+                    <a class="flex items-center text-gray-700 hover:text-green-500" href="#">
+                        <span class="material-icons mr-4">help_outline</span>
+                        <span>Help</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+        <header class="flex justify-between items-center py-4">
+            <button class="text-gray-600" id="menu-button">
+                <span class="material-icons icon-size">
+                    menu
+                </span>
+            </button>
+           <div class="flex items-center space-x-2">
+                    <img alt="GreenGenie logo" class="h-8"
+                        src="assets\logo (2).png" />
+                    <span class="text-2xl font-bold text-green-800">GreenGenie</span>
+                </div>
+            <button class="relative text-gray-600">
+                <span class="material-icons icon-size">
+                    notifications_none
+                </span>
+                <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+            </button>
+        </header>
+        <main class="pb-24">
+            <h1 class="text-2xl font-bold text-gray-800 mt-4 mb-2">Recommendations</h1>
+            <div class="flex space-x-2 overflow-x-auto pb-4" id="filter-container">
+                <button class="filter-chip active" data-filter="all">All</button>
+                <button class="filter-chip" data-filter="cacti">Cacti</button>
+                <button class="filter-chip" data-filter="in-pots">In pots</button>
+                <button class="filter-chip" data-filter="dried-flowers">Dried flowers</button>
+                <button class="filter-chip" data-filter="indoors">Indoors</button>
+            </div>
+          
+            <div class="flex items-center text-gray-500 text-sm mb-6">
+                <span>Popularity</span>
+                <span class="material-icons text-sm ml-1">arrow_downward</span>
+            </div>
+            <div class="grid grid-cols-1 gap-6" id="plant-grid">
+                <div class="plant-card flex items-center bg-white rounded-2xl p-4 shadow-sm relative"
+                    data-category="cacti in-pots indoors">
+                    <div class="w-24 h-24 rounded-2xl overflow-hidden mr-4 flex-shrink-0">
+                        <img alt="Echeveria plant in a white pot" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnWCtOJPxy7kFp-BhH8N4nLM_WHNsbaRVVNqE6Eok1oujGobfaTplu1UCOJ4RmeNyYbPuc3CPuW2-rUp9js2-Ul88zYPW48oCCmWgw6y-9abGwcRGsVi7cZAOPYs3TPkUSwkYKgyh6BmSmr3kuuiiRItpYy4hPxVCJF1dzcy2GcZaw18n8e3nkRja3hN99dV4ks2n5sj6gUlBM4r_d8q__rAmS1kd_xdXyy0wOXXnSHvtdEECb14A4jySgeb6hcAmesQxrie3TIbWN" />
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="font-semibold text-gray-800">Echeveria</h2>
+                        <p class="text-sm text-gray-500">From 3 Inch</p>
+                        <p class="font-bold text-lg text-gray-800 mt-2">$25</p>
+                    </div>
+                    <div class="flex items-center space-x-1 self-start mt-1">
+                        <span class="material-icons text-yellow-400 text-lg">star</span>
+                        <span class="font-semibold text-gray-700">5.0</span>
+                    </div>
+                    <button class="absolute top-4 right-4 bg-white bg-opacity-70 rounded-full p-1">
+                    </button>
+                </div>
+                <div class="plant-card flex items-center bg-white rounded-2xl p-4 shadow-sm relative"
+                    data-category="cacti in-pots indoors">
+                    <div class="w-24 h-24 rounded-2xl overflow-hidden mr-4 flex-shrink-0">
+                        <img alt="Prickly Pear cactus in a concrete pot" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuASBWFkLFRjL0K_q40a2zTe4Ihq8a1YmIG0HL3GgByTfHbUyfx7tz0uhA5rY_osOo61BJ0Crq7MNLC5W5C0yTDXfi5uN4o3iol0Edzu8vvXwPIZK3NH-zHN8xXv_bJHyaK5XHTbotyPI_CZS63sZDwSBzuqrskA1hghj1vANGiiviem7V96SyLAyx8a_PGWBItdVZhkRxBZgX2Em-6CVdBgQUJkfeEEveIRNlqkGe5llQOr5HlETR67B357cqfZcHWncDOS7okChM6z" />
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="font-semibold text-gray-800">Prickly Pear</h2>
+                        <p class="text-sm text-gray-500">From 5 Inch</p>
+                        <p class="font-bold text-lg text-gray-800 mt-2">$20</p>
+                    </div>
+                    <div class="flex items-center space-x-1 self-start mt-1">
+                        <span class="material-icons text-yellow-400 text-lg">star</span>
+                        <span class="font-semibold text-gray-700">4.8</span>
+                    </div>
+                    <button class="absolute top-4 right-4 bg-white bg-opacity-70 rounded-full p-1">
+                    </button>
+                </div>
+                <div class="plant-card flex items-center bg-white rounded-2xl p-4 shadow-sm relative"
+                    data-category="cacti in-pots indoors">
+                    <div class="w-24 h-24 rounded-2xl overflow-hidden mr-4 flex-shrink-0">
+                        <img alt="Golden Barrel Cactus in a clay pot" class="w-full h-full object-cover"
+                            src="https://www.saharanpurnursery.in/cdn/shop/files/1_23ce1afd-b834-498b-8b05-15d4f110c94b_700x700.png?v=1739752264" />
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="font-semibold text-gray-800">Golden Barrel</h2>
+                        <p class="text-sm text-gray-500">From 4 Inch</p>
+                        <p class="font-bold text-lg text-gray-800 mt-2">$30</p>
+                    </div>
+                    <div class="flex items-center space-x-1 self-start mt-1">
+                        <span class="material-icons text-yellow-400 text-lg">star</span>
+                        <span class="font-semibold text-gray-700">4.9</span>
+                    </div>
+                    <button class="absolute top-4 right-4 bg-white bg-opacity-70 rounded-full p-1">
+                    </button>
+                </div>
+                <div class="plant-card flex items-center bg-white rounded-2xl p-4 shadow-sm relative"
+                    data-category="cacti in-pots indoors">
+                    <div class="w-24 h-24 rounded-2xl overflow-hidden mr-4 flex-shrink-0">
+                        <img alt="Bunny Ears Cactus in a yellow pot" class="w-full h-full object-cover"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO2dTjYz35KJ0g9CjdsO1ybDAvSjPQ_LyzIw&s" />
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="font-semibold text-gray-800">Bunny Ears</h2>
+                        <p class="text-sm text-gray-500">From 3 Inch</p>
+                        <p class="font-bold text-lg text-gray-800 mt-2">$22</p>
+                    </div>
+                    <div class="flex items-center space-x-1 self-start mt-1">
+                        <span class="material-icons text-yellow-400 text-lg">star</span>
+                        <span class="font-semibold text-gray-700">4.7</span>
+                    </div>
+                    <button class="absolute top-4 right-4 bg-white bg-opacity-70 rounded-full p-1">
+                    </button>
+                </div>
+                <div
+                    class="bg-purple-100 rounded-2xl p-4 mt-6 flex items-center justify-between overflow-hidden relative">
+                    <div class="z-10">
+                        <h3 class="font-bold text-gray-800 text-lg">Free shipping</h3>
+                        <p class="text-gray-600 text-sm">When ordering <span
+                                class="bg-yellow-400 text-gray-800 font-bold px-2 py-1 rounded-md">from $40</span></p>
+                    </div>
+                    <img alt="Illustration of a person riding a scooter"
+                        class="w-32 h-auto absolute right-0 bottom-0 -mr-2"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAVT4ACBU5421cxrF1HzxPX4ne9xEUAX9ToAoIFXHniMaqYNcNNG5cbn5_-QhgfW50DDNIY3qtnYSHNLnLlbhSUDzWpdGiKVAyaRWRaYa6saVhMzzriO47tcQ9KH9aZ1gwUlzjYtnRkIuED_fPyv-6L44NqYc0WV-Uvz57IgZJpNvX2Ky91PgWMow842JQT1BAUKO-3b3QrqhRyZvqnuPWARD9X2pkkBzkHPyn6Ju_FSs7UtiEwXPtVBwK-06nX_j0dnYQJzU2cz9D" />
+                </div>
+                <div class="plant-card flex items-center bg-white rounded-2xl p-4 shadow-sm relative"
+                    data-category="cacti in-pots indoors">
+                    <div class="w-24 h-24 rounded-2xl overflow-hidden mr-4 flex-shrink-0">
+                        <img alt="Feather Cactus in a small pot" class="w-full h-full object-cover"
+                            src="https://m.media-amazon.com/images/I/51j191bCG1L._UF1000,1000_QL80_.jpg" />
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="font-semibold text-gray-800">Feather Cactus</h2>
+                        <p class="text-sm text-gray-500">From 2 Inch</p>
+                        <p class="font-bold text-lg text-gray-800 mt-2">$18</p>
+                    </div>
+                    <div class="flex items-center space-x-1 self-start mt-1">
+                        <span class="material-icons text-yellow-400 text-lg">star</span>
+                        <span class="font-semibold text-gray-700">4.6</span>
+                    </div>
+                    <button class="absolute top-4 right-4 bg-white bg-opacity-70 rounded-full p-1">
+                    </button>
+                </div>
+                <div class="plant-card flex items-center bg-white rounded-2xl p-4 shadow-sm relative"
+                    data-category="dried-flowers">
+                    <div class="w-24 h-24 rounded-2xl overflow-hidden mr-4 flex-shrink-0">
+                        <img alt="Dried Lavender Bunch" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-MVvpFDRXWInNQVXI_Rp9TUSdeRMLSMXIB4v1PSEl30sXzzb3KK5BKj7EiBOpPJFDNSWvcmqSDvNa1mQEmkySr6uJ-7t6RvpiELNBoh9U8OM1gkC6ogcnBsIDDGLSdbhOYVhhwbWBeQbqYe-wRXlPGiyPoDSkju_9otpSZ8ZUbcJSWvs0JiDdvl7BESnwENokWQznalIGmSTp1QtAW0qWGQ7RwboRK0lNPAJVib_5lakpLr1nFCFM-nOntfkCk3bHoXAQ7WfucLZ0" />
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="font-semibold text-gray-800">Dried Lavender</h2>
+                        <p class="text-sm text-gray-500">Bunch</p>
+                        <p class="font-bold text-lg text-gray-800 mt-2">$15</p>
+                    </div>
+                    <div class="flex items-center space-x-1 self-start mt-1">
+                        <span class="material-icons text-yellow-400 text-lg">star</span>
+                        <span class="font-semibold text-gray-700">4.9</span>
+                    </div>
+                    <button class="absolute top-4 right-4 bg-white bg-opacity-70 rounded-full p-1">
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+<footer class="fixed bottom-0 left-0 right-0 bg-white shadow-lg rounded-t-3xl max-w-md mx-auto">
+            <div class="flex justify-around items-center p-4">
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">home</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">eco</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">emoji_events</span>
+                </button>
+                <button class="text-green-600">
+                    <span class="material-icons icon-size">storefront</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">spa</span>
+                </button>
+            </div>
+        </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterContainer = document.getElementById('filter-container');
+            const plantCards = document.querySelectorAll('.plant-card');
+            function filterPlants(filter) {
+                plantCards.forEach(card => {
+                    const categories = card.dataset.category.split(' ');
+                    if (filter === 'all' || categories.includes(filter)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            filterContainer.addEventListener('click', (event) => {
+                if (event.target.classList.contains('filter-chip')) {
+                    filterContainer.querySelectorAll('.filter-chip').forEach(chip => {
+                        chip.classList.remove('active');
+                        chip.classList.add('bg-gray-200', 'text-gray-500');
+                        chip.classList.remove('bg-green-500', 'text-white', 'shadow-md');
+                    });
+                    event.target.classList.add('active');
+                    event.target.classList.remove('bg-gray-200', 'text-gray-500');
+                    event.target.classList.add('bg-green-500', 'text-white', 'shadow-md');
+                    const filterValue = event.target.dataset.filter;
+                    filterPlants(filterValue);
+                }
+            });
+            filterPlants('all');
+            const menuButton = document.getElementById('menu-button');
+            const menuModal = document.getElementById('menu-modal');
+            const menuOverlay = document.getElementById('menu-overlay');
+            const closeMenuButton = document.getElementById('close-menu');
+            function toggleMenu() {
+                menuModal.classList.toggle('open');
+                menuOverlay.classList.toggle('open');
+            }
+            menuButton.addEventListener('click', toggleMenu);
+            closeMenuButton.addEventListener('click', toggleMenu);
+            menuOverlay.addEventListener('click', toggleMenu);
+        });
+    </script>
+
+</body>
+
+</html>

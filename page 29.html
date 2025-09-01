@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GreenGenie Notifications</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .material-icons {
+            font-size: 28px;
+        }
+
+        .icon-bg {
+            background-color: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+        }
+
+        .notification-badge {
+            background-color: #10b981;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <div class="max-w-sm mx-auto bg-white min-h-screen flex flex-col">
+        <header class="p-4 flex items-center justify-between">
+            <span class="material-icons text-gray-800">arrow_back</span>
+            <div class="flex flex-col items-center">
+                <img alt="GreenGenie logo" class="h-8"
+                    src="assets\logo (2).png" />
+                <span class="text-2xl font-bold text-green-600">GreenGenie</span>
+            </div>
+            <div class="w-6"></div>
+        </header>
+        <main class="flex-grow p-4">
+            <h1 class="text-2xl font-bold text-gray-800 mb-6">Notifications</h1>
+            <div class="space-y-6">
+                <div class="flex items-center space-x-4">
+                    <div class="icon-bg">
+                        <span class="material-icons text-gray-800">shopping_cart_checkout</span>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-gray-800">Order #5542 Placed</p>
+                        <p class="text-sm text-green-500">1m ago.</p>
+                    </div>
+                    <div class="notification-badge">1</div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="icon-bg">
+                        <span class="material-icons text-gray-800">local_shipping</span>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-gray-800">Order #5541 arriving today</p>
+                        <p class="text-sm text-green-500">30m ago.</p>
+                    </div>
+                    <div class="notification-badge">1</div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="icon-bg">
+                        <span class="material-icons text-gray-800">inventory_2</span>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-gray-800">Order #5540 received</p>
+                        <p class="text-sm text-green-500">10h ago.</p>
+                    </div>
+                    <div class="notification-badge">1</div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="icon-bg">
+                        <span class="material-icons text-gray-800">eco</span>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-gray-800">Monstera Adansonii looks health</p>
+                        <p class="text-sm text-green-500">Today</p>
+                    </div>
+                    <div class="notification-badge">2</div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="icon-bg">
+                        <span class="material-icons text-gray-800">spa</span>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-gray-800">Janda Bolong is thirsty</p>
+                        <p class="text-sm text-green-500">Today</p>
+                    </div>
+                    <div class="notification-badge">2</div>
+                </div>
+            </div>
+        </main>
+       <footer class="fixed bottom-0 left-0 right-0 bg-white shadow-lg rounded-t-3xl max-w-md mx-auto">
+            <div class="flex justify-around items-center p-4">
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">home</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">eco</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">emoji_events</span>
+                </button>
+                <button class="text-green-600">
+                    <span class="material-icons icon-size">storefront</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">spa</span>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>

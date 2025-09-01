@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Booking Accepted</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Roboto', sans-serif;
+            animation: gradient-animation 15s ease infinite;
+            background-size: 200% 200%;
+        }
+        .icon-container {
+            animation: pop-in 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+        .tick-icon {
+            animation: draw-tick 0.5s 0.6s ease-in-out forwards;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+        }
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 15px;
+            background-color: #facc15;opacity: 0;
+            animation: confetti-fall 2s ease-out forwards;
+        }
+        .confetti.blue { background-color: #60a5fa;}
+        .confetti.green { background-color: #4ade80;}
+        .confetti.pink { background-color: #f472b6;}
+        .confetti.purple { background-color: #c084fc;}
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fade-in-up-animation 0.8s forwards;
+        }
+        .heading-animation {
+             animation-delay: 1.2s;
+        }
+        .paragraph-animation {
+            animation-delay: 1.4s;
+        }
+        @keyframes pop-in {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes draw-tick {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotateZ(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(200px) rotateZ(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+        @keyframes fade-in-up-animation {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-green-50 via-green-100 to-green-50">
+    <div class="w-full max-w-sm p-6 bg-white rounded-2xl shadow-lg">
+        <header class="mb-12">
+            <button class="bg-gray-100 p-2 rounded-full text-gray-600">
+                <span class="material-icons">arrow_back</span>
+            </button>
+        </header>
+        <main class="flex flex-col items-center text-center">
+            <div class="relative flex items-center justify-center mb-8 h-32 w-32">
+                <div class="confetti-container">
+                </div>
+                <div
+                    class="icon-container bg-green-500 rounded-full h-32 w-32 flex items-center justify-center shadow-lg">
+                    <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path class="tick-icon" d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"></path>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-800 mb-2 fade-in-up heading-animation">Booking Accepted</h1>
+            <p class="text-gray-500 mb-12 fade-in-up paragraph-animation">Your booking has been accepted. Your assigned
+                gardner is Toby Ramos</p>
+            <button
+                class="w-full bg-green-500 text-white font-bold py-4 px-6 rounded-lg shadow-md hover:bg-green-600 transition duration-300">
+                View Gardner Details
+            </button>
+        </main>
+    </div>
+    <audio id="pop-sound" preload="auto" src="assets\ding.mp3"></audio>
+    <audio id="tick-sound" preload="auto" src="assets\ding.mp3"></audio>
+    <audio id="confetti-sound" preload="auto" src="assets\ding.mp3"></audio>
+    <script>
+        const popSound = document.getElementById('pop-sound');
+        const tickSound = document.getElementById('tick-sound');
+        const confettiSound = document.getElementById('confetti-sound');
+        const iconContainer = document.querySelector('.icon-container');
+        const tickIcon = document.querySelector('.tick-icon');
+        const confettiContainer = document.querySelector('.confetti-container');
+        const colors = ['blue', 'green', 'pink', 'purple', 'yellow'];
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                confetti.className = `confetti ${color}`;
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.animationDelay = `${Math.random() * 2}s`;
+                if (color === 'yellow') {
+                    confetti.style.backgroundColor = '#facc15';
+                }
+                confettiContainer.appendChild(confetti);
+            }
+        }
+        iconContainer.addEventListener('animationstart', () => {
+            popSound.currentTime = 0;
+            popSound.play();
+        });
+        tickIcon.addEventListener('animationstart', () => {
+            tickSound.currentTime = 0;
+            tickSound.play();
+        });
+        // Delay confetti creation and sound to sync with the checkmark animation
+        setTimeout(() => {
+            createConfetti();
+            confettiSound.currentTime = 0;
+            confettiSound.play();
+        }, 800);
+    </script>
+
+</body>
+
+</html>

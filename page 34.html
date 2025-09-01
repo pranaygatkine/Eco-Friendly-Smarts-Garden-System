@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GreenGenie</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+        font-family: 'Inter', sans-serif;
+    }
+    .text-green-custom {
+        color: #4CAF50;
+    }
+    .icon-active {
+        color: #4CAF50;
+    }
+  </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <div class="container mx-auto max-w-sm min-h-screen flex flex-col justify-between" id="app-container">
+        <header class="flex justify-between items-center p-4">
+            <button class="text-gray-600">
+                <span class="material-icons">arrow_back</span>
+            </button>
+              <div class="flex items-center">
+                <img alt="GreenGenie logo" class="h-6 mr-2"
+                    src="assets\logo (2).png" />
+                <span class="text-xl font-bold text-green-600">GreenGenie</span>
+            </div>
+            <button class="text-gray-600" id="notification-bell">
+                <span class="material-icons">notifications_none</span>
+            </button>
+        </header>
+        <main class="flex-grow p-4">
+            <ul class="space-y-2">
+                <li>
+                    <a class="flex items-center p-3 text-gray-800 rounded-lg hover:bg-gray-100" href="#">
+                        <span class="material-icons mr-4 text-green-custom">home</span>
+                        <span class="flex-1">Home</span>
+                        <span class="material-icons text-gray-400">chevron_right</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center p-3 text-gray-800 rounded-lg hover:bg-gray-100" href="#">
+                        <span class="material-icons mr-4 text-green-custom">spa</span>
+                        <span class="flex-1">Plant Health</span>
+                        <span class="material-icons text-gray-400">chevron_right</span>
+                    </a>
+                </li>
+            </ul>
+            <hr class="my-4 border-gray-200" />
+            <ul class="space-y-2">
+                <li>
+                    <a class="flex items-center p-3 text-gray-800 rounded-lg hover:bg-gray-100" href="#">
+                        <span class="material-icons mr-4 text-yellow-400">emoji_events</span>
+                        <span class="flex-1">Nutritional Summary</span>
+                        <span class="material-icons text-gray-400">chevron_right</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center p-3 text-gray-800 rounded-lg hover:bg-gray-100" href="#">
+                        <span class="material-icons mr-4 text-green-custom">storefront</span>
+                        <span class="flex-1">Plant Store</span>
+                        <span class="material-icons text-gray-400">chevron_right</span>
+                    </a>
+                </li>
+            </ul>
+            <hr class="my-4 border-gray-200" />
+            <ul class="space-y-2">
+                <li>
+                    <a class="flex items-center p-3 text-gray-800 rounded-lg hover:bg-gray-100" href="#">
+                        <span class="material-icons mr-4 text-green-custom">yard</span>
+                        <span class="flex-1">Recommendations</span>
+                        <span class="material-icons text-gray-400">chevron_right</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center p-3 text-gray-800 rounded-lg hover:bg-gray-100" href="#">
+                        <span class="material-icons mr-4 text-gray-600">account_circle</span>
+                        <span class="flex-1">Account</span>
+                        <span class="material-icons text-gray-400">chevron_right</span>
+                    </a>
+                </li>
+            </ul>
+            <hr class="my-4 border-gray-200" />
+            <ul class="space-y-2">
+                <li>
+                    <a class="flex items-center p-3 text-gray-800 rounded-lg hover:bg-gray-100" href="#">
+                        <span class="material-icons mr-4 text-gray-600">logout</span>
+                        <span class="flex-1">Log out</span>
+                        <span class="material-icons text-gray-400">chevron_right</span>
+                    </a>
+                </li>
+            </ul>
+        </main>
+        <footer class="bg-white rounded-t-3xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-2">
+            <nav class="flex justify-around">
+                <button class="flex flex-col items-center text-green-custom p-2">
+                    <span class="material-icons">home</span>
+                </button>
+                <button class="flex flex-col items-center text-gray-500 p-2">
+                    <span class="material-icons">spa</span>
+                </button>
+                <button class="flex flex-col items-center text-gray-500 p-2">
+                    <span class="material-icons">emoji_events</span>
+                </button>
+                <button class="flex flex-col items-center text-gray-500 p-2">
+                    <span class="material-icons">storefront</span>
+                </button>
+                <button class="flex flex-col items-center text-gray-500 p-2">
+                    <span class="material-icons">yard</span>
+                </button>
+            </nav>
+        </footer>
+    </div>
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden" id="notification-modal">
+        <div class="bg-white rounded-2xl shadow-xl w-11/12 max-w-sm mx-auto p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-800">Notifications</h2>
+                <button class="text-gray-500 hover:text-gray-700" id="close-modal">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-start space-x-4 p-3 bg-green-50 rounded-lg">
+                    <div class="bg-green-100 p-2 rounded-full">
+                        <span class="material-icons text-green-custom">water_drop</span>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800">Time to water your Fiddle Leaf Fig!</p>
+                        <p class="text-sm text-gray-500">Just now</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 p-3 bg-yellow-50 rounded-lg">
+                    <div class="bg-yellow-100 p-2 rounded-full">
+                        <span class="material-icons text-yellow-500">light_mode</span>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800">Your Snake Plant is getting too much light.</p>
+                        <p class="text-sm text-gray-500">1 hour ago</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 p-3 bg-blue-50 rounded-lg">
+                    <div class="bg-blue-100 p-2 rounded-full">
+                        <span class="material-icons text-blue-500">eco</span>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800">New recommendation for your garden.</p>
+                        <p class="text-sm text-gray-500">Yesterday</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 p-3 bg-red-50 rounded-lg">
+                    <div class="bg-red-100 p-2 rounded-full">
+                        <span class="material-icons text-red-500">bug_report</span>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800">Pest alert! Check your Monstera.</p>
+                        <p class="text-sm text-gray-500">2 days ago</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 text-center">
+                <button class="text-green-custom font-semibold hover:underline">Mark all as read</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Simple script to toggle the modal. Not part of the design, just for interaction.
+        const notificationBell = document.getElementById('notification-bell');
+        const notificationModal = document.getElementById('notification-modal');
+        const closeModal = document.getElementById('close-modal');
+        notificationBell.addEventListener('click', () => {
+            notificationModal.classList.remove('hidden');
+        });
+        closeModal.addEventListener('click', () => {
+            notificationModal.classList.add('hidden');
+        });
+        // Close modal if clicking outside of it
+        notificationModal.addEventListener('click', (e) => {
+            if (e.target === notificationModal) {
+                notificationModal.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

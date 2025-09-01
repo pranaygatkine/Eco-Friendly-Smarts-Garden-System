@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Checkout</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        #credit-card-btn.active {
+            background-color: #16A34A;
+            color: white;
+        }
+        #apple-pay-btn.active {
+            background-color: black;
+            color: white;
+        }
+        #apple-pay-btn.active svg {
+            color: white;
+        }
+        #apple-pay-btn svg {
+           color: black;
+        }
+        #credit-card-form {
+            display: block;
+        }
+        #apple-pay-view {
+            display: none;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        .notification-dropdown {
+            display: none;
+        }
+        .success-animation {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 100;
+        }
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #4caf50;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+        .checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            margin: 10% auto;
+            box-shadow: inset 0px 0px 0px #4caf50;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+        @keyframes scale {
+            0%, 100% {
+                transform: none;
+            }
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #4caf50;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <div class="max-w-sm mx-auto bg-white shadow-lg rounded-b-xl">
+        <header class="p-4 flex justify-between items-center border-b">
+            <button class="text-gray-600">
+                <span class="material-icons">arrow_back</span>
+            </button>
+            <div class="flex items-center">
+                <img alt="Green Genie logo" class="h-8"
+                    src="assets\logo (2).png" />
+                <span class="text-2xl font-bold text-green-600 ml-2">Green</span><span
+                    class="text-2xl font-bold text-green-600">Genie</span>
+            </div>
+            <div class="relative">
+                <button class="text-gray-600" id="notification-btn">
+                    <span class="material-icons">notifications_none</span>
+                </button>
+                <div class="notification-dropdown absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-xl z-20"
+                    id="notification-dropdown">
+                    <div class="p-4 border-b">
+                        <h3 class="font-semibold text-gray-800">Notifications</h3>
+                    </div>
+                    <div class="divide-y divide-gray-100">
+                        <a class="flex items-start p-4 hover:bg-gray-50" href="#">
+                            <div class="flex-shrink-0">
+                                <span class="material-icons text-green-500">check_circle</span>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">Payment Successful</p>
+                                <p class="text-sm text-gray-500">Your payment of $72.60 was successful.</p>
+                                <p class="text-xs text-gray-400 mt-1">2 minutes ago</p>
+                            </div>
+                        </a>
+                        <a class="flex items-start p-4 hover:bg-gray-50" href="#">
+                            <div class="flex-shrink-0">
+                                <span class="material-icons text-blue-500">local_shipping</span>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">Order Shipped</p>
+                                <p class="text-sm text-gray-500">Your order #12345 has been shipped.</p>
+                                <p class="text-xs text-gray-400 mt-1">1 hour ago</p>
+                            </div>
+                        </a>
+                        <a class="flex items-start p-4 hover:bg-gray-50" href="#">
+                            <div class="flex-shrink-0">
+                                <span class="material-icons text-yellow-500">new_releases</span>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">New product alert</p>
+                                <p class="text-sm text-gray-500">Check out the new eco-friendly pots!</p>
+                                <p class="text-xs text-gray-400 mt-1">1 day ago</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="p-2 text-center border-t">
+                        <a class="text-sm font-medium text-green-600 hover:text-green-700" href="#">View all
+                            notifications</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="p-6">
+            <h1 class="text-xl font-semibold mb-4">Checkout details</h1>
+            <div class="bg-gray-100 rounded-xl p-4 mb-6">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">For payment:</span>
+                    <div class="text-right">
+                        <p class="text-2xl font-bold text-gray-800">$72.60</p>
+                        <p class="text-sm text-gray-500">Including VAT (21%)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex bg-gray-200 rounded-full p-1 mb-6">
+                <button class="flex-1 py-3 px-4 rounded-full text-center text-sm font-medium active"
+                    id="credit-card-btn">
+                    <span class="material-icons align-middle mr-1 text-base">credit_card</span> Credit card
+                </button>
+
+                <button
+                    class="flex-1 py-3 px-4 rounded-full text-center text-sm font-medium text-gray-800 flex items-center justify-center gap-2"
+                    id="apple-pay-btn">
+                    <!-- Apple logo SVG -->
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 814 1000" fill="currentColor">
+                        <path
+                            d="M788 779c-14 31-31 59-51 86-27 36-49 61-67 73-27 19-56 29-86 29-22 0-49-6-82-18-33-12-63-18-91-18-29 0-60 6-94 18s-63 18-84 18c-27 0-54-9-82-28-18-13-41-38-70-75-30-39-55-84-75-136-21-55-32-108-32-160 0-59 13-109 40-151 21-33 49-58 84-77 34-19 71-28 110-29 22 0 50 7 84 20 34 14 56 21 67 21 8 0 34-8 77-24 41-15 75-21 103-18 76 6 134 36 174 91-69 42-103 100-103 175 0 58 22 107 65 148 19 19 40 34 63 44-5 14-11 28-18 42ZM569 51c0 45-16 87-48 125-39 46-85 73-136 69-1-5-2-11-2-19 0-43 19-89 53-129 17-19 39-35 64-47 25-13 49-20 71-21 1 8 2 15 2 22Z" />
+                    </svg>
+                    <span>Apple Pay</span>
+                </button>
+
+            </div>
+            <div id="credit-card-form">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="card-number">Card number</label>
+                    <div class="relative">
+                        <input class="w-full bg-gray-100 border-none rounded-lg p-3 text-gray-500 placeholder-gray-400"
+                            id="card-number" placeholder="0000   0000   0000   0000" type="text" />
+                        <span
+                            class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">content_copy</span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="cardholder-name">Cardholder
+                        name</label>
+                    <input class="w-full bg-gray-100 border-none rounded-lg p-3 text-gray-900 placeholder-gray-400"
+                        id="cardholder-name" placeholder="ex. David Kim" type="text" />
+                </div>
+                <div class="flex gap-4">
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-1" for="expiry-date">Expiry
+                            date</label>
+                        <input class="w-full bg-gray-100 border-none rounded-lg p-3 text-gray-500 placeholder-gray-400"
+                            id="expiry-date" placeholder="MM   /   YYYY" type="text" />
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-1" for="cvv">CVV / CVC <span
+                                class="material-icons text-xs text-gray-400 align-middle">help_outline</span></label>
+                        <input class="w-full bg-gray-100 border-none rounded-lg p-3 text-gray-500 placeholder-gray-400"
+                            id="cvv" placeholder="3-4 digits" type="text" />
+                    </div>
+                </div>
+            </div>
+            <div id="apple-pay-view">
+                <p class="mt-4 text-gray-600">Click the button below to pay with Apple Pay.</p>
+            </div>
+            <button
+                class="w-full bg-green-500 hover:bg-green-600 text-white rounded-lg py-4 mt-6 text-lg font-semibold flex items-center justify-center"
+                id="pay-btn">
+                <span class="material-icons mr-2">lock</span>
+                Pay for the order
+            </button>
+        </main>
+        <footer class="flex justify-around items-center py-4 border-t bg-white w-full max-w-sm fixed bottom-0">
+            <button class="text-gray-400">
+                <span class="material-icons icon-size">home</span>
+            </button>
+            <button class="text-gray-400">
+                <span class="material-icons icon-size">eco</span>
+            </button>
+            <button class="text-gray-400">
+                <span class="material-icons icon-size">emoji_events</span>
+            </button>
+            <button class="text-green-600">
+                <span class="material-icons icon-size">storefront</span>
+            </button>
+            <button class="text-gray-400">
+                <span class="material-icons icon-size">spa</span>
+            </button>
+        </footer>
+    </div>
+    <div class="success-animation" id="success-animation">
+        <svg class="checkmark" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+            <circle class="checkmark__circle" cx="26" cy="26" fill="none" r="25"></circle>
+            <path class="checkmark__check" d="M14.1 27.2l7.1 7.2 16.7-16.8" fill="none"></path>
+        </svg>
+        <p class="text-2xl font-semibold text-gray-800 mt-4">Order Placed!</p>
+        <p class="text-gray-600">Your order has been successfully placed.</p>
+    </div>
+    <script>
+        const creditCardBtn = document.getElementById('credit-card-btn');
+        const applePayBtn = document.getElementById('apple-pay-btn');
+        const creditCardForm = document.getElementById('credit-card-form');
+        const applePayView = document.getElementById('apple-pay-view');
+        const notificationBtn = document.getElementById('notification-btn');
+        const notificationDropdown = document.getElementById('notification-dropdown');
+        const payBtn = document.getElementById('pay-btn');
+        const successAnimation = document.getElementById('success-animation');
+        creditCardBtn.addEventListener('click', () => {
+            creditCardBtn.classList.add('active');
+            creditCardBtn.classList.remove('text-gray-800');
+            applePayBtn.classList.remove('active');
+            applePayBtn.classList.add('text-gray-800');
+            creditCardForm.style.display = 'block';
+            applePayView.style.display = 'none';
+        });
+        applePayBtn.addEventListener('click', () => {
+            applePayBtn.classList.add('active');
+            applePayBtn.classList.remove('text-gray-800');
+            creditCardBtn.classList.remove('active');
+            creditCardBtn.classList.add('text-gray-800');
+            creditCardForm.style.display = 'none';
+            applePayView.style.display = 'block';
+        });
+        notificationBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (notificationDropdown.style.display === 'block') {
+                notificationDropdown.style.display = 'none';
+            } else {
+                notificationDropdown.style.display = 'block';
+            }
+        });
+        window.addEventListener('click', function (e) {
+            if (!notificationDropdown.contains(e.target) && !notificationBtn.contains(e.target)) {
+                notificationDropdown.style.display = 'none';
+            }
+        });
+        payBtn.addEventListener('click', () => {
+            successAnimation.style.display = 'flex';
+            setTimeout(() => {
+                window.location.href = 'order-placed.html'; // Or whatever the next page is
+            }, 2000); // Wait for animation to mostly finish
+        });
+    </script>
+</body>
+
+</html>

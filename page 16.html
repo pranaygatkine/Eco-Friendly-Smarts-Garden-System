@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GreenGenie - Order Placed</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .icon {
+            font-family: 'Material Icons';
+        }
+        .drawer {
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.drawer-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.drawer .relative {
+  transform: scale(0.9); /* start smaller */
+  transition: transform 0.3s ease;
+}
+.drawer-open .relative {
+  transform: scale(1); /* zoom in effect */
+}
+
+        .drawer-closed {
+            transform: translateX(-100%);
+        }
+      
+.notification-drawer {
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-120%);
+}
+
+.notification-drawer-open {
+  transform: translateY(20px); /* drop down effect */
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+    </style>
+</head>
+
+<body class="bg-white">
+    <div class="max-w-md mx-auto bg-white relative overflow-x-hidden">
+
+        <!-- Drawer / Mobile Menu -->
+        <div class="fixed inset-0 z-40 flex items-center justify-center drawer drawer-closed" id="drawer">
+            <!-- Overlay (dark background) -->
+            <div class="absolute inset-0 bg-gray-800 bg-opacity-50" id="drawer-overlay"></div>
+
+            <!-- Centered Menu Box -->
+            <div class="relative w-72 max-w-sm bg-white rounded-2xl shadow-xl z-50 p-6 text-center">
+                <div class="mb-4">
+                    <img alt="GreenGenie logo" class="h-10 mx-auto"
+                        src="assets\logo (2).png" />
+                    <h2 class="text-xl font-bold text-green-700 mt-2">Green<span class="text-green-500">Genie</span>
+                    </h2>
+                </div>
+
+                <nav class="space-y-4">
+                    <a href="#" class="block text-gray-700 hover:text-green-600">My Profile</a>
+                    <a href="#" class="block text-gray-700 hover:text-green-600">My Orders</a>
+                    <a href="#" class="block text-gray-700 hover:text-green-600">Wishlist</a>
+                    <a href="#" class="block text-gray-700 hover:text-green-600">Settings</a>
+                    <a href="#" class="block text-gray-700 hover:text-green-600">Help & Support</a>
+                    <a href="#" class="block text-red-500 hover:text-red-700">Logout</a>
+                </nav>
+            </div>
+        </div>
+
+
+        <div class="fixed top-0 left-0 right-0 z-50 notification-drawer" id="notification-drawer">
+            <!-- Notification Card -->
+            <div
+                class="relative max-w-sm w-full mx-auto bg-white shadow-2xl rounded-2xl p-4 transform transition-all duration-300">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-800">Notifications</h2>
+                    <button class="text-gray-500" id="close-notification-button">
+                        <span class="icon">close</span>
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start p-3 bg-green-50 rounded-lg shadow-sm">
+                        <span class="icon text-green-500 mt-1">check_circle</span>
+                        <div class="ml-3">
+                            <p class="font-semibold text-gray-800">Order Placed Successfully!</p>
+                            <p class="text-sm text-gray-600">Your order #5542 has been placed and is now being
+                                processed.</p>
+                            <p class="text-xs text-gray-400 mt-1">Just now</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <header class="flex justify-between items-center p-4 relative">
+            <button class="text-gray-600 z-50" id="menu-button">
+                <span class="icon">menu</span>
+            </button>
+            <div class="flex items-center">
+                <img alt="GreenGenie logo" class="h-8"
+                    src="assets\logo (2).png" />
+                <span class="text-2xl font-bold text-green-700 ml-2">Green<span
+                        class="text-green-500">Genie</span></span>
+            </div>
+            <button class="text-gray-600 relative z-50" id="notification-button">
+                <span class="icon">notifications</span>
+                <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+            </button>
+        </header>
+        <main class="p-4">
+            <h1 class="text-3xl font-bold text-gray-800">Order Placed!</h1>
+            <div class="flex justify-between items-center mt-2 mb-6">
+                <p class="text-gray-500">Order #5542</p>
+                <p class="text-2xl font-bold text-gray-800">$72.60</p>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-green-100 rounded-2xl p-4 flex items-center">
+                    <div class="relative">
+                        <img alt="Monstera Adansonii plant in a white pot" class="w-24 h-24 rounded-xl object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfbn3Wo6b7GXZOJn1n01mcKHJYrdqnOopO2nukyC-cfZQKvmq_TkmsAbbMMD-13wyUv7Cs6xoPEzYLQZ1WGsD8WttB_WndMwoSblDeRyRt6sRopE1l0-8xX_2zFTrFckFEZQTfg1enWLHc9-44HO0OWfNbciz8Hq3RjwzSn5WQXcgxVvR5V2A_Wdr5N_1TeYWAgioyvEXqPrjRWrap6-nslhDUeA0LXlSCI0SIw7KSwD4CjbpHkveniGukzodNS4scnrhglIKsZQ" />
+                        <span
+                            class="absolute -bottom-2 -left-2 bg-white text-gray-800 text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full border-2 border-green-100">2</span>
+                    </div>
+                    <div class="ml-4 flex-1">
+                        <h2 class="font-bold text-gray-800">Monstera Adansonii</h2>
+                        <p class="text-sm text-gray-600">Monstera family</p>
+                        <div
+                            class="flex items-center mt-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full w-fit">
+                            <span class="icon text-sm mr-1">star</span>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                    <p class="text-xl font-bold text-gray-800">$ 30</p>
+                </div>
+                <div class="bg-green-100 rounded-2xl p-4 flex items-center">
+                    <div class="relative">
+                        <img alt="Cardboard box with seeds" class="w-24 h-24 object-contain"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9YQxEGdeWj0uvyZCbAgfDqHClJKmdIS3VFlzjhRQ47BT5l5hp9mdva9BixaR9Bo0v9iewTgVgUXMxmg0pcaAZuenwLnY55quwgU15-YwoXdWixTeYJKg52LsgcpIYsHJZVhv_5o3SrEFP9MEvaF2OLSY2L9oyZSqHFTnNkWsZ7baDWx8TGUmU3l5jNdVd-OwqU64_Zl338U12t0dKBiPCsLg65Dft3fV0aHhjQlNmhVGHke2VjrM_qTNGXCrKfw-Ft7e6Wh7AgQ" />
+                        <span
+                            class="absolute -bottom-2 -left-2 bg-white text-gray-800 text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full border-2 border-green-100">2</span>
+                    </div>
+                    <div class="ml-4 flex-1">
+                        <h2 class="font-bold text-gray-800">Fruit Bundle #3</h2>
+                        <p class="text-sm text-gray-600">Customized seeds</p>
+                        <div
+                            class="flex items-center mt-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full w-fit">
+                            <span class="icon text-sm mr-1">star</span>
+                            <span>4.9</span>
+                        </div>
+                    </div>
+                    <p class="text-xl font-bold text-gray-800">$ 30</p>
+                </div>
+            </div>
+            <div class="text-center my-8">
+                <p class="text-gray-600">Thank you for choosing <span class="font-bold text-green-700">Green<span
+                            class="text-green-500">Genie</span></span>!<br />Your order has been received and is on its
+                    way to you.</p>
+            </div>
+            <div class="relative">
+                <div class="absolute bottom-0 left-0 right-0 h-24 bg-white"></div>
+                <img alt="A young plant sprout growing from soil" class="w-full h-auto"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkhUKcnO4uu8E6ZBe7-HuMB1GyaIwcvbbNXCFaes8rarb7H3U-lbArukL7qQ4DMMIz4CkDuvfSwN1mV0sTJ8-pvy0nNTYob7_zm6y7-Q9S-pxY0gSeFeyyhWYjn3TbpaX0QxNZfpovjMUdDSR8zBFIbVl-Ed8w1yRdRVj8paPKBC91D2gDWOeCb38tYsqCcYvduhQhEDyRl5h5cIxQkiO6D1KY4VbNmQpkzjkt22oa6weXBwkmX0Ny1vBvD8y5V_M_sUjFB8ye9g" />
+            </div>
+        </main>
+        <footer class="fixed bottom-0 left-0 right-0 bg-white shadow-lg rounded-t-3xl max-w-md mx-auto">
+            <div class="flex justify-around items-center p-4">
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">home</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">eco</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">emoji_events</span>
+                </button>
+                <button class="text-green-600">
+                    <span class="material-icons icon-size">storefront</span>
+                </button>
+                <button class="text-gray-400">
+                    <span class="material-icons icon-size">spa</span>
+                </button>
+            </div>
+        </footer>
+    </div>
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const drawer = document.getElementById('drawer');
+        const drawerOverlay = document.getElementById('drawer-overlay');
+        const notificationButton = document.getElementById('notification-button');
+        const notificationDrawer = document.getElementById('notification-drawer');
+        const notificationOverlay = document.getElementById('notification-overlay');
+        const closeNotificationButton = document.getElementById('close-notification-button');
+        function toggleDrawer() {
+            const isOpening = drawer.classList.contains('drawer-closed');
+            if (isOpening) {
+                drawer.classList.remove('drawer-closed');
+                drawer.classList.add('drawer-open');
+            } else {
+                drawer.classList.remove('drawer-open');
+                drawer.classList.add('drawer-closed');
+            }
+        }
+        function toggleNotificationDrawer() {
+            const isOpen = notificationDrawer.classList.contains('notification-drawer-open');
+            if (isOpen) {
+                notificationDrawer.classList.remove('notification-drawer-open');
+            } else {
+                notificationDrawer.classList.add('notification-drawer-open');
+            }
+        }
+        menuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDrawer();
+        });
+        drawerOverlay.addEventListener('click', toggleDrawer);
+        notificationButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleNotificationDrawer();
+        });
+        notificationOverlay.addEventListener('click', toggleNotificationDrawer);
+        closeNotificationButton.addEventListener('click', toggleNotificationDrawer);
+
+
+
+
+    </script>
+</body>
+
+</html>

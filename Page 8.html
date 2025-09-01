@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Plant Shop</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F7F7F7;
+        }
+        .tab.active {
+            @apply bg-green-500 text-white;
+        }
+        .tab {
+             @apply text-gray-500 px-4 py-2 rounded-full;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="max-w-sm mx-auto bg-white" id="app">
+    <div class="p-6" id="home-screen">
+        <header class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold">Shop <span class="text-green-600">Plants</span></h1>
+            <img alt="User avatar" class="w-12 h-12 rounded-full object-cover cursor-pointer" onclick="showProfile()"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPOIQpIl7R96B8KcyXOzbHph3VPtjq64-AnWJeTsS96w6i1PQ5VjsMgpOjc30dGtGqbTeCe5NVEz33PordV9i3vowYmCNrnkn4JrVlDjkYHak5OAL7dRnJez1ElQmBt5CjkZVWFkcNTGVGyrIa00D1ZSjq585hB6cbI1Oxz70qRXpskTfWaHXjQ1CwOhHg-m9Dp7xnXV03XvZq48NOKcRJkPXY0tJF_njtSGvoAnk4Jc3HzJacIUYcilccSBCKOCyZm1BcIHQ00yU" />
+        </header>
+        <div class="relative mb-6">
+            <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+            <input
+                class="w-full pl-10 pr-4 py-3 bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
+                id="search-input" onkeyup="filterProducts()" placeholder="Search for plants..." type="text" />
+        </div>
+        <div class="flex space-x-2 mb-8 ">
+            <button class="tab active" onclick="filterCategory('all', this)">All</button>
+            <button class="tab" onclick="filterCategory('indoor', this)">Indoor</button>
+            <button class="tab" onclick="filterCategory('outdoor', this)">Outdoor</button>
+            <button class="tab" onclick="filterCategory('garden', this)">Garden</button>
+        </div>
+        <div class="grid grid-cols-2 gap-6" id="product-grid">
+            <div class="product-item" data-category="indoor">
+                <img alt="Cactus in a pot" class="rounded-lg h-48 w-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkp56pvcHAOY-kZUvGHt7Mv_ZhvxaZLC_AYUvHgXCOVtNBdzRV2Y0qP4KOhrhBPqR2NsnzWHATttYiG0AWvIwAXg8C2HptZYYIcD2NJarv3jssFrOCyaesSasQWFZqfK6chCWrPYBwSzp8FJN0wJAiSPUl5kHR8p7Ok6dPNvoa4V36mKQQBYQ3oNEb0VWCBl8nQC1Zq9y5fFZlSgaWo5LB900CfWvPFD0-rcJFnsYi6SPN3-KeNcsZpCIjHdr2X6lMeu3hK6QPxE4" />
+                <h3 class="font-semibold mt-2">Cactus envy</h3>
+                <p class="text-green-500 font-bold">$ 65.00</p>
+            </div>
+            <div class="product-item" data-category="indoor">
+                <img alt="Green leaves of Dephrion plant" class="rounded-lg h-48 w-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2PpJnGcjriyK_a2Sp813e23Zcr1XmhKhHWCrv6vQW5jYcUY9qqpnxCAErB5JcTmq4OaeSP_QuVmf1H3Le6iATzOx4XD511cCFe-4n9rwJLnItQR9i1wjMx4_GhW3ImRUwl1JmKaCEyiFThwEQZtso_JO5kGXIZBtMLjc9cToMqJJQlEePLSL1SVauJ1uTRiKgkIb5jiO8CvetbcYeNzy-aIOSqHjWKCZ2V6kCnpWXIhul7aV6dduhHcmvtkGcoXrhgqVUraK2roo" />
+                <h3 class="font-semibold mt-2">Dephrion</h3>
+                <p class="text-green-500 font-bold">$ 65.00</p>
+            </div>
+            <div class="product-item" data-category="outdoor">
+                <img alt="White Lender flowers" class="rounded-lg h-48 w-full object-cover"
+                    src="https://i0.wp.com/lavender-nw.org/wp-content/uploads/2023/11/Cultivar-LA-Melissa-RC.jpg?fit=1030%2C1030&ssl=1" />
+                <h3 class="font-semibold mt-2">White Lender</h3>
+                <p class="text-green-500 font-bold">$ 65.00</p>
+            </div>
+            <div class="product-item" data-category="garden">
+                <img alt="Tulips in the morning" class="rounded-lg h-48 w-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqsuqlXaizvpz_Tt5uCYgk_EtRP8FUcwHoKHet3B3_WY_g_hfXnheZYQnmzkeal33A1yWhqlhF9QYTDtKDf2QRMLzYAJO8yPNzmUQDH1-HjbOoUgjKZVoyb__F8wgdoJ-gCXyvBZeapOo32sSPqS_YZKdGaVKAVT0Hay3iUJ6IYA557BEQC2inbHieGTw0ACEJDAaCxGAx1QGkHckwoZFzI_CgL5N9Ou1LUnwautZmezEKI5E4cZo9uylp-tt44yrZhb6yUy8Q38E" />
+                <h3 class="font-semibold mt-2">Morning Be..</h3>
+                <p class="text-green-500 font-bold">$ 65.00</p>
+            </div>
+            <div class="product-item" data-category="indoor">
+                <img alt="Succulent plant" class="rounded-lg h-48 w-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjL0dV4O2-U4htWO4KVobM2tkpn2OGg69-oV7pMB2SfYQcEYVyUR5wnn2iXQNPE6pxBpoWOxs226IYB3RbEJSqj-gx79KaaKxji-iSvi6AtxC-zMkQ6k_Ie51iIMvhvVTdnRqRNdVuy4CcCb2MhseufIyKTAzTYBbvFY_95qx3FuD7YuzjP845nHDGlMojgnMircAuJs-dWIZmxeTgr7Ww2z0-ZJlBU0-AwZDhT0cV-KGKS0hgfQnjEbszQTcxU2iQGT8k6d3A3t4" />
+                <h3 class="font-semibold mt-2">Succulent</h3>
+                <p class="text-green-500 font-bold">$ 45.00</p>
+            </div>
+            <div class="product-item" data-category="garden">
+                <img alt="Cotton plant" class="rounded-lg h-48 w-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3gcJ_afm1fiZwcvPpIWxEBzsJx5eEi5ioFpGtiAZ9Uv5-mgm74_HX7VdSYOwz3gsbyLlfKm9lKpATb6Rb83DvxUpZgubutUsIMUpItlP9YGacX6d20NTqaJt6bWbd_QwF8K83hZ8eJmbSbkKrkOBGUJGL9xmjasb-KqZAfhnos3UD9B1WXdWgGdXZgXXNVzBPl-il-u0lKa_B9UzAtWmunkd3ywOjFPOlbLPbblhnE8vo5W5hJ-qN5vhU8oki7nC2yu-Baegd7LI" />
+                <h3 class="font-semibold mt-2">Cotton Plant</h3>
+                <p class="text-green-500 font-bold">$ 30.00</p>
+            </div>
+        </div>
+    </div>
+    <div class="hidden p-6" id="profile-screen">
+        <div class="flex items-center mb-6">
+            <span class="material-icons cursor-pointer" onclick="showHome()">arrow_back_ios</span>
+            <h2 class="text-2xl font-bold ml-4">My Profile</h2>
+        </div>
+        <div class="flex flex-col items-center">
+            <img alt="User avatar" class="w-24 h-24 rounded-full object-cover mb-4"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPOIQpIl7R96B8KcyXOzbHph3VPtjq64-AnWJeTsS96w6i1PQ5VjsMgpOjc30dGtGqbTeCe5NVEz33PordV9i3vowYmCNrnkn4JrVlDjkYHak5OAL7dRnJez1ElQmBt5CjkZVWFkcNTGVGyrIa00D1ZSjq585hB6cbI1Oxz70qRXpskTfWaHXjQ1CwOhHg-m9Dp7xnXV03XvZq48NOKcRJkPXY0tJF_njtSGvoAnk4Jc3HzJacIUYcilccSBCKOCyZm1BcIHQ00yU" />
+            <h3 class="text-xl font-semibold">Pranay</h3>
+            <p class="text-gray-500">pggmail.com.com</p>
+            <div class="w-full mt-8 space-y-4">
+                <div class="bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                    <div>
+                        <h4 class="font-semibold">My Orders</h4>
+                        <p class="text-sm text-gray-500"> orders</p>
+                    </div>
+                    <span class="material-icons text-gray-500">chevron_right</span>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                    <div>
+                        <h4 class="font-semibold">Shipping Addresses</h4>
+                        <p class="text-sm text-gray-500">nagpur maharashtra</p>
+                    </div>
+                    <span class="material-icons text-gray-500">chevron_right</span>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                    <div>
+                        <h4 class="font-semibold">Payment Methods</h4>
+                        <p class="text-sm text-gray-500">Visa **34</p>
+                    </div>
+                    <span class="material-icons text-gray-500">chevron_right</span>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                    <div>
+                        <h4 class="font-semibold">Settings</h4>
+                    </div>
+                    <span class="material-icons text-gray-500">chevron_right</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hidden p-6" id="plant-health-screen">
+        <div class="flex items-center mb-6">
+            <span class="material-icons cursor-pointer" onclick="showHome()">arrow_back_ios</span>
+            <h2 class="text-2xl font-bold ml-4">Plant Health</h2>
+        </div>
+        <div class="flex flex-col items-center justify-center h-full">
+            <p class="text-gray-500 text-center">Plant Health Content Goes Here</p>
+        </div>
+    </div>
+    <div class="hidden p-6" id="subscription-screen">
+        <div class="flex items-center mb-6">
+            <span class="material-icons cursor-pointer" onclick="showHome()">arrow_back_ios</span>
+            <h2 class="text-2xl font-bold ml-4">Subscription</h2>
+        </div>
+        <div class="flex flex-col items-center justify-center h-full">
+            <p class="text-gray-500 text-center">Subscription Content Goes Here</p>
+        </div>
+        
+    </div>
+    <div class="hidden p-6" id="recommendation-screen">
+        <div class="flex items-center mb-6">
+            <span class="material-icons cursor-pointer" onclick="showHome()">arrow_back_ios</span>
+            <h2 class="text-2xl font-bold ml-4">Recommendation</h2>
+        </div>
+        <div class="flex flex-col items-center justify-center h-full">
+            <p class="text-gray-500 text-center">Recommendation Content Goes Here</p>
+        </div>
+        
+    </div>
+    <div class="hidden p-6 flex flex-col items-center justify-center h-full" id="scanner-screen">
+        <span class="material-icons absolute top-6 left-6 cursor-pointer" onclick="showHome()">arrow_back_ios</span>
+        <h2 class="text-2xl font-bold mb-8">Scan a Plant</h2>
+        <div class="w-64 h-64 border-4 border-dashed border-green-500 rounded-lg flex items-center justify-center mb-8">
+            <span class="material-icons text-green-500" style="font-size: 80px;">qr_code_scanner</span>
+        </div>
+        <p class="text-gray-500 text-center">Place a plant's QR code inside the frame to scan it.</p>
+    </div>
+    <div class="fixed bottom-0 left-0 right-0 max-w-sm mx-auto bg-white shadow-lg rounded-t-3xl">
+        <div class="flex justify-around items-center py-4">
+            <span class="material-icons text-gray-800 cursor-pointer" onclick="showHome()"
+                style="font-size: 28px;">home</span>
+            <span class="material-icons text-gray-400 cursor-pointer" onclick="showPlantHealth()"
+                style="font-size: 28px;">eco</span>
+            <div class="bg-green-500 p-4 rounded-full -mt-12 shadow-lg cursor-pointer" onclick="showScanner()">
+                <span class="material-icons text-white" style="font-size: 32px;">fullscreen</span>
+            </div>
+            <span class="material-icons text-gray-400 cursor-pointer" onclick="showSubscription()"
+                style="font-size: 28px;">star_border</span>
+            <span class="material-icons text-gray-400 cursor-pointer" onclick="showRecommendation()"
+                style="font-size: 28px;">storefront</span>
+        </div>
+    </div>
+    <script>
+        const homeScreen = document.getElementById('home-screen');
+        const profileScreen = document.getElementById('profile-screen');
+        const scannerScreen = document.getElementById('scanner-screen');
+        const plantHealthScreen = document.getElementById('plant-health-screen');
+        const subscriptionScreen = document.getElementById('subscription-screen');
+        const recommendationScreen = document.getElementById('recommendation-screen');
+        function hideAllScreens() {
+            homeScreen.classList.add('hidden');
+            profileScreen.classList.add('hidden');
+            scannerScreen.classList.add('hidden');
+            scannerScreen.classList.remove('flex');
+            plantHealthScreen.classList.add('hidden');
+            subscriptionScreen.classList.add('hidden');
+            recommendationScreen.classList.add('hidden');
+        }
+        function showHome() {
+            hideAllScreens();
+            homeScreen.classList.remove('hidden');
+        }
+        function showProfile() {
+            hideAllScreens();
+            profileScreen.classList.remove('hidden');
+        }
+        function showScanner() {
+            hideAllScreens();
+            scannerScreen.classList.remove('hidden');
+            scannerScreen.classList.add('flex');
+        }
+        function showPlantHealth() {
+            hideAllScreens();
+            plantHealthScreen.classList.remove('hidden');
+        }
+        function showSubscription() {
+            hideAllScreens();
+            subscriptionScreen.classList.remove('hidden');
+        }
+        function showRecommendation() {
+            hideAllScreens();
+            recommendationScreen.classList.remove('hidden');
+        }
+        function filterCategory(category, element) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            element.classList.add('active');
+            const products = document.querySelectorAll('.product-item');
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+        function filterProducts() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const products = document.querySelectorAll('.product-item');
+            products.forEach(product => {
+                const productName = product.querySelector('h3').innerText.toLowerCase();
+                if (productName.includes(searchInput)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

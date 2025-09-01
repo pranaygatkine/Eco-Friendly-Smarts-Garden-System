@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>New Bookings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .main-container {
+            max-width: 420px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+        }
+        .dialog-container {
+            display: none;
+        }
+        .booking-card.accepted {
+            border-left: 4px solid #4ade80;}
+        .booking-card.rejected {
+            border-left: 4px solid #f87171;}
+        .toast {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+        .menu-dropdown {
+            display: none;
+        }
+        #suggestions-container {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            border-radius: 0 0 1rem 1rem;
+            overflow: hidden;
+        }
+        .filter-chip.active {
+            background-color: #dcfce7;color: #166534;border-color: #22c55e;}
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="main-container p-4">
+        <header class="flex items-center mb-6">
+            <button class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center shadow-md">
+                <span class="material-icons">arrow_back</span>
+            </button>
+        </header>
+        <h1 class="text-3xl font-bold text-green-700 mb-4">New Bookings</h1>
+        <div class="relative mb-4">
+            <input
+                class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                id="searchInput" placeholder="Search bookings..." type="text" />
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span class="material-icons text-gray-400">search</span>
+            </div>
+            <div class="bg-white border-l border-r border-b border-gray-300 rounded-b-2xl shadow-lg"
+                id="suggestions-container">
+                <ul id="suggestions-list">
+                </ul>
+            </div>
+        </div>
+        <div class="flex flex-wrap gap-2 mb-6" id="filter-container">
+            <button
+                class="filter-chip flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded-full text-sm text-gray-600"
+                data-filter="All">
+                <span>All</span>
+            </button>
+            <button
+                class="filter-chip flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded-full text-sm text-gray-600"
+                data-filter="Fruitful Service">
+                <span>Fruitful Service</span>
+            </button>
+            <button
+                class="filter-chip flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded-full text-sm text-gray-600"
+                data-filter="Cleaning Service">
+                <span>Cleaning Service</span>
+            </button>
+            <button
+                class="filter-chip flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded-full text-sm text-gray-600"
+                data-filter="Handyman Service">
+                <span>Handyman Service</span>
+            </button>
+            <button
+                class="filter-chip flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded-full text-sm text-gray-600"
+                data-filter="Upcoming">
+                <span>Upcoming</span>
+            </button>
+        </div>
+        <div class="space-y-6" id="booking-list">
+            <!-- booking 1 -->
+            <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm booking-card"
+                data-service="Fruitful Service" data-time="upcoming">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Dattatraya Tarakase</h2>
+                        <div class="flex items-center text-sm text-gray-500 mt-1">
+                            <span class="material-icons text-xs text-green-500 mr-1"
+                                style="font-size: 10px;">circle</span>
+                            <span>Fruitful Service</span>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center space-x-2 text-gray-400">
+                        <span class="text-xs">25 min ago</span>
+                        <button class="text-gray-400" onclick="toggleMenu(this)">
+                            <span class="material-icons">more_vert</span>
+                        </button>
+                        <div
+                            class="menu-dropdown absolute right-0 top-6 mt-2 w-48 bg-white rounded-md shadow-lg z-10 hidden">
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">View Details</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Reschedule</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Contact
+                                Customer</a>
+                            <a class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100" href="#"
+                                onclick="showConfirmationDialog(this.closest('.booking-card').querySelector('.flex.space-x-3 button:last-child'))">Cancel
+                                Booking</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <span class="bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-md">Mon, Oct 15 - 08:00
+                        PM</span>
+                </div>
+                <div class="relative rounded-xl overflow-hidden mb-4">
+
+                    <iframe alt="Map showing location in Al Rigga" class="w-full h-auto"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.571357460894!2d73.77132427496362!3d18.54826258255073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bec057616c6f%3A0xd9cfb318d0c64953!2sTrident%20Business%20Centre!5e0!3m2!1sen!2sin!4v1755677759165!5m2!1sen!2sin"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                </div>
+                <div class="flex space-x-3">
+                    <button class="flex-1 bg-green-500 text-white py-3 rounded-xl font-semibold shadow-md"
+                        onclick="handleAccept(this)">Accept</button>
+                    <button class="flex-1 border border-gray-300 text-gray-700 py-3 rounded-xl font-semibold"
+                        onclick="showConfirmationDialog(this)">Reject</button>
+                </div>
+                <div class="hidden status-indicator mt-4 p-3 rounded-lg flex items-center justify-center">
+                    <span class="font-semibold"></span>
+                </div>
+            </div>
+
+            <!-- booking 2 -->
+            <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm booking-card"
+                data-service="Fruitful Service" data-time="upcoming">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Hanmant Rotte Patil </h2>
+                        <div class="flex items-center text-sm text-gray-500 mt-1">
+                            <span class="material-icons text-xs text-green-500 mr-1"
+                                style="font-size: 10px;">circle</span>
+                            <span>Fruitful Service</span>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center space-x-2 text-gray-400">
+                        <span class="text-xs">30 min ago</span>
+                        <button class="text-gray-400" onclick="toggleMenu(this)">
+                            <span class="material-icons">more_vert</span>
+                        </button>
+                        <div
+                            class="menu-dropdown absolute right-0 top-6 mt-2 w-48 bg-white rounded-md shadow-lg z-10 hidden">
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">View Details</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Reschedule</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Contact
+                                Customer</a>
+                            <a class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100" href="#"
+                                onclick="showConfirmationDialog(this.closest('.booking-card').querySelector('.flex.space-x-3 button:last-child'))">Cancel
+                                Booking</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <span class="bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-md">Mon, Oct 15 - 08:00
+                        PM</span>
+                </div>
+                <div class="relative rounded-xl overflow-hidden mb-4">
+
+                    <iframe alt="Map showing location in Al Rigga" class="w-full h-auto"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3785.8367540144723!2d76.57736557495977!3d18.40027938267014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcf830d9b1d7fa9%3A0x8a80af90bd2c1a94!2sLatur%20St%20Stand!5e0!3m2!1sen!2sin!4v1755678681905!5m2!1sen!2sin"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                </div>
+                <div class="flex space-x-3">
+                    <button class="flex-1 bg-green-500 text-white py-3 rounded-xl font-semibold shadow-md"
+                        onclick="handleAccept(this)">Accept</button>
+                    <button class="flex-1 border border-gray-300 text-gray-700 py-3 rounded-xl font-semibold"
+                        onclick="showConfirmationDialog(this)">Reject</button>
+                </div>
+                <div class="hidden status-indicator mt-4 p-3 rounded-lg flex items-center justify-center">
+                    <span class="font-semibold"></span>
+                </div>
+            </div>
+
+            <!-- booking 3 -->
+            <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm booking-card"
+                data-service="Cleaning Service" data-time="upcoming">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Rohan Takale</h2>
+                        <div class="flex items-center text-sm text-gray-500 mt-1">
+                            <span class="material-icons text-xs text-green-500 mr-1"
+                                style="font-size: 10px;">circle</span>
+                            <span>Cleaning Service</span>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center space-x-2 text-gray-400">
+                        <span class="text-xs">1 hour ago</span>
+                        <button class="text-gray-400" onclick="toggleMenu(this)">
+                            <span class="material-icons">more_vert</span>
+                        </button>
+                        <div
+                            class="menu-dropdown absolute right-0 top-6 mt-2 w-48 bg-white rounded-md shadow-lg z-10 hidden">
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">View Details</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Reschedule</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Contact
+                                Customer</a>
+                            <a class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100" href="#"
+                                onclick="showConfirmationDialog(this.closest('.booking-card').querySelector('.flex.space-x-3 button:last-child'))">Cancel
+                                Booking</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <span class="bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-md">Tue, Oct 16 - 10:00
+                        AM</span>
+                </div>
+                <div class="relative rounded-xl overflow-hidden mb-4">
+                    <iframe alt="Map showing location in Al Rigga" class="w-full h-auto"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.571357460894!2d73.77132427496362!3d18.54826258255073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bec057616c6f%3A0xd9cfb318d0c64953!2sTrident%20Business%20Centre!5e0!3m2!1sen!2sin!4v1755677759165!5m2!1sen!2sin"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
+                </div>
+                <div class="flex space-x-3">
+                    <button class="flex-1 bg-green-500 text-white py-3 rounded-xl font-semibold shadow-md"
+                        onclick="handleAccept(this)">Accept</button>
+                    <button class="flex-1 border border-gray-300 text-gray-700 py-3 rounded-xl font-semibold"
+                        onclick="showConfirmationDialog(this)">Reject</button>
+                </div>
+                <div class="hidden status-indicator mt-4 p-3 rounded-lg flex items-center justify-center">
+                    <span class="font-semibold"></span>
+                </div>
+            </div>
+            <!-- booking 4 -->
+            <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm booking-card"
+                data-service="Handyman Service" data-time="upcoming">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Sanjog Shirodhkar</h2>
+                        <div class="flex items-center text-sm text-gray-500 mt-1">
+                            <span class="material-icons text-xs text-green-500 mr-1"
+                                style="font-size: 10px;">circle</span>
+                            <span>Handyman Service</span>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center space-x-2 text-gray-400">
+                        <span class="text-xs">2 hours ago</span>
+                        <button class="text-gray-400" onclick="toggleMenu(this)">
+                            <span class="material-icons">more_vert</span>
+                        </button>
+                        <div
+                            class="menu-dropdown absolute right-0 top-6 mt-2 w-48 bg-white rounded-md shadow-lg z-10 hidden">
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">View Details</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Reschedule</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Contact
+                                Customer</a>
+                            <a class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100" href="#"
+                                onclick="showConfirmationDialog(this.closest('.booking-card').querySelector('.flex.space-x-3 button:last-child'))">Cancel
+                                Booking</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <span class="bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-md">Wed, Oct 17 - 03:30
+                        PM</span>
+                </div>
+                <div class="relative rounded-xl overflow-hidden mb-4">
+
+
+                    <iframe alt="Map showing location in Al Rigga" class="w-full h-auto"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.571357460894!2d73.77132427496362!3d18.54826258255073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bec057616c6f%3A0xd9cfb318d0c64953!2sTrident%20Business%20Centre!5e0!3m2!1sen!2sin!4v1755677759165!5m2!1sen!2sin"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                </div>
+                <div class="flex space-x-3">
+                    <button class="flex-1 bg-green-500 text-white py-3 rounded-xl font-semibold shadow-md"
+                        onclick="handleAccept(this)">Accept</button>
+                    <button class="flex-1 border border-gray-300 text-gray-700 py-3 rounded-xl font-semibold"
+                        onclick="showConfirmationDialog(this)">Reject</button>
+                </div>
+                <div class="hidden status-indicator mt-4 p-3 rounded-lg flex items-center justify-center">
+                    <span class="font-semibold"></span>
+                </div>
+            </div>
+            <!-- booking 5 -->
+            <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm booking-card"
+                data-service="Handyman Service" data-time="upcoming">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Darshan Patil</h2>
+                        <div class="flex items-center text-sm text-gray-500 mt-1">
+                            <span class="material-icons text-xs text-green-500 mr-1"
+                                style="font-size: 10px;">circle</span>
+                            <span>Handyman Service</span>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center space-x-2 text-gray-400">
+                        <span class="text-xs">2 hours ago</span>
+                        <button class="text-gray-400" onclick="toggleMenu(this)">
+                            <span class="material-icons">more_vert</span>
+                        </button>
+                        <div
+                            class="menu-dropdown absolute right-0 top-6 mt-2 w-48 bg-white rounded-md shadow-lg z-10 hidden">
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">View Details</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Reschedule</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Contact
+                                Customer</a>
+                            <a class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100" href="#"
+                                onclick="showConfirmationDialog(this.closest('.booking-card').querySelector('.flex.space-x-3 button:last-child'))">Cancel
+                                Booking</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <span class="bg-gray-100 text-gray-600 text-xs font-medium px-3 py-1 rounded-md">Wed, Oct 17 - 03:30
+                        PM</span>
+                </div>
+                <div class="relative rounded-xl overflow-hidden mb-4">
+
+                    <iframe alt="Map showing location in Al Rigga" class="w-full h-auto"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59448.41243028855!2d74.20613016556646!3d21.369192723618482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdf09953058e561%3A0x7d3b72c42f40546a!2sNandurbar%2C%20Maharashtra%20425412!5e0!3m2!1sen!2sin!4v1755679379040!5m2!1sen!2sin"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                </div>
+                <div class="flex space-x-3">
+                    <button class="flex-1 bg-green-500 text-white py-3 rounded-xl font-semibold shadow-md"
+                        onclick="handleAccept(this)">Accept</button>
+                    <button class="flex-1 border border-gray-300 text-gray-700 py-3 rounded-xl font-semibold"
+                        onclick="showConfirmationDialog(this)">Reject</button>
+                </div>
+                <div class="hidden status-indicator mt-4 p-3 rounded-lg flex items-center justify-center">
+                    <span class="font-semibold"></span>
+                </div>
+            </div>
+
+            <div class="hidden text-center text-gray-500 py-10" id="no-results">
+                <p>No bookings found.</p>
+            </div>
+        </div>
+    </div>
+    <div class="dialog-container fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
+        id="confirmation-dialog">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-sm mx-auto text-center shadow-lg">
+            <div class="flex justify-center items-center w-16 h-16 rounded-full bg-red-100 mx-auto mb-4">
+                <span class="material-icons text-red-500" style="font-size: 32px;">delete_outline</span>
+            </div>
+            <h2 class="text-xl font-bold text-gray-800 mb-2">Remove Booking?</h2>
+            <p class="text-gray-500 mb-6">Are you sure you want to remove this booking? This action can be undone.
+            </p>
+            <div class="flex space-x-3">
+                <button class="flex-1 border border-gray-300 text-gray-700 py-3 rounded-xl font-semibold"
+                    onclick="hideConfirmationDialog()">No, Keep It</button>
+                <button class="flex-1 bg-red-500 text-white py-3 rounded-xl font-semibold shadow-md"
+                    onclick="confirmRemove()">Yes, Remove</button>
+            </div>
+        </div>
+    </div>
+    <div class="toast bg-gray-800 text-white py-3 px-6 rounded-full shadow-lg flex items-center space-x-4" id="toast">
+        <span>Booking removed.</span>
+        <button class="font-semibold text-green-400" onclick="undoRemove()">Undo</button>
+    </div>
+    <script>
+        let currentBookingCard = null;
+        let removedBookingCard = null;
+        let toastTimeout;
+        let activeFilters = new Set();
+        function showStatus(card, status, message, bgColor, textColor) {
+            const buttonContainer = card.querySelector('.flex.space-x-3');
+            buttonContainer.style.display = 'none';
+            const statusIndicator = card.querySelector('.status-indicator');
+            const statusText = statusIndicator.querySelector('span');
+            statusIndicator.classList.remove('hidden');
+            statusIndicator.classList.add('flex');
+            statusIndicator.style.backgroundColor = bgColor;
+            statusText.textContent = message;
+            statusText.style.color = textColor;
+            if (status === 'accepted') {
+                card.classList.add('accepted');
+            } else if (status === 'rejected') {
+                card.classList.add('rejected');
+            }
+        }
+        function handleAccept(button) {
+            const bookingCard = button.closest('.booking-card');
+            showStatus(bookingCard, 'accepted', 'Booking Accepted', '#ecfdf5', '#10b981'); // green-50, green-600
+        }
+        function showConfirmationDialog(button) {
+            currentBookingCard = button.closest('.booking-card');
+            const dialog = document.getElementById('confirmation-dialog');
+            dialog.style.display = 'flex';
+        }
+        function hideConfirmationDialog() {
+            const dialog = document.getElementById('confirmation-dialog');
+            dialog.style.display = 'none';
+            currentBookingCard = null;
+        }
+        function confirmRemove() {
+            if (currentBookingCard) {
+                removedBookingCard = currentBookingCard;
+                currentBookingCard.style.display = 'none';
+                showToast();
+            }
+            hideConfirmationDialog();
+        }
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.style.display = 'flex';
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                hideToast();
+                removedBookingCard = null; // Clear reference if not undone
+            }, 5000);
+        }
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            toast.style.display = 'none';
+            clearTimeout(toastTimeout);
+        }
+        function undoRemove() {
+            if (removedBookingCard) {
+                removedBookingCard.style.display = 'block';
+                hideToast();
+                removedBookingCard = null;
+                applyAllFilters();
+            }
+        }
+        function toggleMenu(button) {
+            const menu = button.nextElementSibling;
+            const allMenus = document.querySelectorAll('.menu-dropdown');
+            allMenus.forEach(m => {
+                if (m !== menu) {
+                    m.style.display = 'none';
+                }
+            });
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            event.stopPropagation();
+        }
+        const searchInput = document.getElementById('searchInput');
+        const bookingList = document.getElementById('booking-list');
+        const bookingCards = Array.from(bookingList.querySelectorAll('.booking-card'));
+        const noResults = document.getElementById('no-results');
+        const suggestionsContainer = document.getElementById('suggestions-container');
+        const suggestionsList = document.getElementById('suggestions-list');
+        const filterChips = document.querySelectorAll('.filter-chip');
+        const allSuggestions = Array.from(new Set(bookingCards.flatMap(card => [
+            card.querySelector('h2').textContent.trim(),
+            card.querySelector('.flex.items-center.text-sm.text-gray-500 span:last-child').textContent.trim()
+        ])));
+        function applyAllFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            let resultsFound = false;
+            bookingCards.forEach(card => {
+                const name = card.querySelector('h2').textContent.toLowerCase();
+                const service = card.querySelector('.flex.items-center.text-sm.text-gray-500 span:last-child').textContent.toLowerCase();
+                const matchesSearch = name.includes(searchTerm) || service.includes(searchTerm);
+                const cardService = card.dataset.service;
+                const cardTime = card.dataset.time;
+                let matchesFilters = true;
+                if (activeFilters.size > 0) {
+                    matchesFilters = [...activeFilters].every(filter => {
+                        if (filter === 'upcoming') return cardTime === 'upcoming';
+                        return cardService === filter;
+                    });
+                }
+                if (matchesSearch && matchesFilters) {
+                    card.style.display = 'block';
+                    resultsFound = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            noResults.style.display = resultsFound ? 'none' : 'block';
+        }
+        searchInput.addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            if (searchTerm.length > 0) {
+                const filteredSuggestions = allSuggestions.filter(suggestion =>
+                    suggestion.toLowerCase().includes(searchTerm)
+                );
+                suggestionsList.innerHTML = '';
+                if (filteredSuggestions.length > 0) {
+                    filteredSuggestions.forEach(suggestion => {
+                        const li = document.createElement('li');
+                        li.textContent = suggestion;
+                        li.className = 'px-4 py-2 cursor-pointer hover:bg-gray-100';
+                        li.onclick = () => {
+                            searchInput.value = suggestion;
+                            suggestionsContainer.style.display = 'none';
+                            applyAllFilters();
+                        };
+                        suggestionsList.appendChild(li);
+                    });
+                    suggestionsContainer.style.display = 'block';
+                } else {
+                    suggestionsContainer.style.display = 'none';
+                }
+            } else {
+                suggestionsContainer.style.display = 'none';
+            }
+            applyAllFilters();
+        });
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const filter = chip.dataset.filter;
+                if (filter === 'All') {
+                    activeFilters.clear();
+                    filterChips.forEach(c => c.classList.remove('active'));
+                } else {
+                    if (activeFilters.has(filter)) {
+                        activeFilters.delete(filter);
+                        chip.classList.remove('active');
+                    } else {
+                        activeFilters.add(filter);
+                        chip.classList.add('active');
+                    }
+                    // If other filters are active, "All" should be inactive
+                    document.querySelector('.filter-chip[data-filter="All"]').classList.remove('active');
+                }
+                if (activeFilters.size === 0) {
+                    document.querySelector('.filter-chip[data-filter="All"]').classList.add('active');
+                }
+                applyAllFilters();
+            });
+        });
+        // Set 'All' as active by default
+        document.querySelector('.filter-chip[data-filter="All"]').classList.add('active');
+        window.onclick = function (event) {
+            if (!event.target.matches('#searchInput')) {
+                suggestionsContainer.style.display = 'none';
+            }
+            if (!event.target.closest('.relative')) {
+                const dropdowns = document.getElementsByClassName("menu-dropdown");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

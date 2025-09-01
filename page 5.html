@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Gardening Supplies</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7fafc;
+        }
+        .product-card {
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto max-w-sm p-4 bg-white">
+        <header class="flex justify-between items-center py-4">
+            <button class="text-gray-800" id="back-button" onclick="goBack()">
+                <i class="material-icons text-3xl">arrow_back</i>
+            </button>
+            <div class="flex items-center space-x-4">
+                <button class="relative text-gray-800" id="cart-button">
+                    <i class="material-icons text-3xl">shopping_cart</i>
+                    <span
+                        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                        id="cart-count">0</span>
+                </button>
+                <button class="text-gray-800" id="user-button">
+                    <i class="material-icons text-3xl">account_circle</i>
+                </button>
+            </div>
+        </header>
+        <main>
+            <div id="category-view">
+                <h1 class="text-4xl font-bold text-gray-800 mt-4 mb-8">What are you looking for?</h1>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="category-item text-center cursor-pointer" data-category="plants">
+                        <img alt="Potted plants on a shelf" class="w-full h-40 object-cover rounded-2xl mb-2"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNLQDdBWxWn-UbKdSrsqsdr-CvzTmkqJ0988Oy9nZLDTD7DzE10VEYYHXIvo8I0Xrrv6OchPgc-XlZBrcSpEpPQBddQ4ZrBqSk6JV1bTepp3mac0jZG0uRVdpTm72WsFWWj4GvnfEYyiE31xA9vB8wvF6ADMFqy7tvYR1wAtNy1EzaZ7-8kjZ-KfU_oBUn8bmV-Z9SBpGsxU_ZtyueBjAOmhTBu8G_BPSvtXYHBwCP45Fn-mRT_U5QrcmNB22f_sEBZ6sGFI651TCz" />
+                        <p class="text-gray-700">plants</p>
+                    </div>
+                    <div class="category-item text-center cursor-pointer" data-category="fertilizers">
+                        <img alt="Person fertilizing plants" class="w-full h-40 object-cover rounded-2xl mb-2"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxxOIh6zbIs-19HV4NktzpWuVs9kKOfqmqlEHpQGDoC4vyI-WFM8lfWDU3i9ANHxmj6UYviOIJEj9B8JhPlUj-zLiGOqUwgKMY68B2gXgcNk17ji9G0AGWRN-P4XAvtvVmD6HNbw8NWfbuj89jd8jIV3yJ2iKI9IHAISqpQYSaPzZBum-B-Q-9MadapQSA_-JOEMQYkwClSYcd5bfs_SnCJ68otyz6-6e38pjS8Lj4ptZyg76yITgP2n-a_e21GwE6nfVZ476_lGZR" />
+                        <p class="text-gray-700">fertilizers</p>
+                    </div>
+                    <div class="category-item text-center cursor-pointer" data-category="tools">
+                        <img alt="Gardening tools laid out" class="w-full h-40 object-cover rounded-2xl mb-2"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf3MB4JerO64hyIVY3jTgZbx7SuVtUUu0iautOO8oyL73xiF6QhU3bobWjL0Gvo_ikd_SUSA84XZY6ys-PvN37n3pdb2sd_5XJscTYUgL4sNrAQYy1yJtY-6kpng9z1Wwr1EEctmNJ4jLHOsI8xpKd6upddJWOK2NnnfHtkF_A9T6W01v6BSWMGDv7W_mnzGhqTO3h3co8qWJTgacGU1H3rncrLzAZxfVliDcLkbHNWC2Aic8QppjDwvQ8PPRYnJ-a3K6QowW2weP2" />
+                        <p class="text-gray-700">gardening tools</p>
+                    </div>
+                    <div class="category-item text-center cursor-pointer" data-category="seeds">
+                        <img alt="Hand planting a seed in a pot" class="w-full h-40 object-cover rounded-2xl mb-2"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFc7AxDnfZ3FBWOdJ55Lo13tHmnsqKjmEPJPQ4eDSYV1W8dYcrqOjOuBUE9Vgj_HrVuHigxBOjU2-i72WnGCb_OORjuY1mo-Tf3Jerhu13P7BCCbTdJcA3Zf84i_Q5D9ixIXSG1SdLfDX0sWNnaVF9jW11hlLGM3OSJNOqt5QLR-iCmc8AKHNcIrW-h1z8KNwtQr5iFGK4U35PpsHGm3vsnGGhG9uoUoB7g7s87iXEEPTs043FqCMSujiNARS-Yp22EQNeLsWd3fT-" />
+                        <p class="text-gray-700">seeds</p>
+                    </div>
+                    <div class="category-item text-center cursor-pointer" data-category="pots">
+                        <img alt="Terracotta pots" class="w-full h-40 object-cover rounded-2xl mb-2"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCTk2eZEi1LslC0Vj_n1htul6cDrq9CzDxJOJSku9KGa53pYqw5SL20AuDb9Z_SPe0xwqDl-34r6ZVs1r447kFMx1LVAh2QMSE0WzA_tee-KeQWYX_AQsszTTwj5Q5l4XzkRVFyFX0kIQ11jkvzNEwZXrItoUBW7yZ4R1rfLJBaNdTN-OQmTQDeq0NaZ4PASA3sej7UzvkYJhypJ1R9dx7MuxfxORQoS6vFi68i5PaJoqOBOmY2MRx9bE6Ao57B01SavFQ6NKnZXSw" />
+                        <p class="text-gray-700">pots/grow bags..</p>
+                    </div>
+                    <div class="category-item text-center cursor-pointer" data-category="soil">
+                        <img alt="Hand holding soil" class="w-full h-40 object-cover rounded-2xl mb-2"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfub2VbCPi-9GB3wFosHCXheZJYtJndVMqJBqFtf79ZY1yQiJTYltp5Ckwu4p4iz_h0aXSG6rk-PHJFTlIZgzTygWzNYQo7Ncej7DS3e7jz5lMPgA6K3GChkXlVq96TFgrq79AgYXlhcZF2SQPO6clcXz6HeCOPQz58qIoSjaXcsQhfe1wP8knUbgajImylc9ZX99v_11UinzdaB_pM-NeD-41Xqv9XbnXwLgndI0QgUzScsKhj8LYQHdZr6LiOzjyKeCpYQMKQB7p" />
+                        <p class="text-gray-700">soil</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 hidden" id="product-list">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4" id="product-category-title"></h2>
+                <div class="grid grid-cols-2 gap-6" id="product-items">
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden" id="user-modal">
+        <div class="bg-white p-8 rounded-lg max-w-sm w-full">
+            <h2 class="text-2xl font-bold mb-4">User Details</h2>
+            <div class="flex items-center mb-4">
+                <img alt="user avatar" class="w-16 h-16 rounded-full mr-4" src="C:\Users\Pranay\Downloads\logo1.png" />
+                <div>
+                    <p class="font-semibold">Pranay Gatkine</p>
+                    <p class="text-gray-500">pg@gmail.com</p>
+                </div>
+            </div>
+            <button class="mt-4 w-full bg-red-500 text-white py-2 rounded-lg font-semibold hover:bg-red-600"
+                id="close-user-modal">Close</button>
+        </div>
+    </div>
+    <div class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden" id="cart-modal">
+        <div class="bg-white p-6 rounded-lg max-w-sm w-full h-4/5 flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">Your Cart</h2>
+                <button class="text-gray-600 hover:text-gray-800" id="close-cart-modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="flex-grow overflow-y-auto" id="cart-items">
+                <p class="text-gray-500 text-center py-8" id="empty-cart-message">Your cart is empty.</p>
+            </div>
+            <div class="border-t pt-4 mt-4">
+                <div class="flex justify-between font-bold text-lg">
+                    <span>Total:</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+                <button
+                    class="mt-4 w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600">Checkout</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const products = {
+            plants: [
+                { id: 1, name: 'Monstera', price: 25.00, image: 'https://m.media-amazon.com/images/I/610nFUGS5TL._UF1000,1000_QL80_.jpg' },
+                { id: 2, name: 'Snake Plant', price: 20.00, image: 'https://plantsguru.com/cdn/shop/files/Sansevieria_Trifasciata_Small_-_Snake_Plant.jpg?v=1746105034&width=1500' },
+                { id: 3, name: 'Fiddle Leaf Fig', price: 45.00, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvG60R9IM1yc_TC1EwnMDQL-o8t2IlbC0_hg&s' },
+                { id: 4, name: 'Pothos', price: 15.00, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe2Wz7FzKjLedznb5HOAob3eMN-279-OWIjA&s' }
+            ],
+            fertilizers: [
+                { id: 5, name: 'All-Purpose Fertilizer', price: 12.50, image: 'https://m.media-amazon.com/images/I/710TaBhjfCL.jpg' },
+                { id: 6, name: 'Orchid Fertilizer', price: 15.00, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8aYR_UENVeV_QaeSYO728ivzBXTnbNmbxSA&s' }
+            ],
+            tools: [
+                { id: 7, name: 'Gardening Gloves', price: 8.00, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH-dl-Ah-a8UbbA26Zzsq-lw4NPVkbx1SDeA&s' },
+                { id: 8, name: 'Pruning Shears', price: 18.00, image: 'https://kreateworld.in/cdn/shop/products/2edd9ad4-624a-4c47-9381-ddbab69f6b6c.jpg?v=1673863811' }
+            ],
+            seeds: [
+                { id: 9, name: 'Tomato Seeds', price: 3.00, image: 'https://www.urbanplant.in/cdn/shop/files/Tomatocopy.webp?v=1686578634' },
+                { id: 10, name: 'Basil Seeds', price: 2.50, image: 'https://ruchasdryfruits.com/wp-content/uploads/2023/04/Basil-Seeds.jpg' }
+            ],
+            pots: [
+                { id: 11, name: 'Terracotta Pot', price: 5.00, image: 'https://m.media-amazon.com/images/I/81LizUahX2L._UF894,1000_QL80_.jpg' },
+                { id: 12, name: 'Ceramic Planter', price: 22.00, image: 'https://media-uk.landmarkshops.in/cdn-cgi/image/h=750,w=750,q=85,fit=cover/homecentre/1000012525061-1000012525060_02-2100.jpg' }
+            ],
+            soil: [
+                { id: 13, name: 'Potting Mix', price: 10.00, image: 'https://gardengenie.in/wp-content/uploads/2023/11/Potting-Mix-for-Plants.webp' },
+                { id: 14, name: 'Cactus Soil', price: 12.00, image: 'https://m.media-amazon.com/images/I/81aHhV5qRkL.jpg' }
+            ]
+        };
+        let cart = [];
+        const categoryItems = document.querySelectorAll('.category-item');
+        const productList = document.getElementById('product-list');
+        const productItems = document.getElementById('product-items');
+        const productCategoryTitle = document.getElementById('product-category-title');
+        const categoryView = document.getElementById('category-view');
+        const userButton = document.getElementById('user-button');
+        const userModal = document.getElementById('user-modal');
+        const closeUserModalButton = document.getElementById('close-user-modal');
+        const cartButton = document.getElementById('cart-button');
+        const cartModal = document.getElementById('cart-modal');
+        const closeCartModalButton = document.getElementById('close-cart-modal');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartCount = document.getElementById('cart-count');
+        const cartTotal = document.getElementById('cart-total');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const backButton = document.getElementById('back-button');
+        let currentView = 'categories'; // 'categories' or 'products'
+        function showProducts(category) {
+            categoryView.classList.add('hidden');
+            productList.classList.remove('hidden');
+            productCategoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+            productItems.innerHTML = '';
+            products[category].forEach(product => {
+                const productEl = document.createElement('div');
+                productEl.className = 'product-card bg-white rounded-2xl overflow-hidden shadow-md';
+                productEl.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <h3 class="font-semibold text-gray-800">${product.name}</h3>
+                        <p class="text-gray-600">$${product.price.toFixed(2)}</p>
+                        <button class="add-to-cart-btn mt-2 w-full bg-green-500 text-white py-1 rounded-lg text-sm font-semibold hover:bg-green-600" data-id="${product.id}" data-category="${category}">Add to Cart</button>
+                    </div>
+                `;
+                productItems.appendChild(productEl);
+            });
+            currentView = 'products';
+        }
+        function showCategories() {
+            productList.classList.add('hidden');
+            categoryView.classList.remove('hidden');
+            currentView = 'categories';
+        }
+        function goBack() {
+            if (currentView === 'products') {
+                showCategories();
+            } else {
+                // If you want to implement further back functionality (e.g., from cart or user modal)
+                // you can add more logic here. For now, it will just go back in browser history.
+                window.history.back();
+            }
+        }
+        function addToCart(productId, category) {
+            const productToAdd = products[category].find(p => p.id == productId);
+            const existingProduct = cart.find(p => p.id == productId);
+            if (existingProduct) {
+                existingProduct.quantity++;
+            } else {
+                cart.push({ ...productToAdd, quantity: 1 });
+            }
+            updateCart();
+        }
+        function removeFromCart(productId) {
+            const productIndex = cart.findIndex(p => p.id == productId);
+            if (productIndex > -1) {
+                if (cart[productIndex].quantity > 1) {
+                    cart[productIndex].quantity--;
+                } else {
+                    cart.splice(productIndex, 1);
+                }
+            }
+            updateCart();
+        }
+        function updateCart() {
+            cartItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+            } else {
+                emptyCartMessage.classList.add('hidden');
+                cart.forEach(item => {
+                    const cartItemEl = document.createElement('div');
+                    cartItemEl.className = 'flex items-center justify-between py-3 border-b';
+                    cartItemEl.innerHTML = `
+                        <div class="flex items-center">
+                            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg mr-4">
+                            <div>
+                                <p class="font-semibold">${item.name}</p>
+                                <p class="text-gray-500">$${item.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                             <button class="remove-from-cart-btn text-red-500 font-bold px-2" data-id="${item.id}">-</button>
+                            <span>${item.quantity}</span>
+                             <button class="add-one-btn text-green-500 font-bold px-2" data-id="${item.id}" data-category="${Object.keys(products).find(cat => products[cat].some(p => p.id === item.id))}">+</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(cartItemEl);
+                });
+            }
+            const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartCount.textContent = totalQuantity;
+            cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+        }
+        // Event Listeners
+        categoryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                showProducts(item.dataset.category);
+            });
+        });
+        productItems.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-to-cart-btn')) {
+                const productId = e.target.dataset.id;
+                const category = e.target.dataset.category;
+                addToCart(productId, category);
+            }
+        });
+        cartItemsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-from-cart-btn')) {
+                removeFromCart(e.target.dataset.id);
+            }
+            if (e.target.classList.contains('add-one-btn')) {
+                addToCart(e.target.dataset.id, e.target.dataset.category);
+            }
+        });
+        userButton.addEventListener('click', () => userModal.classList.remove('hidden'));
+        closeUserModalButton.addEventListener('click', () => userModal.classList.add('hidden'));
+        cartButton.addEventListener('click', () => cartModal.classList.remove('hidden'));
+        closeCartModalButton.addEventListener('click', () => cartModal.classList.add('hidden'));
+        // Close modals on outside click
+        window.addEventListener('click', (e) => {
+            if (e.target === userModal) userModal.classList.add('hidden');
+            if (e.target === cartModal) cartModal.classList.add('hidden');
+        });
+    </script>
+
+</body>
+
+</html>
